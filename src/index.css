@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    @apply text-brand-text bg-brand-bg;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-teal text-white font-semibold px-6 py-3 rounded-2xl transition-all duration-200 hover:bg-teal-dark hover:shadow-hover active:scale-95 inline-flex items-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply bg-pink-brand text-white font-semibold px-6 py-3 rounded-2xl transition-all duration-200 hover:bg-pink-dark hover:shadow-hover active:scale-95 inline-flex items-center gap-2;
+  }
+
+  .btn-outline {
+    @apply border-2 border-teal text-teal font-semibold px-6 py-3 rounded-2xl transition-all duration-200 hover:bg-teal hover:text-white active:scale-95 inline-flex items-center gap-2;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-card hover:shadow-hover transition-all duration-300;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-brand-text leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-brand-gray leading-relaxed;
+  }
+
+  .badge-age {
+    @apply text-xs font-semibold px-3 py-1 rounded-full;
+  }
+}
+
+/* Scrollbar stilizat */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: theme('colors.teal.DEFAULT');
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.teal.dark');
+}
+
+/* Animatii personalizate */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
