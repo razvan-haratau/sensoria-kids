@@ -91,21 +91,21 @@ const ageGroups = [
     age: '2–5 ani',
     desc: 'La această vârstă, succesul rapid contează. Planșele noastre au forme mari și clare — copilul termină o planșă în 20 de minute și e mândru de rezultat.',
     features: ['Modele mari, ușor de colorat', 'Culori vii, primare', 'Nisip fin, 100% non-toxic, sigur la atingere'],
-    color: 'bg-[#F4A68F]',
+    color: '#F4A68F',
   },
   {
     label: 'Școlari',
     age: '6–10 ani',
     desc: 'La această vârstă copiii vor provocări. Planșele mai complexe îi țin concentrați mai mult și îi ajută să-și dezvolte răbdarea și precizia.',
     features: ['Detalii fine, multiple zone de culoare', 'Teme: spațiu, animale, artă, natură', 'Combinații de culori și tehnici avansate'],
-    color: 'bg-[#5BC4C0]',
+    color: '#5BC4C0',
   },
   {
     label: 'Activitate de familie',
     age: 'Părinți & copii',
     desc: 'Cel mai bun lucru pe care îl poți oferi unui copil e timpul tău. Kiturile de familie vin cu două planșe — una pentru el, una pentru tine.',
     features: ['Planșe perechi, pentru adult și copil', 'Activitate de 45–60 minute împreună', 'Fără ecrane, fără distracții — doar voi doi'],
-    color: 'bg-[#E86B9E]',
+    color: '#E86B9E',
   },
 ]
 
