@@ -163,7 +163,7 @@ export default function HomePage() {
               Fără ecrane. Fără haos. Doar creativitate.
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2D2D2D] leading-tight mb-6">
-              Jocul prin care copilul{' '}
+              Activitatea prin care copilul{' '}
               <span className="text-[#5BC4C0]">creează, învață și se liniștește</span>
             </h1>
             <p className="text-xl text-[#6B7280] mb-8 leading-relaxed max-w-lg">
