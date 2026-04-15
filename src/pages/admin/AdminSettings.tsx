@@ -92,16 +92,18 @@ export default function AdminSettings() {
         <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-xl p-4">
           <AlertTriangle size={18} className="text-amber-500 shrink-0 mt-0.5" />
           <div className="text-sm text-amber-700">
-            <p className="font-semibold mb-1">Cheile API se configurează în server, nu în frontend</p>
+            <p className="font-semibold mb-1">Cheile API se configurează în server, nu în aplicația client</p>
             <p className="text-amber-600">
-              Cheile secrete Stripe (<code className="font-mono text-xs bg-amber-100 px-1 rounded">sk_live_...</code>) și Netopia
-              nu trebuie niciodată expuse în aplicația client. Configurează-le ca variabile de mediu
-              în backend-ul tău (Node.js, Supabase Edge Functions, etc.).
+              Cheia secretă Netopia (<code className="font-mono text-xs bg-amber-100 px-1 rounded">NETOPIA_API_KEY</code>) și semnătura POS
+              nu trebuie niciodată expuse în frontend. Configurează-le ca variabile de mediu în
+              Supabase Edge Functions (Settings → Edge Functions → Secrets).
             </p>
             <p className="text-amber-600 mt-2">
-              În frontend se folosește doar cheia publică Stripe (<code className="font-mono text-xs bg-amber-100 px-1 rounded">pk_live_...</code>),
-              configurată în fișierul <code className="font-mono text-xs bg-amber-100 px-1 rounded">.env</code> ca{' '}
-              <code className="font-mono text-xs bg-amber-100 px-1 rounded">VITE_STRIPE_PUBLIC_KEY</code>.
+              Variabilele necesare:{' '}
+              <code className="font-mono text-xs bg-amber-100 px-1 rounded">NETOPIA_API_KEY</code>,{' '}
+              <code className="font-mono text-xs bg-amber-100 px-1 rounded">NETOPIA_POS_SIGNATURE</code>,{' '}
+              <code className="font-mono text-xs bg-amber-100 px-1 rounded">NETOPIA_SANDBOX</code>,{' '}
+              <code className="font-mono text-xs bg-amber-100 px-1 rounded">SITE_URL</code>.
             </p>
           </div>
         </div>

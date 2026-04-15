@@ -99,8 +99,8 @@ export default function AboutPage() {
                 <p className="text-sm text-[#6B7280]">Anul fondării</p>
               </div>
               <div className="absolute -top-6 -right-6 bg-white rounded-2xl p-5 shadow-hover">
-                <p className="font-bold text-2xl text-[#E86B9E]">500+</p>
-                <p className="text-sm text-[#6B7280]">Familii fericite</p>
+                <p className="font-bold text-2xl text-[#E86B9E]">100%</p>
+                <p className="text-sm text-[#6B7280]">Produs în România</p>
               </div>
             </div>
           </div>
@@ -248,7 +248,7 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="section-title mb-4">Gata să descoperi magia?</h2>
           <p className="section-subtitle mb-8">
-            Alătură-te celor 500+ familii care au ales Sensoria Kids
+            Prima comandă vine cu satisfacție garantată sau rambursăm integral.
           </p>
           <Link to="/magazin" className="btn-primary text-base px-8 py-4">
             Descoperă produsele noastre

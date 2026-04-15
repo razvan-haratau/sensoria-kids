@@ -11,7 +11,7 @@ const STATUS_COLORS: Record<string, string> = {
 }
 const STATUS_LABELS: Record<string, string> = {
   active: 'Activ',
-  draft: 'Draft',
+  draft: 'Ciornă',
   out_of_stock: 'Stoc Epuizat',
 }
 

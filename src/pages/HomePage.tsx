@@ -17,31 +17,31 @@ const benefits = [
   {
     icon: Brain,
     title: 'Concentrare',
-    description: 'Activitățile cu nisip colorat antrenează atenția susținută și capacitatea de focalizare.',
+    description: 'Copiii stau focalizați 30–60 de minute fără ecrane. Nisipul îi ancorează în prezent și antrenează atenția susținută.',
     color: 'bg-[#5BC4C0]/10 text-[#5BC4C0]',
   },
   {
     icon: Sparkles,
     title: 'Creativitate',
-    description: 'Fiecare planșă este un spațiu liber de expresie artistică și imaginație.',
+    description: 'Nu există greșeli — fiecare planșă iese diferit. Copilul alege culorile și ritmul, iar rezultatul e mereu al lui.',
     color: 'bg-[#E86B9E]/10 text-[#E86B9E]',
   },
   {
     icon: Hand,
     title: 'Motricitate Fină',
-    description: 'Manipularea nisipului dezvoltă coordonarea mână-ochi și musculatura mică.',
+    description: 'Gesturile mici și precise de aplicare a nisipului pregătesc mâna pentru scris și antrenează coordonarea mână-ochi.',
     color: 'bg-[#B07CC6]/10 text-[#B07CC6]',
   },
   {
     icon: Heart,
     title: 'Calm Emoțional',
-    description: 'Textura nisipului are efect calmant și ajută la reglarea emoțiilor.',
+    description: 'Textura fină a nisipului are efect aproape meditativ. Ideal după o zi agitată sau în momentele de anxietate.',
     color: 'bg-[#F4A68F]/10 text-[#E08870]',
   },
   {
     icon: Zap,
-    title: 'Dezvoltare Senzorială',
-    description: 'Stimularea senzorială prin textură și culoare susține dezvoltarea neurologică.',
+    title: 'Stimulare Senzorială',
+    description: 'Culorile vii și textura nisipului activează simțurile tactil și vizual, sprijinind dezvoltarea neurologică timpurie.',
     color: 'bg-[#5BC4C0]/10 text-[#5BC4C0]',
   },
 ]
@@ -49,7 +49,7 @@ const benefits = [
 const audiences = [
   {
     title: 'Copii 2–6 ani',
-    desc: 'Planșe simple, culori vii, modele mari pentru primele experiențe senzoriale.',
+    desc: 'Primele experiențe cu culorile și textura. Modele mari, simple, care dau un sentiment de reușită rapid.',
     icon: Baby,
     iconColor: 'text-[#E08870]',
     iconBg: 'bg-[#F4A68F]/15',
@@ -57,8 +57,8 @@ const audiences = [
     bg: 'bg-[#F4A68F]/5',
   },
   {
-    title: 'Acasă',
-    desc: 'O activitate liniștitoare pentru momentele de joacă independentă sau împreună cu părinții.',
+    title: 'Joacă acasă',
+    desc: 'Înlocuiește tableta cu o activitate liniștitoare. Copilul se joacă singur sau alături de tine — fără haos, fără ecrane.',
     icon: Home,
     iconColor: 'text-[#3EA8A4]',
     iconBg: 'bg-[#5BC4C0]/15',
@@ -66,8 +66,8 @@ const audiences = [
     bg: 'bg-[#5BC4C0]/5',
   },
   {
-    title: 'Grădiniță',
-    desc: 'Kituri educative perfecte pentru activitățile senzoriale și de motricitate fină.',
+    title: 'Grădiniță & Școală',
+    desc: 'Activitate educativă recomandată de educatori pentru dezvoltarea motricității fine și a atenției.',
     icon: BookOpen,
     iconColor: 'text-[#D04D82]',
     iconBg: 'bg-[#E86B9E]/15',
@@ -75,8 +75,8 @@ const audiences = [
     bg: 'bg-[#E86B9E]/5',
   },
   {
-    title: 'Afterschool & Centre',
-    desc: 'Seturi durabile pentru grupuri, ușor de gestionat și reutilizabile.',
+    title: 'Centre & Afterschool',
+    desc: 'Seturi pentru grupuri mici, ușor de pregătit și de gestionat. Nisipul nu se împrăștie, spațiul rămâne curat.',
     icon: Building2,
     iconColor: 'text-[#8A5EAA]',
     iconBg: 'bg-[#B07CC6]/15',
@@ -89,32 +89,32 @@ const ageGroups = [
   {
     label: 'Preșcolari',
     age: '2–5 ani',
-    desc: 'Planșe mari, cu modele simple și culori puternice. Perfect pentru primele contacte cu activitățile creative.',
-    features: ['Forme mari, ușor de umplut', 'Culori primare vibrante', 'Nisip fin, sigur la atingere'],
+    desc: 'La această vârstă, succesul rapid contează. Planșele noastre au forme mari și clare — copilul termină o planșă în 20 de minute și e mândru de rezultat.',
+    features: ['Modele mari, ușor de colorat', 'Culori vii, primare', 'Nisip fin, 100% non-toxic, sigur la atingere'],
     color: 'bg-[#F4A68F]',
   },
   {
-    label: 'Școlari mici',
+    label: 'Școlari',
     age: '6–10 ani',
-    desc: 'Desene mai complexe cu detalii fine, teme variate și provocări creative mai avansate.',
-    features: ['Detalii fine și complexe', 'Teme diverse: space, natură, arte', 'Tehnici de amestecare culori'],
+    desc: 'La această vârstă copiii vor provocări. Planșele mai complexe îi țin concentrați mai mult și îi ajută să-și dezvolte răbdarea și precizia.',
+    features: ['Detalii fine, multiple zone de culoare', 'Teme: spațiu, animale, artă, natură', 'Combinații de culori și tehnici avansate'],
     color: 'bg-[#5BC4C0]',
   },
   {
-    label: 'Părinți & copii',
-    age: 'Activitate de familie',
-    desc: 'Kituri speciale pentru momente de calitate împreună, cu planșe duale și ghid de activitate.',
-    features: ['Planșe perechi', 'Ghid de conversație tematică', 'Amintiri create împreună'],
+    label: 'Activitate de familie',
+    age: 'Părinți & copii',
+    desc: 'Cel mai bun lucru pe care îl poți oferi unui copil e timpul tău. Kiturile de familie vin cu două planșe — una pentru el, una pentru tine.',
+    features: ['Planșe perechi, pentru adult și copil', 'Activitate de 45–60 minute împreună', 'Fără ecrane, fără distracții — doar voi doi'],
     color: 'bg-[#E86B9E]',
   },
 ]
 
 const steps = [
-  { num: 1, title: 'Pregătire', desc: 'Alege planșa și culoarea', icon: ClipboardList },
-  { num: 2, title: 'Explorare', desc: 'Descoperă textura și culorile', icon: Search },
-  { num: 3, title: 'Ghidare', desc: 'Urmează liniile și tiparele', icon: Pencil },
-  { num: 4, title: 'Creație', desc: 'Dă viață desenului tău', icon: Palette },
-  { num: 5, title: 'Împărtășire', desc: 'Prezintă creația cu mândrie', icon: Award },
+  { num: 1, title: 'Alege planșa', desc: 'Copilul alege tema preferată din kit', icon: ClipboardList },
+  { num: 2, title: 'Descoperă nisipul', desc: 'Atinge, simte — experiența senzorială începe', icon: Search },
+  { num: 3, title: 'Aplică cu grijă', desc: 'Urmează liniile și umple zona cu culoarea aleasă', icon: Pencil },
+  { num: 4, title: 'Creează', desc: 'Fiecare culoare adăugată aduce desenul la viață', icon: Palette },
+  { num: 5, title: 'Prezintă cu mândrie', desc: 'Lucrarea e gata — și e 100% a lui', icon: Award },
 ]
 
 export default function HomePage() {
@@ -160,16 +160,15 @@ export default function HomePage() {
           <div>
             <div className="inline-flex items-center gap-2 bg-[#5BC4C0]/10 text-[#5BC4C0] px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <Sparkles size={14} />
-              Planșe de nisip pentru copii creativi
+              Fără ecrane. Fără haos. Doar creativitate.
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2D2D2D] leading-tight mb-6">
-              Magia{' '}
-              <span className="text-[#5BC4C0]">Creativității</span>
-              <br />
-              pentru Copii
+              Activitatea care îl{' '}
+              <span className="text-[#5BC4C0]">ține concentrat</span>
+              {' '}o oră întreagă
             </h1>
             <p className="text-xl text-[#6B7280] mb-8 leading-relaxed max-w-lg">
-              Joacă blândă, liniște, creativitate. Planșe de nisip colorate care transformă timpul liber în momente de magie și dezvoltare.
+              Planșe de nisip colorat pentru copii de 2–10 ani. Copilul creează, se liniștește și se dezvoltă — tu te bucuri de liniște.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to="/magazin" className="btn-primary text-base px-8 py-4">
@@ -182,18 +181,18 @@ export default function HomePage() {
             </div>
             <div className="flex items-center gap-6 mt-8">
               <div className="text-center">
-                <p className="text-2xl font-bold text-[#2D2D2D]">500+</p>
-                <p className="text-xs text-[#6B7280]">Familii fericite</p>
+                <p className="text-2xl font-bold text-[#2D2D2D]">100%</p>
+                <p className="text-xs text-[#6B7280]">Non-toxic, sigur</p>
               </div>
               <div className="w-px h-10 bg-gray-200" />
               <div className="text-center">
-                <p className="text-2xl font-bold text-[#2D2D2D]">4.9★</p>
-                <p className="text-xs text-[#6B7280]">Rating mediu</p>
-              </div>
-              <div className="w-px h-10 bg-gray-200" />
-              <div className="text-center">
-                <p className="text-2xl font-bold text-[#2D2D2D]">2-10</p>
+                <p className="text-2xl font-bold text-[#2D2D2D]">2–10</p>
                 <p className="text-xs text-[#6B7280]">Ani recomandat</p>
+              </div>
+              <div className="w-px h-10 bg-gray-200" />
+              <div className="text-center">
+                <p className="text-2xl font-bold text-[#2D2D2D]">60 min</p>
+                <p className="text-xs text-[#6B7280]">Concentrare medie</p>
               </div>
             </div>
           </div>
@@ -239,13 +238,13 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="section-title mb-4">
-                Ce sunt planșele de nisip?
+                Cum funcționează?
               </h2>
               <p className="section-subtitle mb-6">
-                Planșele de nisip sunt un tip special de activitate creativă în care copiii aplică nisip colorat pe imagini pre-desenate, urmând tiparele și creând opere de artă unice.
+                Fiecare planșă are suprafața acoperită cu adeziv transparent. Copilul aplică nisipul colorat pe zonele marcate și — în câteva minute — apare o imagine completă.
               </p>
               <p className="text-[#6B7280] leading-relaxed mb-6">
-                Fiecare kit include planșe cu adeziv, nisip colorat non-toxic în multiple culori și instrumente de aplicare. Procesul este simplu, relaxant și extrem de satisfăcător — atât pentru copii, cât și pentru adulți.
+                Nu e nevoie de apă, pensule sau pregătire specială. Kitul conține tot: planșe gata de folosit, nisip colorat non-toxic în mai multe culori și instrumente de aplicare. Se poate face pe masă, pe podea, oriunde.
               </p>
               <div className="flex flex-col gap-3">
                 {steps.map((step) => (
@@ -279,9 +278,9 @@ export default function HomePage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title mb-4">De ce Planșele de Nisip?</h2>
+            <h2 className="section-title mb-4">De ce funcționează atât de bine?</h2>
             <p className="section-subtitle max-w-2xl mx-auto">
-              Mai mult decât o joacă — o activitate cu beneficii reale pentru dezvoltarea copilului
+              Nu e doar o joacă frumoasă — e o activitate cu beneficii concrete, validate de educatori și psihologi pentru copii.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
@@ -302,9 +301,9 @@ export default function HomePage() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title mb-4">Cui se adresează?</h2>
+            <h2 className="section-title mb-4">Potrivit pentru orice context</h2>
             <p className="section-subtitle max-w-xl mx-auto">
-              Planșele Sensoria Kids se potrivesc în multe contexte și pentru toți copiii
+              Acasă, la grădiniță sau la afterschool — kiturile Sensoria Kids se adaptează ușor oricărui mediu
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -328,9 +327,9 @@ export default function HomePage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title mb-4">Adaptat vârstei</h2>
+            <h2 className="section-title mb-4">Câte un kit potrivit pentru fiecare vârstă</h2>
             <p className="section-subtitle max-w-xl mx-auto">
-              Fiecare etapă de dezvoltare are nevoile ei creative
+              Nu toate kiturile sunt la fel — le-am gândit diferit pentru fiecare etapă de dezvoltare
             </p>
           </div>
 
@@ -410,8 +409,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-10">
             <div>
-              <h2 className="section-title mb-2">Produse Recomandate</h2>
-              <p className="section-subtitle">Cele mai populare kituri ale noastre</p>
+              <h2 className="section-title mb-2">Cele mai iubite kituri</h2>
+              <p className="section-subtitle">Alegerile preferate ale familiilor Sensoria Kids</p>
             </div>
             <Link to="/magazin" className="btn-outline hidden sm:inline-flex">
               Vezi toate
@@ -436,9 +435,9 @@ export default function HomePage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title mb-4">Ce spun părinții</h2>
+            <h2 className="section-title mb-4">Ce spun părinții și educatorii</h2>
             <p className="section-subtitle max-w-xl mx-auto">
-              Experiențe reale din familiile care au ales Sensoria Kids
+              Părinți, bunici, educatoare — toți au găsit ceva valoros în kiturile Sensoria Kids
             </p>
           </div>
 
@@ -494,10 +493,10 @@ export default function HomePage() {
             <Mail size={32} className="text-white" />
           </div>
           <h2 className="text-3xl font-bold text-white mb-4">
-            Rămâi conectat cu noi
+            Idei, oferte și noutăți — direct pe email
           </h2>
           <p className="text-white/80 mb-8 text-lg">
-            Abonează-te la newsletter pentru oferte exclusive, idei creative și noutăți despre produse.
+            Înscrie-te și primești primul idei creative gratuite, oferte exclusive și notificări când lansăm produse noi.
           </p>
           {subscribed ? (
             <div className="bg-white/20 rounded-2xl p-6 text-white">
