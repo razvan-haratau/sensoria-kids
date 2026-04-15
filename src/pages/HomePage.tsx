@@ -140,7 +140,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#5BC4C0]/10 to-[#E86B9E]/10">
 
         {/* Layout MOBILE */}
         <div className="lg:hidden flex flex-col items-center text-center px-4 sm:px-6 pt-12 pb-0">
