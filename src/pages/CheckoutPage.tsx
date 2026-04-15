@@ -308,12 +308,12 @@ export default function CheckoutPage() {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between pt-2">
-                      <Link to="/magazin" className="flex items-center gap-1.5 text-sm text-[#6B7280] hover:text-[#5BC4C0] transition-colors">
+                    <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3 pt-2">
+                      <Link to="/magazin" className="flex items-center justify-center gap-1.5 text-sm text-[#6B7280] hover:text-[#5BC4C0] transition-colors">
                         <ArrowLeft size={14} />
                         Înapoi la magazin
                       </Link>
-                      <button type="submit" className="btn-primary">
+                      <button type="submit" className="btn-primary w-full sm:w-auto justify-center">
                         Continuă la plată
                         <CreditCard size={16} />
                       </button>
@@ -375,16 +375,16 @@ export default function CheckoutPage() {
                       </div>
                     )}
 
-                    <div className="flex items-center justify-between pt-2">
+                    <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3 pt-2">
                       <button
                         type="button"
                         onClick={() => setStep('shipping')}
-                        className="flex items-center gap-1.5 text-sm text-[#6B7280] hover:text-[#5BC4C0] transition-colors"
+                        className="flex items-center justify-center gap-1.5 text-sm text-[#6B7280] hover:text-[#5BC4C0] transition-colors"
                       >
                         <ArrowLeft size={14} />
                         Înapoi
                       </button>
-                      <button type="submit" disabled={processing} className="btn-primary">
+                      <button type="submit" disabled={processing} className="btn-primary w-full sm:w-auto justify-center">
                         {processing ? (
                           <span className="flex items-center gap-2">
                             <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
