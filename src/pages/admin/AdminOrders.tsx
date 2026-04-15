@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Search, ChevronDown, Eye, X, Check } from 'lucide-react'
 import { useOrdersStore } from '../../store/ordersStore'
 import { Order, OrderStatus } from '../../types'
@@ -28,10 +28,14 @@ const PAYMENT_LABELS: Record<string, string> = {
 const allStatuses: OrderStatus[] = ['Nouă', 'În procesare', 'Expediată', 'Livrată', 'Anulată']
 
 export default function AdminOrders() {
-  const { orders, updateOrderStatus } = useOrdersStore()
+  const { orders, updateOrderStatus, fetchOrders } = useOrdersStore()
   const [search, setSearch] = useState('')
   const [filterStatus, setFilterStatus] = useState<string>('Toate')
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
+
+  useEffect(() => {
+    fetchOrders()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const filtered = orders.filter((o) => {
     const matchSearch = o.id.toLowerCase().includes(search.toLowerCase()) ||
