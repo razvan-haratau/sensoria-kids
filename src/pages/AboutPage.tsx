@@ -78,8 +78,8 @@ export default function AboutPage() {
                 Povestea noastră
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-[#2D2D2D] leading-tight mb-6">
-                Noi credem că fiecare copil merită un spațiu de{' '}
-                <span className="text-[#5BC4C0]">joacă blândă</span>
+                Credem că fiecare copil merită să crească prin{' '}
+                <span className="text-[#5BC4C0]">joc liniștit</span>
               </h1>
               <p className="text-[#6B7280] text-lg leading-relaxed mb-6">
                 Sensoria Kids s-a născut din dorința de a oferi copiilor activități creative care hrănesc sufletul — liniștitoare, frumoase și pline de sens.
