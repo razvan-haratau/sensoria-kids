@@ -141,20 +141,6 @@ export default function HomePage() {
     <div className="min-h-screen">
       {/* Hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-gradient-to-br from-[#5BC4C0]/10 via-white to-[#E86B9E]/10"
-        />
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, #5BC4C0 0%, transparent 50%),
-                              radial-gradient(circle at 80% 50%, #E86B9E 0%, transparent 50%)`,
-          }}
-        />
-
-        {/* Decorative shapes */}
-        <div className="absolute top-20 right-10 w-64 h-64 rounded-full bg-[#B07CC6]/10 blur-3xl float-animation" />
-        <div className="absolute bottom-20 left-10 w-48 h-48 rounded-full bg-[#F4A68F]/20 blur-3xl float-animation" style={{ animationDelay: '1.5s' }} />
 
         {/* Layout MOBILE */}
         <div className="lg:hidden flex flex-col items-center text-center px-4 sm:px-6 pt-12 pb-0">
