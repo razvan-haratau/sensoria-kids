@@ -156,28 +156,61 @@ export default function HomePage() {
         <div className="absolute top-20 right-10 w-64 h-64 rounded-full bg-[#B07CC6]/10 blur-3xl float-animation" />
         <div className="absolute bottom-20 left-10 w-48 h-48 rounded-full bg-[#F4A68F]/20 blur-3xl float-animation" style={{ animationDelay: '1.5s' }} />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-32 grid lg:grid-cols-2 gap-12 items-center">
+        {/* Layout MOBILE */}
+        <div className="lg:hidden flex flex-col items-center text-center px-4 sm:px-6 pt-12 pb-0">
+          <div className="inline-flex items-center gap-2 bg-[#5BC4C0]/10 text-[#5BC4C0] px-4 py-2 rounded-full text-sm font-semibold mb-5">
+            <Sparkles size={14} />
+            Fără ecrane. Fără haos. Doar creativitate.
+          </div>
+          <h1 className="text-3xl font-bold text-[#2D2D2D] leading-tight mb-3">
+            Activitatea prin care copilul{' '}
+            <span className="text-[#5BC4C0]">creează, învață și se liniștește</span>
+          </h1>
+          <p className="text-base text-[#6B7280] mb-6 leading-relaxed max-w-xs">
+            Planșe de nisip colorat pentru copii de 2–10 ani.
+          </p>
+          <div className="flex gap-3 mb-8">
+            <Link to="/magazin" className="btn-primary text-sm px-6 py-3">
+              Descoperă Produsele
+              <ArrowRight size={16} />
+            </Link>
+            <Link to="/despre-noi" className="btn-outline text-sm px-6 py-3">
+              Despre Noi
+            </Link>
+          </div>
+          {/* Imagine full-bleed */}
+          <div className="relative w-full -mx-4 sm:-mx-6 overflow-hidden" style={{ borderRadius: '24px 24px 0 0' }}>
+            <img
+              src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80"
+              alt="Copil creativ cu planșă de nisip"
+              className="w-full object-cover object-top"
+              style={{ aspectRatio: '4/5' }}
+              loading="eager"
+            />
+            <div className="absolute bottom-4 left-4 right-4 flex justify-between">
+              <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-3 py-2 shadow-card">
+                <p className="font-bold text-xs">100% non-toxic</p>
+                <p className="text-[10px] text-[#6B7280]">Sigur pentru copii</p>
+              </div>
+              <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-3 py-2 shadow-card">
+                <p className="font-bold text-xs">Recomandat de educatori</p>
+                <p className="text-[10px] text-[#6B7280]">Activitate certificată</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Layout DESKTOP */}
+        <div className="hidden lg:grid max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 grid-cols-2 gap-12 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-[#5BC4C0]/10 text-[#5BC4C0] px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <Sparkles size={14} />
               Fără ecrane. Fără haos. Doar creativitate.
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2D2D2D] leading-tight mb-6">
+            <h1 className="text-5xl lg:text-6xl font-bold text-[#2D2D2D] leading-tight mb-6">
               Activitatea prin care copilul{' '}
               <span className="text-[#5BC4C0]">creează, învață și se liniștește</span>
             </h1>
-
-            {/* Imagine vizibilă doar pe mobile — după titlu */}
-            <div className="relative lg:hidden mb-8 rounded-3xl overflow-hidden shadow-hover aspect-square">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#5BC4C0]/20 to-[#E86B9E]/20" />
-              <img
-                src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80"
-                alt="Copil creativ cu planșă de nisip"
-                className="w-full h-full object-cover"
-                loading="eager"
-              />
-            </div>
-
             <p className="text-xl text-[#6B7280] mb-8 leading-relaxed max-w-lg">
               Planșe de nisip colorat pentru copii de 2–10 ani. Copilul creează, se liniștește și se dezvoltă — tu te bucuri de liniște.
             </p>
@@ -207,8 +240,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-
-          <div className="relative hidden lg:block">
+          <div className="relative">
             <div className="relative w-full aspect-square max-w-lg mx-auto">
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#5BC4C0]/20 to-[#E86B9E]/20" />
               <img
