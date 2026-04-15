@@ -21,8 +21,8 @@ const defaultSettings: StoreSettings = {
   address: 'România',
   instagramUrl: 'https://instagram.com/sensoriakids',
   facebookUrl: 'https://facebook.com/sensoriakids',
-  freeShippingThreshold: 150,
-  shippingCost: 15,
+  freeShippingThreshold: 200,
+  shippingCost: 20,
   lowStockThreshold: 5,
   currency: 'RON',
 }
