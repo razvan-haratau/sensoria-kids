@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { TrendingUp, ShoppingBag, Package, Users, AlertTriangle, Eye, X, Check } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useOrdersStore } from '../../store/ordersStore'
@@ -29,8 +29,12 @@ const steps: OrderStatus[] = ['Nouă', 'În procesare', 'Expediată', 'Livrată'
 
 export default function AdminDashboard() {
   const { products } = useProductsStore()
-  const { orders, updateOrderStatus } = useOrdersStore()
+  const { orders, updateOrderStatus, fetchOrders } = useOrdersStore()
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
+
+  useEffect(() => {
+    fetchOrders()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0)
   const totalOrders = orders.length
