@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Search, ChevronDown, Eye, X, Check } from 'lucide-react'
+import { Search, ChevronDown, Eye, X, Check, Download } from 'lucide-react'
 import { useOrdersStore } from '../../store/ordersStore'
 import { Order, OrderStatus } from '../../types'
 
@@ -54,11 +54,53 @@ export default function AdminOrders() {
 
   const steps: OrderStatus[] = ['Nouă', 'În procesare', 'Expediată', 'Livrată']
 
+  const exportCSV = () => {
+    const rows = [
+      ['ID Comandă', 'Client', 'Email', 'Telefon', 'Stradă', 'Oraș', 'Județ', 'Produse', 'Transport (RON)', 'Total (RON)', 'Plată', 'Status', 'Data'],
+      ...filtered.map((o) => {
+        const addr = o.shipping_address as unknown as Record<string, string>
+        const items = (o.items as any[]).map((i: any) => `${i.product_name} x${i.quantity}`).join(' | ')
+        return [
+          o.id,
+          o.customer_name,
+          o.customer_email,
+          o.customer_phone ?? '',
+          addr?.street ?? '',
+          addr?.city ?? '',
+          addr?.county ?? '',
+          items,
+          o.shipping_cost,
+          o.total,
+          PAYMENT_LABELS[o.payment_status] ?? o.payment_status,
+          o.order_status,
+          new Date(o.created_at).toLocaleDateString('ro-RO'),
+        ]
+      }),
+    ]
+    const csv = rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n')
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `comenzi-sensoria-${new Date().toISOString().slice(0, 10)}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-xl font-bold text-[#2D2D2D]">Comenzi</h2>
-        <p className="text-sm text-[#6B7280]">{orders.length} comenzi în total</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-xl font-bold text-[#2D2D2D]">Comenzi</h2>
+          <p className="text-sm text-[#6B7280]">{orders.length} comenzi în total</p>
+        </div>
+        <button
+          onClick={exportCSV}
+          className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-medium text-[#2D2D2D] hover:border-[#5BC4C0] hover:text-[#5BC4C0] transition-colors shadow-card"
+        >
+          <Download size={15} />
+          Export Excel
+        </button>
       </div>
 
       {/* Filters */}
