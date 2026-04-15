@@ -245,7 +245,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <p className="font-bold text-sm">Recomandat de educatori</p>
-                    <p className="text-xs text-[#6B7280]">Activitate educativă certificată</p>
+                    <p className="text-xs text-[#6B7280]">Activitate educativă relaxantă</p>
                   </div>
                 </div>
               </div>
