@@ -238,7 +238,7 @@ export default function AboutPage() {
             "Am creat Sensoria Kids pentru că am văzut câtă bucurie și calm aduce un moment simplu de creativitate. Vrem ca fiecare copil din România să aibă acces la jocul blând."
           </blockquote>
           <p className="text-sm text-[#6B7280]">
-            Suntem o echipă mică, pasionată, bazată în România. Fiecare produs este gândit cu grijă pentru copii și familiile lor.
+            Suntem o echipă mică, pasionată, din România. Fiecare produs este gândit cu grijă pentru copii și familiile lor.
           </p>
         </div>
       </section>

@@ -496,7 +496,7 @@ export default function HomePage() {
             Idei, oferte și noutăți — direct pe email
           </h2>
           <p className="text-white/80 mb-8 text-lg">
-            Înscrie-te și primești primul idei creative gratuite, oferte exclusive și notificări când lansăm produse noi.
+            Înscrie-te și primești idei creative gratuite, oferte exclusive și notificări când lansăm produse noi.
           </p>
           {subscribed ? (
             <div className="bg-white/20 rounded-2xl p-6 text-white">
