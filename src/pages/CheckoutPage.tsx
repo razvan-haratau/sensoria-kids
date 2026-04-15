@@ -105,6 +105,8 @@ export default function CheckoutPage() {
         // Save order directly — no payment gateway needed
         await addOrder(orderData)
         items.forEach(({ product, quantity }) => decrementStock(product.id, quantity))
+        // Trimite email confirmare (fire-and-forget, nu blocăm UX)
+        supabase.functions.invoke('send-order-email', { body: { order: orderData } }).catch(() => {})
         setConfirmedOrderId(orderId)
         setConfirmedEmail(shipping.email)
         clearCart()
