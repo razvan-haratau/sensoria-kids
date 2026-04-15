@@ -95,7 +95,7 @@ export default function AboutPage() {
                 className="w-full rounded-3xl shadow-hover"
               />
               <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-5 shadow-hover">
-                <p className="font-bold text-2xl text-[#5BC4C0]">2022</p>
+                <p className="font-bold text-2xl text-[#5BC4C0]">2025</p>
                 <p className="text-sm text-[#6B7280]">Anul fondării</p>
               </div>
               <div className="absolute -top-6 -right-6 bg-white rounded-2xl p-5 shadow-hover">
