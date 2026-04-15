@@ -156,7 +156,7 @@ export default function HomePage() {
         <div className="absolute top-20 right-10 w-64 h-64 rounded-full bg-[#B07CC6]/10 blur-3xl float-animation" />
         <div className="absolute bottom-20 left-10 w-48 h-48 rounded-full bg-[#F4A68F]/20 blur-3xl float-animation" style={{ animationDelay: '1.5s' }} />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-32 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-[#5BC4C0]/10 text-[#5BC4C0] px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <Sparkles size={14} />
@@ -232,7 +232,7 @@ export default function HomePage() {
       </section>
 
       {/* What are sand art kits */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-10 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -274,7 +274,7 @@ export default function HomePage() {
       </section>
 
       {/* Benefits */}
-      <section className="py-20">
+      <section className="py-10 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="section-title mb-4">De ce funcționează atât de bine?</h2>
@@ -297,7 +297,7 @@ export default function HomePage() {
       </section>
 
       {/* Audience */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-10 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="section-title mb-4">Potrivit pentru orice context</h2>
@@ -323,7 +323,7 @@ export default function HomePage() {
       </section>
 
       {/* Age groups */}
-      <section className="py-20">
+      <section className="py-10 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="section-title mb-4">Câte un kit potrivit pentru fiecare vârstă</h2>
@@ -431,7 +431,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20">
+      <section className="py-10 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="section-title mb-4">Ce spun părinții și educatorii</h2>
