@@ -166,6 +166,18 @@ export default function HomePage() {
               Activitatea prin care copilul{' '}
               <span className="text-[#5BC4C0]">creează, învață și se liniștește</span>
             </h1>
+
+            {/* Imagine vizibilă doar pe mobile — după titlu */}
+            <div className="relative lg:hidden mb-8 rounded-3xl overflow-hidden shadow-hover aspect-square">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#5BC4C0]/20 to-[#E86B9E]/20" />
+              <img
+                src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80"
+                alt="Copil creativ cu planșă de nisip"
+                className="w-full h-full object-cover"
+                loading="eager"
+              />
+            </div>
+
             <p className="text-xl text-[#6B7280] mb-8 leading-relaxed max-w-lg">
               Planșe de nisip colorat pentru copii de 2–10 ani. Copilul creează, se liniștește și se dezvoltă — tu te bucuri de liniște.
             </p>
