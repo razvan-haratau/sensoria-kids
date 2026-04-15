@@ -10,6 +10,7 @@ import Footer from './components/Footer'
 import CartDrawer from './components/CartDrawer'
 import CookieBanner from './components/CookieBanner'
 import ErrorBoundary from './components/ErrorBoundary'
+import ScrollToTop from './components/ScrollToTop'
 
 import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
@@ -62,6 +63,7 @@ export default function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
+        <ScrollToTop />
         <AppInit />
         <Suspense fallback={
           <div className="min-h-screen flex items-center justify-center">
