@@ -112,7 +112,7 @@ export default function Footer() {
             © {new Date().getFullYear()} {settings.storeName}. Toate drepturile rezervate.
           </p>
           <p className="text-sm text-gray-500">
-            Realizat cu <Heart size={12} className="inline text-[#E86B9E] fill-[#E86B9E]" /> pentru copiii creativi din România
+            Realizat din <Heart size={12} className="inline text-[#E86B9E] fill-[#E86B9E]" /> pentru copiii creativi din România
           </p>
         </div>
       </div>
