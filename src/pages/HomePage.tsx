@@ -143,7 +143,7 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#5BC4C0]/10 to-[#E86B9E]/10">
 
         {/* Layout MOBILE */}
-        <div className="lg:hidden flex flex-col items-center text-center px-4 sm:px-6 pt-12 pb-0">
+        <div className="lg:hidden flex flex-col items-center text-center px-4 sm:px-6 pt-20 pb-0">
           <div className="inline-flex items-center gap-2 bg-[#5BC4C0]/10 text-[#5BC4C0] px-4 py-2 rounded-full text-sm font-semibold mb-5">
             <Sparkles size={14} />
             Fără ecrane. Fără haos. Doar creativitate.
@@ -180,7 +180,7 @@ export default function HomePage() {
               </div>
               <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-3 py-2 shadow-card">
                 <p className="font-bold text-xs">Recomandat de educatori</p>
-                <p className="text-[10px] text-[#6B7280]">Activitate certificată</p>
+                <p className="text-[10px] text-[#6B7280]">Activitate relaxantă</p>
               </div>
             </div>
           </div>
