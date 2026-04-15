@@ -11,6 +11,7 @@ import CartDrawer from './components/CartDrawer'
 import CookieBanner from './components/CookieBanner'
 import ErrorBoundary from './components/ErrorBoundary'
 import ScrollToTop from './components/ScrollToTop'
+import ScrollToTopButton from './components/ScrollToTopButton'
 
 import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
@@ -37,6 +38,7 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
       <Footer />
       <CartDrawer />
       <CookieBanner />
+      <ScrollToTopButton />
     </>
   )
 }
