@@ -316,7 +316,7 @@ export default function AdminOrders() {
                       className="flex-1 py-3 bg-[#5BC4C0] text-white rounded-xl text-sm font-semibold hover:bg-[#3EA8A4] transition-colors disabled:opacity-60 flex items-center justify-center gap-1.5 whitespace-nowrap"
                     >
                       {!sendingShipping && <Send size={14} className="shrink-0" />}
-                      {sendingShipping ? 'Se trimite...' : 'Expediază și trimite email'}
+                      {sendingShipping ? 'Se trimite...' : 'Expediază'}
                     </button>
                   </div>
                 </>
