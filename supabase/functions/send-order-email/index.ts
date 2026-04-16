@@ -40,6 +40,7 @@ Deno.serve(async (req) => {
 
     const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
     const FROM_EMAIL = Deno.env.get('FROM_EMAIL') ?? 'onboarding@resend.dev'
+    const ADMIN_EMAIL = Deno.env.get('ADMIN_EMAIL')
 
     if (!RESEND_API_KEY) {
       throw new Error('RESEND_API_KEY lipsește din secrets')
@@ -97,14 +98,16 @@ Deno.serve(async (req) => {
 
       <!-- Totals -->
       <div style="background:#f9fafb; border-radius:12px; padding:16px 20px; margin-bottom:28px;">
-        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-          <span style="color:#6B7280; font-size:14px;">Transport</span>
-          <span style="color:#6B7280; font-size:14px;">${order.shipping_cost === 0 ? 'Gratuit' : `${order.shipping_cost} RON`}</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; border-top:1px solid #e5e7eb; padding-top:12px; margin-top:4px;">
-          <span style="color:#2D2D2D; font-size:16px; font-weight:700;">Total</span>
-          <span style="color:#5BC4C0; font-size:16px; font-weight:700;">${order.total} RON</span>
-        </div>
+        <table style="width:100%; border-collapse:collapse;">
+          <tr>
+            <td style="color:#6B7280; font-size:14px; padding-bottom:8px;">Transport</td>
+            <td style="color:#6B7280; font-size:14px; padding-bottom:8px; text-align:right;">${order.shipping_cost === 0 ? 'Gratuit' : `${order.shipping_cost} RON`}</td>
+          </tr>
+          <tr style="border-top:1px solid #e5e7eb;">
+            <td style="color:#2D2D2D; font-size:16px; font-weight:700; padding-top:12px;">Total</td>
+            <td style="color:#5BC4C0; font-size:16px; font-weight:700; padding-top:12px; text-align:right;">${order.total} RON</td>
+          </tr>
+        </table>
       </div>
 
       <!-- Payment -->
@@ -145,6 +148,52 @@ Deno.serve(async (req) => {
     if (!res.ok) {
       const err = await res.text()
       throw new Error(`Resend error: ${err}`)
+    }
+
+    // Notificare admin
+    if (ADMIN_EMAIL) {
+      const itemsText = order.items.map((i) => `${i.product_name} ×${i.quantity} = ${i.unit_price * i.quantity} RON`).join('<br>')
+      const paymentLabel = order.payment_method === 'card' ? 'Card bancar (Netopia)' : 'Ramburs la livrare'
+      const adminHtml = `
+<!DOCTYPE html>
+<html lang="ro">
+<head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#f9fafb;font-family:'Segoe UI',Arial,sans-serif;">
+  <div style="max-width:500px;margin:40px auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
+    <div style="background:#2D2D2D;padding:24px 32px;">
+      <p style="color:#9CA3AF;font-size:12px;margin:0 0 4px;text-transform:uppercase;letter-spacing:1px;">Sensoria Kids — Admin</p>
+      <h2 style="color:#fff;margin:0;font-size:20px;">Comandă nouă!</h2>
+    </div>
+    <div style="padding:28px 32px;space-y:16px;">
+      <table style="width:100%;border-collapse:collapse;margin-bottom:20px;">
+        <tr><td style="color:#6B7280;font-size:13px;padding:6px 0;">Comandă</td><td style="font-family:monospace;font-weight:700;color:#5BC4C0;font-size:15px;">${order.id}</td></tr>
+        <tr><td style="color:#6B7280;font-size:13px;padding:6px 0;">Client</td><td style="font-weight:600;color:#2D2D2D;">${order.customer_name}</td></tr>
+        <tr><td style="color:#6B7280;font-size:13px;padding:6px 0;">Email</td><td style="color:#2D2D2D;">${order.customer_email}</td></tr>
+        <tr><td style="color:#6B7280;font-size:13px;padding:6px 0;">Plată</td><td style="color:#2D2D2D;">${paymentLabel}</td></tr>
+      </table>
+      <div style="background:#f9fafb;border-radius:10px;padding:16px 20px;margin-bottom:20px;">
+        <p style="color:#6B7280;font-size:12px;margin:0 0 10px;text-transform:uppercase;letter-spacing:1px;">Produse</p>
+        <p style="color:#2D2D2D;font-size:14px;margin:0;line-height:1.8;">${itemsText}</p>
+      </div>
+      <div style="display:flex;justify-content:space-between;border-top:2px solid #f3f4f6;padding-top:16px;">
+        <span style="font-size:16px;font-weight:700;color:#2D2D2D;">Total</span>
+        <span style="font-size:20px;font-weight:700;color:#5BC4C0;">${order.total} RON</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`
+
+      await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          from: FROM_EMAIL,
+          to: ADMIN_EMAIL,
+          subject: `[Comandă nouă] ${order.id} — ${order.customer_name} — ${order.total} RON`,
+          html: adminHtml,
+        }),
+      })
     }
 
     return new Response(JSON.stringify({ ok: true }), {
