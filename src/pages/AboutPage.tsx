@@ -34,7 +34,7 @@ const steps = [
   {
     num: 5,
     title: 'Împărtășire',
-    desc: 'Prezentăm creația cu mândrie. Un moment de validare și bucurie autentică.',
+    desc: 'Prezentăm creația cu mândrie. Un moment de bucurie și satisfacție.',
     icon: Award,
     color: 'bg-[#5BC4C0]',
   },
@@ -42,8 +42,8 @@ const steps = [
 
 const reasons_educators = [
   'Activitate structurată, ușor de integrat în orar',
-  'Materiale sigure, non-toxice, certificate CE',
-  'Dezvoltă motricitatea fină și concentrarea',
+  'Materiale sigure, certificate CE',
+  'Îi ajută pe copii să se concentreze și să controleze mișcările mâinii',
   'Poate fi practicată individual sau în grup',
   'Curățare rapidă — nisipul este ușor de strâns',
   'Rezultat vizual motivant pentru copii',
@@ -60,7 +60,7 @@ const reasons_parents = [
 
 const values = [
   { icon: Heart, title: 'Blândețe', desc: 'Credem că jocul trebuie să fie liniștitor, nu stimulant excesiv.', color: 'text-[#E86B9E]' },
-  { icon: Star, title: 'Calitate', desc: 'Materiale premium, non-toxice, testate și sigure pentru copii.', color: 'text-[#5BC4C0]' },
+  { icon: Star, title: 'Calitate', desc: 'Materiale de calitate, testate și sigure pentru copii.', color: 'text-[#5BC4C0]' },
   { icon: Users, title: 'Comunitate', desc: 'Construim o rețea de părinți și educatori care valorizează jocul conștient.', color: 'text-[#B07CC6]' },
   { icon: Leaf, title: 'Sustenabilitate', desc: 'Ambalaje eco, producție responsabilă, materiale reciclabile.', color: 'text-[#5BC4C0]' },
 ]
@@ -82,7 +82,7 @@ export default function AboutPage() {
                 <span className="text-[#5BC4C0]">joc liniștit</span>
               </h1>
               <p className="text-[#6B7280] text-lg leading-relaxed mb-6">
-                Sensoria Kids s-a născut din dorința de a oferi copiilor activități creative care hrănesc sufletul — liniștitoare, frumoase și pline de sens.
+                Sensoria Kids s-a născut din dorința de a oferi copiilor activități creative liniștitoare, frumoase și cu sens pentru copii.
               </p>
               <p className="text-[#6B7280] leading-relaxed">
                 Am văzut cum copiii de astăzi sunt suprastimulați de ecrane și zgomot. Am vrut să creăm ceva diferit — un refugiu de creativitate, concentrare și liniște. Planșele noastre de nisip sunt răspunsul.

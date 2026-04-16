@@ -17,7 +17,7 @@ const benefits = [
   {
     icon: Brain,
     title: 'Concentrare',
-    description: 'Copiii stau focalizați 30–60 de minute fără ecrane. Nisipul îi ancorează în prezent și antrenează atenția susținută.',
+    description: 'Copiii stau ocupați 30–60 de minute fără să ceară telefonul sau tableta. Nisipul îi ține atenți și liniștiți.',
     color: 'bg-[#5BC4C0]/10 text-[#5BC4C0]',
   },
   {
@@ -28,20 +28,20 @@ const benefits = [
   },
   {
     icon: Hand,
-    title: 'Motricitate Fină',
-    description: 'Gesturile mici și precise de aplicare a nisipului pregătesc mâna pentru scris și antrenează coordonarea mână-ochi.',
+    title: 'Îndemânare',
+    description: 'Mișcările mici și atente cu nisipul ajută copilul să-și controleze mai bine mâna — util și când învață să scrie.',
     color: 'bg-[#B07CC6]/10 text-[#B07CC6]',
   },
   {
     icon: Heart,
-    title: 'Calm Emoțional',
-    description: 'Textura fină a nisipului are efect aproape meditativ. Ideal după o zi agitată sau în momentele de anxietate.',
+    title: 'Liniște',
+    description: 'Textura nisipului îl calmează aproape imediat. Ideal după grădiniță, după școală sau într-o zi mai dificilă.',
     color: 'bg-[#F4A68F]/10 text-[#E08870]',
   },
   {
     icon: Zap,
-    title: 'Stimulare Senzorială',
-    description: 'Culorile vii și textura nisipului activează simțurile tactil și vizual, sprijinind dezvoltarea neurologică timpurie.',
+    title: 'Simțuri Active',
+    description: 'Culorile vii și nisipul îl fac pe copil să simtă, să vadă și să exploreze — totul în același timp, fără ecran.',
     color: 'bg-[#5BC4C0]/10 text-[#5BC4C0]',
   },
 ]
@@ -67,7 +67,7 @@ const audiences = [
   },
   {
     title: 'Grădiniță & Școală',
-    desc: 'Activitate educativă recomandată de educatori pentru dezvoltarea motricității fine și a atenției.',
+    desc: 'Activitate recomandată de educatori. Copiii stau liniștiți, sunt implicați și se bucură de ce fac.',
     icon: BookOpen,
     iconColor: 'text-[#D04D82]',
     iconBg: 'bg-[#E86B9E]/15',
@@ -89,15 +89,15 @@ const ageGroups = [
   {
     label: 'Preșcolari',
     age: '2–5 ani',
-    desc: 'La această vârstă, succesul rapid contează. Planșele noastre au forme mari și clare — copilul termină o planșă în 20 de minute și e mândru de rezultat.',
-    features: ['Modele mari, ușor de colorat', 'Culori vii, primare', 'Nisip fin, 100% non-toxic, sigur la atingere'],
+    desc: 'Planșele noastre au forme mari și clare — copilul termină repede și e mândru de ce a făcut. Un început frumos cu culorile.',
+    features: ['Modele mari, ușor de colorat', 'Culori vii, primare', 'Nisip fin și sigur la atingere'],
     color: '#F4A68F',
   },
   {
     label: 'Școlari',
     age: '6–10 ani',
     desc: 'La această vârstă copiii vor provocări. Planșele mai complexe îi țin concentrați mai mult și îi ajută să-și dezvolte răbdarea și precizia.',
-    features: ['Detalii fine, multiple zone de culoare', 'Teme: spațiu, animale, artă, natură', 'Combinații de culori și tehnici avansate'],
+    features: ['Detalii mai fine, mai multe zone de culoare', 'Teme: spațiu, animale, artă, natură', 'Pot folosi mai multe culori și combina tehnici'],
     color: '#5BC4C0',
   },
   {
@@ -175,8 +175,8 @@ export default function HomePage() {
             />
             <div className="absolute bottom-4 left-4 right-4 flex justify-between">
               <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-3 py-2 shadow-card">
-                <p className="font-bold text-xs">100% non-toxic</p>
-                <p className="text-[10px] text-[#6B7280]">Sigur pentru copii</p>
+                <p className="font-bold text-xs">100% sigur</p>
+                <p className="text-[10px] text-[#6B7280]">Testat pentru copii</p>
               </div>
               <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-3 py-2 shadow-card">
                 <p className="font-bold text-xs">Recomandat de educatori</p>
@@ -212,7 +212,7 @@ export default function HomePage() {
             <div className="flex items-center gap-6 mt-8">
               <div className="text-center">
                 <p className="text-2xl font-bold text-[#2D2D2D]">100%</p>
-                <p className="text-xs text-[#6B7280]">Non-toxic, sigur</p>
+                <p className="text-xs text-[#6B7280]">Sigur pentru copii</p>
               </div>
               <div className="w-px h-10 bg-gray-200" />
               <div className="text-center">
@@ -253,8 +253,8 @@ export default function HomePage() {
                 <div className="w-8 h-8 rounded-xl bg-[#E86B9E]/10 flex items-center justify-center mb-1.5">
                   <ShieldCheck size={18} className="text-[#E86B9E]" />
                 </div>
-                <p className="font-bold text-sm">100% non-toxic</p>
-                <p className="text-xs text-[#6B7280]">Sigur pentru copii</p>
+                <p className="font-bold text-sm">100% sigur</p>
+                <p className="text-xs text-[#6B7280]">Testat pentru copii</p>
               </div>
             </div>
           </div>
