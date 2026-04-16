@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { ShoppingCart, ArrowLeft, Star, Package, PackageX, Truck, Shield, ChevronLeft, ChevronRight, Plus, Minus, Check } from 'lucide-react'
+import { ShoppingCart, ArrowLeft, Star, Package, PackageX, Truck, Shield, ChevronLeft, ChevronRight, Plus, Minus, Check, X, ZoomIn } from 'lucide-react'
 import { useProductsStore } from '../store/productsStore'
 import { useCartStore } from '../store/cartStore'
 import ProductCard from '../components/ProductCard'
@@ -13,8 +13,21 @@ export default function ProductDetailPage() {
   const product = products.find((p) => p.id === id)
   const { addItem } = useCartStore()
   const [imageIdx, setImageIdx] = useState(0)
+  const [lightbox, setLightbox] = useState(false)
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
+
+  useEffect(() => {
+    if (!lightbox) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightbox(false)
+      if (e.key === 'ArrowLeft') setImageIdx((p) => Math.max(0, p - 1))
+      if (e.key === 'ArrowRight') setImageIdx((p) => Math.min(product!.images.length - 1, p + 1))
+    }
+    document.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = '' }
+  }, [lightbox, product])
 
   useMeta(
     product?.name ?? 'Produs',
@@ -99,23 +112,31 @@ export default function ProductDetailPage() {
         <div className="grid lg:grid-cols-2 gap-12 mb-20">
           {/* Gallery */}
           <div>
-            <div className="relative aspect-square rounded-3xl overflow-hidden bg-gray-50 mb-4">
+            <div
+              className="relative aspect-square rounded-3xl overflow-hidden bg-gray-50 mb-4 cursor-zoom-in group"
+              onClick={() => setLightbox(true)}
+            >
               <img
                 src={product.images[imageIdx]}
                 alt={product.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
               />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 rounded-full p-2.5">
+                  <ZoomIn size={20} className="text-[#2D2D2D]" />
+                </div>
+              </div>
               {product.images.length > 1 && (
                 <>
                   <button
-                    onClick={() => setImageIdx((prev) => Math.max(0, prev - 1))}
+                    onClick={(e) => { e.stopPropagation(); setImageIdx((prev) => Math.max(0, prev - 1)) }}
                     disabled={imageIdx === 0}
                     className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white rounded-xl shadow flex items-center justify-center disabled:opacity-40 hover:shadow-md transition-shadow"
                   >
                     <ChevronLeft size={18} />
                   </button>
                   <button
-                    onClick={() => setImageIdx((prev) => Math.min(product.images.length - 1, prev + 1))}
+                    onClick={(e) => { e.stopPropagation(); setImageIdx((prev) => Math.min(product.images.length - 1, prev + 1)) }}
                     disabled={imageIdx === product.images.length - 1}
                     className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white rounded-xl shadow flex items-center justify-center disabled:opacity-40 hover:shadow-md transition-shadow"
                   >
@@ -129,6 +150,60 @@ export default function ProductDetailPage() {
                 </div>
               )}
             </div>
+
+            {/* Lightbox */}
+            {lightbox && (
+              <div
+                className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+                onClick={() => setLightbox(false)}
+              >
+                <button
+                  onClick={() => setLightbox(false)}
+                  className="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
+                >
+                  <X size={20} className="text-white" />
+                </button>
+
+                {product.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setImageIdx((p) => Math.max(0, p - 1)) }}
+                      disabled={imageIdx === 0}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center disabled:opacity-30 transition-colors"
+                    >
+                      <ChevronLeft size={24} className="text-white" />
+                    </button>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setImageIdx((p) => Math.min(product.images.length - 1, p + 1)) }}
+                      disabled={imageIdx === product.images.length - 1}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center disabled:opacity-30 transition-colors"
+                    >
+                      <ChevronRight size={24} className="text-white" />
+                    </button>
+                  </>
+                )}
+
+                <img
+                  src={product.images[imageIdx]}
+                  alt={product.name}
+                  className="max-w-full max-h-full object-contain rounded-xl"
+                  style={{ maxHeight: '90dvh', maxWidth: '90dvw' }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+
+                {product.images.length > 1 && (
+                  <div className="absolute bottom-4 flex gap-2">
+                    {product.images.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={(e) => { e.stopPropagation(); setImageIdx(i) }}
+                        className={`w-2 h-2 rounded-full transition-colors ${i === imageIdx ? 'bg-white' : 'bg-white/40'}`}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
 
             {product.images.length > 1 && (
               <div className="flex gap-3">
