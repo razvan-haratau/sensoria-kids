@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Plus, Search, Edit2, Trash2, AlertTriangle, X, Check, Upload, ImagePlus, Star, Link as LinkIcon } from 'lucide-react'
 import { Product } from '../../types'
 import { useProductsStore } from '../../store/productsStore'
@@ -307,6 +307,18 @@ export default function AdminProducts() {
   const [formError, setFormError] = useState('')
   const [saving, setSaving] = useState(false)
 
+  const closeModal = () => {
+    if (saving) return
+    setModalOpen(false)
+    setFormError('')
+  }
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeModal() }
+    if (modalOpen) document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [modalOpen, saving]) // eslint-disable-line react-hooks/exhaustive-deps
+
   const handleSave = async () => {
     setFormError('')
     if (!form.name.trim()) { setFormError('Numele produsului este obligatoriu.'); return }
@@ -478,13 +490,13 @@ export default function AdminProducts() {
 
       {/* Add/Edit Modal */}
       {modalOpen && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4" onClick={(e) => { if (e.target === e.currentTarget) closeModal() }}>
           <div className="bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-hover">
             <div className="flex items-center justify-between p-6 border-b border-gray-100 sticky top-0 bg-white z-10 rounded-t-3xl">
               <h3 className="font-bold text-lg text-[#2D2D2D]">
                 {editingProduct ? 'Editează produs' : 'Adaugă produs nou'}
               </h3>
-              <button onClick={() => setModalOpen(false)} className="p-2 hover:bg-gray-100 rounded-xl">
+              <button onClick={closeModal} className="p-2 hover:bg-gray-100 rounded-xl">
                 <X size={18} />
               </button>
             </div>
@@ -671,7 +683,7 @@ export default function AdminProducts() {
 
               <div className="flex justify-end gap-3 pt-2 border-t border-gray-100">
                 <button
-                  onClick={() => setModalOpen(false)}
+                  onClick={closeModal}
                   className="px-5 py-2.5 border border-gray-200 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors"
                 >
                   Anulează
