@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Search, ChevronDown, Eye, X, Check, Download } from 'lucide-react'
+import { Search, ChevronDown, Eye, X, Check, Download, Truck, Send } from 'lucide-react'
 import { useOrdersStore } from '../../store/ordersStore'
 import { Order, OrderStatus } from '../../types'
+import { supabase } from '../../lib/supabase'
 
 const STATUS_COLORS: Record<string, string> = {
   'Nouă': 'bg-blue-100 text-blue-700',
@@ -32,6 +33,12 @@ export default function AdminOrders() {
   const [search, setSearch] = useState('')
   const [filterStatus, setFilterStatus] = useState<string>('Toate')
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
+  const [shippingModal, setShippingModal] = useState<Order | null>(null)
+  const [courier, setCourier] = useState('')
+  const [trackingNumber, setTrackingNumber] = useState('')
+  const [sendingShipping, setSendingShipping] = useState(false)
+  const [shippingError, setShippingError] = useState('')
+  const [shippingDone, setShippingDone] = useState(false)
 
   useEffect(() => {
     fetchOrders()
@@ -49,6 +56,44 @@ export default function AdminOrders() {
     updateOrderStatus(orderId, status)
     if (selectedOrder?.id === orderId) {
       setSelectedOrder((prev) => prev ? { ...prev, order_status: status } : null)
+    }
+  }
+
+  const openShippingModal = (order: Order) => {
+    setShippingModal(order)
+    setCourier('')
+    setTrackingNumber('')
+    setShippingError('')
+    setShippingDone(false)
+  }
+
+  const handleSendShipping = async () => {
+    if (!shippingModal) return
+    if (!courier.trim() || !trackingNumber.trim()) {
+      setShippingError('Completează curierul și numărul de tracking.')
+      return
+    }
+    setSendingShipping(true)
+    setShippingError('')
+    try {
+      await updateOrderStatus(shippingModal.id, 'Expediată')
+      await supabase.functions.invoke('send-shipping-email', {
+        body: {
+          shipping: {
+            order_id: shippingModal.id,
+            customer_name: shippingModal.customer_name,
+            customer_email: shippingModal.customer_email,
+            courier: courier.trim(),
+            tracking_number: trackingNumber.trim(),
+          },
+        },
+      })
+      setShippingDone(true)
+      setTimeout(() => setShippingModal(null), 1500)
+    } catch {
+      setShippingError('Eroare la trimiterea emailului. Încearcă din nou.')
+    } finally {
+      setSendingShipping(false)
     }
   }
 
@@ -175,12 +220,23 @@ export default function AdminOrders() {
                     {new Date(order.created_at).toLocaleDateString('ro-RO')}
                   </td>
                   <td className="px-6 py-4">
-                    <button
-                      onClick={() => setSelectedOrder(order)}
-                      className="p-2 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors"
-                    >
-                      <Eye size={15} />
-                    </button>
+                    <div className="flex items-center gap-1">
+                      {order.order_status !== 'Expediată' && order.order_status !== 'Livrată' && order.order_status !== 'Anulată' && (
+                        <button
+                          onClick={() => openShippingModal(order)}
+                          title="Expediază și trimite email"
+                          className="p-2 hover:bg-teal-50 hover:text-teal-600 rounded-lg transition-colors"
+                        >
+                          <Truck size={15} />
+                        </button>
+                      )}
+                      <button
+                        onClick={() => setSelectedOrder(order)}
+                        className="p-2 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors"
+                      >
+                        <Eye size={15} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -188,6 +244,87 @@ export default function AdminOrders() {
           </table>
         </div>
       </div>
+
+      {/* Shipping modal */}
+      {shippingModal && (
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl w-full max-w-md shadow-hover">
+            <div className="flex items-center justify-between p-6 border-b border-gray-100">
+              <div>
+                <h3 className="font-bold text-lg text-[#2D2D2D]">Expediază comanda</h3>
+                <p className="text-sm text-[#6B7280]">{shippingModal.id} · {shippingModal.customer_name}</p>
+              </div>
+              <button onClick={() => setShippingModal(null)} className="p-2 hover:bg-gray-100 rounded-xl">
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-4">
+              {shippingDone ? (
+                <div className="flex flex-col items-center gap-3 py-6">
+                  <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
+                    <Check size={28} className="text-green-500" />
+                  </div>
+                  <p className="font-semibold text-[#2D2D2D]">Email trimis cu succes!</p>
+                  <p className="text-sm text-[#6B7280]">Statusul a fost actualizat la "Expediată".</p>
+                </div>
+              ) : (
+                <>
+                  <div>
+                    <label className="block text-sm font-medium text-[#2D2D2D] mb-1.5">Curier</label>
+                    <select
+                      value={courier}
+                      onChange={(e) => setCourier(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-[#5BC4C0] text-sm bg-white"
+                    >
+                      <option value="">Alege curierul</option>
+                      {['Fan Courier', 'Cargus', 'DPD', 'GLS', 'Urgent Cargus', 'Poșta Română', 'Sameday', 'Altul'].map((c) => (
+                        <option key={c} value={c}>{c}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-[#2D2D2D] mb-1.5">Număr tracking (AWB)</label>
+                    <input
+                      type="text"
+                      value={trackingNumber}
+                      onChange={(e) => setTrackingNumber(e.target.value)}
+                      placeholder="Ex: 1234567890"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-[#5BC4C0] text-sm"
+                    />
+                  </div>
+
+                  {shippingError && (
+                    <p className="text-sm text-red-500 bg-red-50 px-4 py-2.5 rounded-xl">{shippingError}</p>
+                  )}
+
+                  <div className="bg-[#5BC4C0]/5 border border-[#5BC4C0]/20 rounded-xl p-3 text-xs text-[#6B7280]">
+                    Se va trimite email automat clientului cu detaliile de tracking și statusul comenzii va fi setat la "Expediată".
+                  </div>
+
+                  <div className="flex gap-3 pt-1">
+                    <button
+                      onClick={() => setShippingModal(null)}
+                      className="flex-1 py-3 border border-gray-200 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors"
+                    >
+                      Anulează
+                    </button>
+                    <button
+                      onClick={handleSendShipping}
+                      disabled={sendingShipping}
+                      className="flex-1 py-3 bg-[#5BC4C0] text-white rounded-xl text-sm font-semibold hover:bg-[#3EA8A4] transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+                    >
+                      <Send size={15} />
+                      {sendingShipping ? 'Se trimite...' : 'Expediază și trimite email'}
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Order detail modal */}
       {selectedOrder && (
