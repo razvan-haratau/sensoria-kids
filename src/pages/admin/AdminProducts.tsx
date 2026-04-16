@@ -315,8 +315,14 @@ export default function AdminProducts() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeModal() }
-    if (modalOpen) document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
+    if (modalOpen) {
+      document.addEventListener('keydown', onKey)
+      document.body.style.overflow = 'hidden'
+    }
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
   }, [modalOpen, saving]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSave = async () => {
@@ -491,7 +497,7 @@ export default function AdminProducts() {
       {/* Add/Edit Modal */}
       {modalOpen && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4" onClick={(e) => { if (e.target === e.currentTarget) closeModal() }}>
-          <div className="bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-hover">
+          <div className="bg-white rounded-3xl w-full max-w-2xl overflow-y-auto shadow-hover" style={{ maxHeight: '90dvh' }}>
             <div className="flex items-center justify-between p-6 border-b border-gray-100 sticky top-0 bg-white z-10 rounded-t-3xl">
               <h3 className="font-bold text-lg text-[#2D2D2D]">
                 {editingProduct ? 'Editează produs' : 'Adaugă produs nou'}
