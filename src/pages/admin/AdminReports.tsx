@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { TrendingUp, ShoppingBag, Users, Package } from 'lucide-react'
 import { useOrdersStore } from '../../store/ordersStore'
 import { useProductsStore } from '../../store/productsStore'
@@ -22,9 +22,13 @@ const PERIODS: { key: PeriodKey; label: string }[] = [
 ]
 
 export default function AdminReports() {
-  const { orders } = useOrdersStore()
+  const { orders, fetchOrders } = useOrdersStore()
   const { products } = useProductsStore()
   const [period, setPeriod] = useState<PeriodKey>('6l')
+
+  useEffect(() => {
+    fetchOrders()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
   const [customFrom, setCustomFrom] = useState('')
   const [customTo, setCustomTo] = useState('')
 
