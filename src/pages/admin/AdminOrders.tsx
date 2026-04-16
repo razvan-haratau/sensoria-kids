@@ -313,9 +313,9 @@ export default function AdminOrders() {
                     <button
                       onClick={handleSendShipping}
                       disabled={sendingShipping}
-                      className="flex-1 py-3 bg-[#5BC4C0] text-white rounded-xl text-sm font-semibold hover:bg-[#3EA8A4] transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+                      className="flex-1 py-3 bg-[#5BC4C0] text-white rounded-xl text-sm font-semibold hover:bg-[#3EA8A4] transition-colors disabled:opacity-60 flex items-center justify-center gap-1.5"
                     >
-                      <Send size={15} />
+                      {!sendingShipping && <Send size={14} />}
                       {sendingShipping ? 'Se trimite...' : 'Expediază și trimite email'}
                     </button>
                   </div>
