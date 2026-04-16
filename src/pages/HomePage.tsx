@@ -273,7 +273,7 @@ export default function HomePage() {
                 Fiecare planșă are suprafața acoperită cu adeziv transparent. Copilul aplică nisipul colorat pe zonele marcate și — în câteva minute — apare o imagine completă.
               </p>
               <p className="text-[#6B7280] leading-relaxed mb-6">
-                Nu e nevoie de apă, pensule sau pregătire specială. Kitul conține tot: planșe gata de folosit, nisip colorat non-toxic în mai multe culori și instrumente de aplicare. Se poate face pe masă, pe podea, oriunde.
+                Nu e nevoie de apă, pensule sau pregătire specială. Kitul conține tot: planșe gata de folosit, nisip colorat sigur în mai multe culori și instrumente de aplicare. Se poate face pe masă, pe podea, oriunde.
               </p>
               <div className="flex flex-col gap-3">
                 {steps.map((step) => (
