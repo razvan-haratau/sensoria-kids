@@ -13,16 +13,7 @@ const ORDER_STATUS_COLORS: Record<string, string> = {
   'Anulată': 'bg-red-100 text-red-700',
 }
 
-const revenueData = [
-  { month: 'Oct', value: 1200 },
-  { month: 'Nov', value: 1800 },
-  { month: 'Dec', value: 3200 },
-  { month: 'Ian', value: 2100 },
-  { month: 'Feb', value: 2600 },
-  { month: 'Mar', value: 3100 },
-]
-
-const maxRevenue = Math.max(...revenueData.map((d) => d.value))
+const MONTH_LABELS = ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun', 'Iul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 const allStatuses: OrderStatus[] = ['Nouă', 'În procesare', 'Expediată', 'Livrată', 'Anulată']
 const steps: OrderStatus[] = ['Nouă', 'În procesare', 'Expediată', 'Livrată']
@@ -42,6 +33,22 @@ export default function AdminDashboard() {
   const outOfStockProducts = products.filter((p) => p.stock_qty === 0)
   const newOrdersCount = orders.filter((o) => o.order_status === 'Nouă').length
   const uniqueCustomers = new Set(orders.map((o) => o.customer_email)).size
+
+  // Ultimele 6 luni cu venituri reale
+  const now = new Date()
+  const revenueData = Array.from({ length: 6 }, (_, i) => {
+    const d = new Date(now.getFullYear(), now.getMonth() - 5 + i, 1)
+    const year = d.getFullYear()
+    const month = d.getMonth()
+    const value = orders
+      .filter((o) => {
+        const od = new Date(o.created_at)
+        return od.getFullYear() === year && od.getMonth() === month
+      })
+      .reduce((sum, o) => sum + o.total, 0)
+    return { month: MONTH_LABELS[month], value }
+  })
+  const maxRevenue = Math.max(...revenueData.map((d) => d.value), 1)
 
   const stats = [
     {
