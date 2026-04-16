@@ -18,14 +18,110 @@ const MONTH_LABELS = ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun', 'Iul', 'Aug', 'S
 const allStatuses: OrderStatus[] = ['Nouă', 'În procesare', 'Expediată', 'Livrată', 'Anulată']
 const steps: OrderStatus[] = ['Nouă', 'În procesare', 'Expediată', 'Livrată']
 
+type PeriodKey = '1z' | '7z' | '30z' | '6l' | '1an' | 'custom'
+const PERIODS: { key: PeriodKey; label: string }[] = [
+  { key: '1z', label: 'Azi' },
+  { key: '7z', label: '7 zile' },
+  { key: '30z', label: '30 zile' },
+  { key: '6l', label: '6 luni' },
+  { key: '1an', label: '1 an' },
+  { key: 'custom', label: 'Custom' },
+]
+
 export default function AdminDashboard() {
   const { products } = useProductsStore()
   const { orders, updateOrderStatus, fetchOrders } = useOrdersStore()
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
+  const [period, setPeriod] = useState<PeriodKey>('6l')
+  const [customFrom, setCustomFrom] = useState('')
+  const [customTo, setCustomTo] = useState('')
 
   useEffect(() => {
     fetchOrders()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const now = new Date()
+
+  const getDateRange = (): { from: Date; to: Date } => {
+    const to = new Date(now)
+    to.setHours(23, 59, 59, 999)
+    if (period === '1z') {
+      const from = new Date(now); from.setHours(0, 0, 0, 0)
+      return { from, to }
+    }
+    if (period === '7z') {
+      const from = new Date(now); from.setDate(from.getDate() - 6); from.setHours(0, 0, 0, 0)
+      return { from, to }
+    }
+    if (period === '30z') {
+      const from = new Date(now); from.setDate(from.getDate() - 29); from.setHours(0, 0, 0, 0)
+      return { from, to }
+    }
+    if (period === '6l') {
+      const from = new Date(now.getFullYear(), now.getMonth() - 5, 1)
+      return { from, to }
+    }
+    if (period === '1an') {
+      const from = new Date(now.getFullYear(), now.getMonth() - 11, 1)
+      return { from, to }
+    }
+    // custom
+    const from = customFrom ? new Date(customFrom) : new Date(now.getFullYear(), now.getMonth(), 1)
+    const customToDate = customTo ? new Date(customTo) : to
+    customToDate.setHours(23, 59, 59, 999)
+    return { from, to: customToDate }
+  }
+
+  const buildChartData = () => {
+    const { from, to } = getDateRange()
+    const filteredOrders = orders.filter((o) => {
+      const d = new Date(o.created_at)
+      return d >= from && d <= to
+    })
+
+    if (period === '1z') {
+      // Pe ore (0-23)
+      return Array.from({ length: 24 }, (_, h) => {
+        const value = filteredOrders
+          .filter((o) => new Date(o.created_at).getHours() === h)
+          .reduce((s, o) => s + o.total, 0)
+        return { label: `${h}:00`, value }
+      }).filter((_, i) => i % 3 === 0) // din 3 în 3 ore pentru spațiu
+    }
+
+    if (period === '7z' || period === '30z') {
+      // Pe zile
+      const days = period === '7z' ? 7 : 30
+      return Array.from({ length: days }, (_, i) => {
+        const d = new Date(from)
+        d.setDate(d.getDate() + i)
+        const value = filteredOrders
+          .filter((o) => {
+            const od = new Date(o.created_at)
+            return od.toDateString() === d.toDateString()
+          })
+          .reduce((s, o) => s + o.total, 0)
+        return { label: `${d.getDate()} ${MONTH_LABELS[d.getMonth()]}`, value }
+      }).filter((_, i) => period === '7z' || i % 3 === 0)
+    }
+
+    // Pe luni (6l, 1an, custom)
+    const months: { label: string; value: number }[] = []
+    const cur = new Date(from.getFullYear(), from.getMonth(), 1)
+    while (cur <= to) {
+      const y = cur.getFullYear()
+      const m = cur.getMonth()
+      const value = filteredOrders
+        .filter((o) => { const od = new Date(o.created_at); return od.getFullYear() === y && od.getMonth() === m })
+        .reduce((s, o) => s + o.total, 0)
+      months.push({ label: `${MONTH_LABELS[m]} ${y !== now.getFullYear() ? y : ''}`.trim(), value })
+      cur.setMonth(cur.getMonth() + 1)
+    }
+    return months
+  }
+
+  const revenueData = buildChartData()
+  const maxRevenue = Math.max(...revenueData.map((d) => d.value), 1)
 
   const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0)
   const totalOrders = orders.length
@@ -33,22 +129,6 @@ export default function AdminDashboard() {
   const outOfStockProducts = products.filter((p) => p.stock_qty === 0)
   const newOrdersCount = orders.filter((o) => o.order_status === 'Nouă').length
   const uniqueCustomers = new Set(orders.map((o) => o.customer_email)).size
-
-  // Ultimele 6 luni cu venituri reale
-  const now = new Date()
-  const revenueData = Array.from({ length: 6 }, (_, i) => {
-    const d = new Date(now.getFullYear(), now.getMonth() - 5 + i, 1)
-    const year = d.getFullYear()
-    const month = d.getMonth()
-    const value = orders
-      .filter((o) => {
-        const od = new Date(o.created_at)
-        return od.getFullYear() === year && od.getMonth() === month
-      })
-      .reduce((sum, o) => sum + o.total, 0)
-    return { month: MONTH_LABELS[month], value }
-  })
-  const maxRevenue = Math.max(...revenueData.map((d) => d.value), 1)
 
   const stats = [
     {
@@ -129,16 +209,59 @@ export default function AdminDashboard() {
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Revenue chart */}
         <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-card">
-          <h3 className="font-bold text-[#2D2D2D] mb-6">Venituri lunare (RON)</h3>
-          <div className="flex items-end gap-3 h-40">
-            {revenueData.map((d) => (
-              <div key={d.month} className="flex-1 flex flex-col items-center gap-2">
-                <span className="text-xs text-[#6B7280] font-medium">{d.value.toLocaleString('ro')}</span>
-                <div
-                  className="w-full bg-gradient-to-t from-[#5BC4C0] to-[#5BC4C0]/60 rounded-lg transition-all hover:from-[#3EA8A4] hover:to-[#3EA8A4]/60"
-                  style={{ height: `${(d.value / maxRevenue) * 100}%` }}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+            <h3 className="font-bold text-[#2D2D2D]">Venituri (RON)</h3>
+            <div className="flex flex-wrap gap-1.5">
+              {PERIODS.map((p) => (
+                <button
+                  key={p.key}
+                  onClick={() => setPeriod(p.key)}
+                  className={`text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors ${
+                    period === p.key
+                      ? 'bg-[#5BC4C0] text-white'
+                      : 'bg-gray-100 text-[#6B7280] hover:bg-gray-200'
+                  }`}
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {period === 'custom' && (
+            <div className="flex flex-wrap gap-3 mb-4">
+              <div className="flex items-center gap-2">
+                <label className="text-xs text-[#6B7280] font-medium">De la</label>
+                <input
+                  type="date"
+                  value={customFrom}
+                  onChange={(e) => setCustomFrom(e.target.value)}
+                  className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 outline-none focus:border-[#5BC4C0]"
                 />
-                <span className="text-xs text-[#6B7280]">{d.month}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <label className="text-xs text-[#6B7280] font-medium">Până la</label>
+                <input
+                  type="date"
+                  value={customTo}
+                  onChange={(e) => setCustomTo(e.target.value)}
+                  className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 outline-none focus:border-[#5BC4C0]"
+                />
+              </div>
+            </div>
+          )}
+
+          <div className="flex items-end gap-1.5 h-40 overflow-x-auto pb-1">
+            {revenueData.map((d, i) => (
+              <div key={i} className="flex-1 min-w-[28px] flex flex-col items-center gap-1.5">
+                {d.value > 0 && (
+                  <span className="text-xs text-[#6B7280] font-medium whitespace-nowrap">{d.value.toLocaleString('ro')}</span>
+                )}
+                <div
+                  className="w-full bg-gradient-to-t from-[#5BC4C0] to-[#5BC4C0]/60 rounded-lg transition-all hover:from-[#3EA8A4] hover:to-[#3EA8A4]/60 min-h-[4px]"
+                  style={{ height: `${Math.max((d.value / maxRevenue) * 100, d.value > 0 ? 4 : 2)}%` }}
+                />
+                <span className="text-xs text-[#6B7280] whitespace-nowrap">{d.label}</span>
               </div>
             ))}
           </div>
