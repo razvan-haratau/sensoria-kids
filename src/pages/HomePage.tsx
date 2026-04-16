@@ -167,7 +167,7 @@ export default function HomePage() {
           {/* Imagine full-bleed */}
           <div className="relative w-full -mx-4 sm:-mx-6 overflow-hidden" style={{ borderRadius: '24px 24px 0 0' }}>
             <img
-              src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80"
+              src="/hero-family.png"
               alt="Copil creativ cu planșă de nisip"
               className="w-full object-cover object-top"
               style={{ aspectRatio: '4/5' }}
@@ -230,7 +230,7 @@ export default function HomePage() {
             <div className="relative w-full aspect-square max-w-lg mx-auto">
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#5BC4C0]/20 to-[#E86B9E]/20" />
               <img
-                src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80"
+                src="/hero-family.png"
                 alt="Copil creativ cu planșă de nisip"
                 width={800}
                 height={800}
@@ -294,7 +294,7 @@ export default function HomePage() {
             </div>
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1516981442399-a91139e20ff8?w=700&q=80"
+                src="/hero-event.png"
                 alt="Activitate cu planșe de nisip"
                 className="w-full rounded-3xl shadow-hover"
               />
