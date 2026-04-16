@@ -497,7 +497,7 @@ export default function AdminProducts() {
       {/* Add/Edit Modal */}
       {modalOpen && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4" onClick={(e) => { if (e.target === e.currentTarget) closeModal() }}>
-          <div className="bg-white rounded-3xl w-full max-w-2xl overflow-y-auto shadow-hover" style={{ maxHeight: '90dvh' }}>
+          <div className="bg-white rounded-3xl w-full max-w-2xl shadow-hover flex flex-col" style={{ maxHeight: '90dvh' }}>
             <div className="flex items-center justify-between p-6 border-b border-gray-100 sticky top-0 bg-white z-10 rounded-t-3xl">
               <h3 className="font-bold text-lg text-[#2D2D2D]">
                 {editingProduct ? 'Editează produs' : 'Adaugă produs nou'}
@@ -507,7 +507,7 @@ export default function AdminProducts() {
               </button>
             </div>
 
-            <div className="p-6 space-y-5">
+            <div className="p-6 space-y-5 overflow-y-auto flex-1">
               {/* ── IMAGINI ── */}
               <div className="grid sm:grid-cols-2 gap-4">
                 <ImageManager
@@ -686,8 +686,10 @@ export default function AdminProducts() {
                   {formError}
                 </div>
               )}
+            </div>
 
-              <div className="flex justify-end gap-3 pt-2 border-t border-gray-100">
+            {/* Sticky footer butoane */}
+            <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-100 bg-white rounded-b-3xl shrink-0">
                 <button
                   onClick={closeModal}
                   className="px-5 py-2.5 border border-gray-200 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors"
@@ -703,7 +705,6 @@ export default function AdminProducts() {
                 >
                   {saved ? <><Check size={14} /> Salvat!</> : saving ? 'Se salvează...' : 'Salvează produsul'}
                 </button>
-              </div>
             </div>
           </div>
         </div>
