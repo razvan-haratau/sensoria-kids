@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  ArrowRight, Star, Sparkles, Brain, Hand, Heart, Zap,
+  ArrowRight, Star, Sparkles, Hand, Heart, Brain,
   ChevronLeft, ChevronRight, Mail,
-  ClipboardList, Search, Pencil, Palette, Award,
-  Baby, Home, BookOpen, Building2,
-  ShieldCheck, Check,
+  ShieldCheck, Check, Package, Palette, Award, MapPin, Gift,
+  Baby, Home, BookOpen,
 } from 'lucide-react'
 import ProductCard from '../components/ProductCard'
 import { testimonials } from '../lib/mockData'
@@ -13,47 +12,85 @@ import { useProductsStore } from '../store/productsStore'
 import { useNewsletterStore } from '../store/newsletterStore'
 import { useMeta } from '../hooks/useMeta'
 
-const benefits = [
+const howItWorksSteps = [
   {
-    icon: Brain,
-    title: 'Concentrare',
-    description: 'Copiii stau ocupați 30–60 de minute fără să ceară telefonul sau tableta. Nisipul îi ține atenți și liniștiți.',
-    color: 'bg-[#5BC4C0]/10 text-[#5BC4C0]',
+    num: 1,
+    title: 'Dezlipești folia',
+    desc: 'Pe o zonă mică, pas cu pas. Adezivul e gata — nu trebuie lipici separat.',
+    color: 'bg-[#F4A68F]',
   },
   {
-    icon: Sparkles,
-    title: 'Creativitate',
-    description: 'Nu există greșeli — fiecare planșă iese diferit. Copilul alege culorile și ritmul, iar rezultatul e mereu al lui.',
-    color: 'bg-[#E86B9E]/10 text-[#E86B9E]',
+    num: 2,
+    title: 'Alegi culoarea',
+    desc: 'Fiecare zonă are culoarea ei. Copilul alege ce umple primul.',
+    color: 'bg-[#E86B9E]',
   },
   {
+    num: 3,
+    title: 'Presari nisipul',
+    desc: 'Din tub, direct pe zonă. Controlat, fără să se verse.',
+    color: 'bg-[#5BC4C0]',
+  },
+  {
+    num: 4,
+    title: 'Scuturi excesul',
+    desc: 'Nisipul în plus cade ușor. Se strânge pe o coală pusă dedesubt.',
+    color: 'bg-[#B07CC6]',
+  },
+  {
+    num: 5,
+    title: 'Admiri rezultatul',
+    desc: 'O planșă completă, frumoasă — 100% creată de el.',
+    color: 'bg-[#5BC4C0]',
+  },
+]
+
+const differentiators = [
+  {
+    title: 'Folia se dezlipește ușor',
+    desc: 'Am testat zeci de variante până am găsit folia potrivită. Se dezlipește bine chiar și pentru un copil de 3 ani — fără să se rupă, fără să se lipească înapoi.',
     icon: Hand,
-    title: 'Îndemânare',
-    description: 'Mișcările mici și atente cu nisipul ajută copilul să-și controleze mai bine mâna — util și când învață să scrie.',
-    color: 'bg-[#B07CC6]/10 text-[#B07CC6]',
+    color: 'text-[#5BC4C0]',
+    bg: 'bg-[#5BC4C0]/10',
   },
   {
-    icon: Heart,
-    title: 'Liniște',
-    description: 'Textura nisipului îl calmează aproape imediat. Ideal după grădiniță, după școală sau într-o zi mai dificilă.',
-    color: 'bg-[#F4A68F]/10 text-[#E08870]',
+    title: 'Nisipul vine în tuburi',
+    desc: 'Nu în pungi pe care copilul le răstoarnă accidental. Tuburile sunt mai ușor de controlat — nisipul merge exact unde trebuie.',
+    icon: Package,
+    color: 'text-[#E86B9E]',
+    bg: 'bg-[#E86B9E]/10',
   },
   {
-    icon: Zap,
-    title: 'Simțuri Active',
-    description: 'Culorile vii și nisipul îl fac pe copil să simtă, să vadă și să exploreze — totul în același timp, fără ecran.',
-    color: 'bg-[#5BC4C0]/10 text-[#5BC4C0]',
+    title: 'Designuri mai realiste',
+    desc: 'Fiecare planșă arată bine și înainte, și după. Nu forme vagi și generice — desene pe care copilul vrea să le termine.',
+    icon: Palette,
+    color: 'text-[#B07CC6]',
+    bg: 'bg-[#B07CC6]/10',
+  },
+  {
+    title: 'Rezultatul se înrăma',
+    desc: 'Planșa finalizată nu e o joacă de aruncat. Se poate înrăma, pune pe perete, duce la bunici. E ceva de care copilul e mândru.',
+    icon: Award,
+    color: 'text-[#E08870]',
+    bg: 'bg-[#F4A68F]/10',
+  },
+  {
+    title: 'Produs în România',
+    desc: 'Materiale verificate, standarde europene. Nu un kit copiat dintr-un catalog. Un brand căruia îi poți scrie dacă ai o problemă.',
+    icon: MapPin,
+    color: 'text-[#5BC4C0]',
+    bg: 'bg-[#5BC4C0]/10',
   },
 ]
 
 const audiences = [
   {
     title: 'Copii 2–6 ani',
-    desc: 'Primele experiențe cu culorile și textura. Modele mari, simple, care dau un sentiment de reușită rapid.',
+    desc: 'Modele mari, simple, care dau un sentiment de reușită rapid. Primele experiențe cu culorile și textura.',
     icon: Baby,
     iconColor: 'text-[#E08870]',
     iconBg: 'bg-[#F4A68F]/15',
-    color: 'border-[#F4A68F]',
+    border: 'border-[#F4A68F]',
     bg: 'bg-[#F4A68F]/5',
   },
   {
@@ -62,7 +99,7 @@ const audiences = [
     icon: Home,
     iconColor: 'text-[#3EA8A4]',
     iconBg: 'bg-[#5BC4C0]/15',
-    color: 'border-[#5BC4C0]',
+    border: 'border-[#5BC4C0]',
     bg: 'bg-[#5BC4C0]/5',
   },
   {
@@ -71,60 +108,62 @@ const audiences = [
     icon: BookOpen,
     iconColor: 'text-[#D04D82]',
     iconBg: 'bg-[#E86B9E]/15',
-    color: 'border-[#E86B9E]',
+    border: 'border-[#E86B9E]',
     bg: 'bg-[#E86B9E]/5',
   },
   {
-    title: 'Centre & Afterschool',
-    desc: 'Seturi pentru grupuri mici, ușor de pregătit și de gestionat. Nisipul nu se împrăștie, spațiul rămâne curat.',
-    icon: Building2,
+    title: 'Cadou original',
+    desc: 'Un cadou care se vede, se folosește și se ține minte. Pentru orice copil între 2 și 8 ani.',
+    icon: Gift,
     iconColor: 'text-[#8A5EAA]',
     iconBg: 'bg-[#B07CC6]/15',
-    color: 'border-[#B07CC6]',
+    border: 'border-[#B07CC6]',
     bg: 'bg-[#B07CC6]/5',
   },
 ]
 
-const ageGroups = [
+const antiMessPoints = [
   {
-    label: 'Preșcolari',
-    age: '2–5 ani',
-    desc: 'Planșele noastre au forme mari și clare — copilul termină repede și e mândru de ce a făcut. Un început frumos cu culorile.',
-    features: ['Modele mari, ușor de colorat', 'Culori vii, primare', 'Nisip fin și sigur la atingere'],
-    color: '#F4A68F',
+    title: 'Nisipul vine în tuburi',
+    desc: 'Nu în pungi deschise. Copilul toarnă exact cât trebuie, fără să răstoarne accidental tot nisipul pe masă.',
   },
   {
-    label: 'Școlari',
-    age: '6–10 ani',
-    desc: 'La această vârstă copiii vor provocări. Planșele mai complexe îi țin concentrați mai mult și îi ajută să-și dezvolte răbdarea și precizia.',
-    features: ['Detalii mai fine, mai multe zone de culoare', 'Teme: spațiu, animale, artă, natură', 'Pot folosi mai multe culori și combina tehnici'],
-    color: '#5BC4C0',
+    title: 'Scuturi planșa și nisipul cade',
+    desc: 'Excesul se desprinde ușor. Pui o coală dedesubt și strângi tot în 30 de secunde.',
   },
   {
-    label: 'Activitate de familie',
-    age: 'Părinți & copii',
-    desc: 'Cel mai bun lucru pe care îl poți oferi unui copil e timpul tău. Kiturile de familie vin cu două planșe — una pentru el, una pentru tine.',
-    features: ['Planșe perechi, pentru adult și copil', 'Activitate de 45–60 minute împreună', 'Fără ecrane, fără distracții — doar voi doi'],
-    color: '#E86B9E',
+    title: 'Nisipul în exces se reutilizează',
+    desc: 'Îl pui înapoi în tub. Nu se pierde, nu se risipește — e gândit să dureze.',
+  },
+  {
+    title: 'Activitate pe masă sau pe podea',
+    desc: 'Se poate face oriunde. Nu trebuie un spațiu special pregătit sau echipament de curățenie.',
   },
 ]
 
-const steps = [
-  { num: 1, title: 'Alege planșa', desc: 'Copilul alege tema preferată din kit', icon: ClipboardList },
-  { num: 2, title: 'Descoperă nisipul', desc: 'Atinge, simte — experiența senzorială începe', icon: Search },
-  { num: 3, title: 'Aplică cu grijă', desc: 'Urmează liniile și umple zona cu culoarea aleasă', icon: Pencil },
-  { num: 4, title: 'Creează', desc: 'Fiecare culoare adăugată aduce desenul la viață', icon: Palette },
-  { num: 5, title: 'Prezintă cu mândrie', desc: 'Lucrarea e gata — și e 100% a lui', icon: Award },
+const benefitsChild = [
+  'Stă concentrat 30–60 de minute fără să ceară telefonul',
+  'Își controlează mai bine mâna — util și când va scrie',
+  'Termină ceva singur și e mândru de rezultat',
+  'Se calmează prin mișcarea repetitivă cu nisipul',
+  'Alege culorile și ritmul — e activitatea lui',
+]
+
+const benefitsParent = [
+  '30–60 de minute de liniște — el e fericit, tu respiri',
+  'Nu trebuie să stai lângă el tot timpul',
+  'Activitate fără ecran pe care tu o propui',
+  'Un rezultat frumos pe care îl puteți pune pe perete',
+  'Un moment de creat împreună, nu de consumat separat',
 ]
 
 export default function HomePage() {
-  useMeta('', 'Planșe de nisip colorate pentru copii de 2–10 ani. Joacă blândă, liniște, creativitate.')
+  useMeta('', 'Planșe de nisip colorate pentru copii de 2–8 ani. Activitate creativă fără ecrane, gândită să funcționeze.')
   const { products } = useProductsStore()
   const { subscribe } = useNewsletterStore()
   const [testimonialIdx, setTestimonialIdx] = useState(0)
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
-  const [activeAge, setActiveAge] = useState(0)
 
   const featuredProducts = products.filter((p) => p.status === 'active').slice(0, 4)
 
@@ -139,36 +178,36 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero */}
+
+      {/* ═══ HERO ═══ */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#5BC4C0]/10 to-[#E86B9E]/10">
 
-        {/* Layout MOBILE */}
-        <div className="lg:hidden flex flex-col items-center text-center px-4 sm:px-6 pt-20 pb-0">
+        {/* MOBILE */}
+        <div className="lg:hidden flex flex-col items-center text-center px-4 sm:px-6 pt-20 pb-0 w-full">
           <div className="inline-flex items-center gap-2 bg-[#5BC4C0]/10 text-[#5BC4C0] px-4 py-2 rounded-full text-sm font-semibold mb-5">
             <Sparkles size={14} />
             Fără ecrane. Fără haos. Doar creativitate.
           </div>
           <h1 className="text-3xl font-bold text-[#2D2D2D] leading-tight mb-3">
-            Activitatea prin care copilul{' '}
-            <span className="text-[#5BC4C0]">creează, învață și se liniștește</span>
+            O activitate creativă pe care copilul{' '}
+            <span className="text-[#5BC4C0]">o face singur — și de care e mândru.</span>
           </h1>
-          <p className="text-base text-[#6B7280] mb-6 leading-relaxed max-w-xs">
-            Planșe de nisip colorat pentru copii de 2–10 ani.
+          <p className="text-base text-[#6B7280] mb-6 leading-relaxed max-w-sm">
+            Planșe cu nisip gândite să funcționeze. Fără mizerie imposibilă. Cu un rezultat frumos la final.
           </p>
-          <div className="flex gap-3 mb-8">
+          <div className="flex gap-3 mb-8 flex-wrap justify-center">
             <Link to="/magazin" className="btn-primary text-sm px-6 py-3">
-              Descoperă Produsele
+              Descoperă kiturile
               <ArrowRight size={16} />
             </Link>
-            <Link to="/despre-noi" className="btn-outline text-sm px-6 py-3">
-              Despre Noi
+            <Link to="/cum-functioneaza" className="btn-outline text-sm px-6 py-3">
+              Cum funcționează?
             </Link>
           </div>
-          {/* Imagine full-bleed */}
           <div className="relative w-full -mx-4 sm:-mx-6 overflow-hidden" style={{ borderRadius: '24px 24px 0 0' }}>
             <img
               src="/hero-family.png"
-              alt="Copil creativ cu planșă de nisip"
+              alt="Copil creând o planșă cu nisip colorat"
               className="w-full object-cover object-top"
               style={{ aspectRatio: '4/5' }}
               loading="eager"
@@ -179,14 +218,14 @@ export default function HomePage() {
                 <p className="text-[10px] text-[#6B7280]">Testat pentru copii</p>
               </div>
               <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-3 py-2 shadow-card">
-                <p className="font-bold text-xs">Recomandat de educatori</p>
-                <p className="text-[10px] text-[#6B7280]">Activitate relaxantă</p>
+                <p className="font-bold text-xs">Produs în România</p>
+                <p className="text-[10px] text-[#6B7280]">Materiale verificate</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Layout DESKTOP */}
+        {/* DESKTOP */}
         <div className="hidden lg:grid max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 grid-cols-2 gap-12 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-[#5BC4C0]/10 text-[#5BC4C0] px-4 py-2 rounded-full text-sm font-semibold mb-6">
@@ -194,35 +233,35 @@ export default function HomePage() {
               Fără ecrane. Fără haos. Doar creativitate.
             </div>
             <h1 className="text-5xl lg:text-6xl font-bold text-[#2D2D2D] leading-tight mb-6">
-              Activitatea prin care copilul{' '}
-              <span className="text-[#5BC4C0]">creează, învață și se liniștește</span>
+              O activitate creativă pe care copilul{' '}
+              <span className="text-[#5BC4C0]">o face singur — și de care e mândru.</span>
             </h1>
             <p className="text-xl text-[#6B7280] mb-8 leading-relaxed max-w-lg">
-              Planșe de nisip colorat pentru copii de 2–10 ani. Copilul creează, se liniștește și se dezvoltă — tu te bucuri de liniște.
+              Planșe cu nisip gândite să funcționeze. Fără mizerie imposibilă. Cu un rezultat frumos pe care îl puteți pune pe perete.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 mb-10">
               <Link to="/magazin" className="btn-primary text-base px-8 py-4">
-                Descoperă Produsele
+                Descoperă kiturile
                 <ArrowRight size={18} />
               </Link>
-              <Link to="/despre-noi" className="btn-outline text-base px-8 py-4">
-                Despre Noi
+              <Link to="/cum-functioneaza" className="btn-outline text-base px-8 py-4">
+                Cum funcționează?
               </Link>
             </div>
-            <div className="flex items-center gap-6 mt-8">
+            <div className="flex items-center gap-6">
               <div className="text-center">
-                <p className="text-2xl font-bold text-[#2D2D2D]">100%</p>
-                <p className="text-xs text-[#6B7280]">Sigur pentru copii</p>
-              </div>
-              <div className="w-px h-10 bg-gray-200" />
-              <div className="text-center">
-                <p className="text-2xl font-bold text-[#2D2D2D]">2–10</p>
+                <p className="text-2xl font-bold text-[#2D2D2D]">2–8</p>
                 <p className="text-xs text-[#6B7280]">Ani recomandat</p>
               </div>
               <div className="w-px h-10 bg-gray-200" />
               <div className="text-center">
                 <p className="text-2xl font-bold text-[#2D2D2D]">60 min</p>
                 <p className="text-xs text-[#6B7280]">Concentrare medie</p>
+              </div>
+              <div className="w-px h-10 bg-gray-200" />
+              <div className="text-center">
+                <p className="text-2xl font-bold text-[#2D2D2D]">100%</p>
+                <p className="text-xs text-[#6B7280]">Produs în România</p>
               </div>
             </div>
           </div>
@@ -231,12 +270,9 @@ export default function HomePage() {
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#5BC4C0]/20 to-[#E86B9E]/20" />
               <img
                 src="/hero-family.png"
-                alt="Copil creativ cu planșă de nisip"
-                width={800}
-                height={800}
+                alt="Copil creând o planșă cu nisip colorat"
                 className="w-full h-full object-cover rounded-3xl shadow-hover"
                 loading="eager"
-                fetchPriority="high"
               />
               <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-hover">
                 <div className="flex items-center gap-3">
@@ -245,7 +281,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <p className="font-bold text-sm">Recomandat de educatori</p>
-                    <p className="text-xs text-[#6B7280]">Activitate educativă relaxantă</p>
+                    <p className="text-xs text-[#6B7280]">Activitate structurată</p>
                   </div>
                 </div>
               </div>
@@ -261,41 +297,37 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* What are sand art kits */}
+      {/* ═══ CUM FUNCȚIONEAZĂ ═══ */}
       <section className="py-10 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="section-title mb-4">
-                Cum funcționează?
-              </h2>
-              <p className="section-subtitle mb-6">
-                Fiecare planșă are suprafața acoperită cu adeziv transparent. Copilul aplică nisipul colorat pe zonele marcate și — în câteva minute — apare o imagine completă.
+              <h2 className="section-title mb-4">Cum funcționează?</h2>
+              <p className="section-subtitle mb-8">
+                Fiecare planșă are suprafața acoperită cu adeziv transparent. Copilul dezlipește folia pe zone mici, presară nisipul colorat și — pas cu pas — apare o imagine completă.
               </p>
-              <p className="text-[#6B7280] leading-relaxed mb-6">
-                Nu e nevoie de apă, pensule sau pregătire specială. Kitul conține tot: planșe gata de folosit, nisip colorat sigur în mai multe culori și instrumente de aplicare. Se poate face pe masă, pe podea, oriunde.
-              </p>
-              <div className="flex flex-col gap-3">
-                {steps.map((step) => (
+              <div className="space-y-3">
+                {howItWorksSteps.map((step) => (
                   <div key={step.num} className="flex items-center gap-4 bg-white rounded-xl p-4 shadow-card">
-                    <div className="w-10 h-10 rounded-xl bg-[#5BC4C0] text-white flex items-center justify-center font-bold shrink-0">
+                    <div className={`w-10 h-10 rounded-xl ${step.color} text-white flex items-center justify-center font-bold text-sm shrink-0`}>
                       {step.num}
                     </div>
                     <div>
                       <p className="font-semibold text-sm text-[#2D2D2D]">{step.title}</p>
                       <p className="text-xs text-[#6B7280]">{step.desc}</p>
                     </div>
-                    <div className="ml-auto w-8 h-8 rounded-lg bg-[#5BC4C0]/10 flex items-center justify-center shrink-0">
-                      <step.icon size={16} className="text-[#5BC4C0]" />
-                    </div>
                   </div>
                 ))}
               </div>
+              <Link to="/cum-functioneaza" className="btn-outline mt-6 inline-flex">
+                Ghid complet pas cu pas
+                <ArrowRight size={16} />
+              </Link>
             </div>
             <div className="relative">
               <img
                 src="/hero-event.png"
-                alt="Activitate cu planșe de nisip"
+                alt="Copii lucrând la planșe cu nisip"
                 className="w-full rounded-3xl shadow-hover"
               />
             </div>
@@ -303,44 +335,113 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Benefits */}
+      {/* ═══ POVESTEA (preview) ═══ */}
       <section className="py-10 md:py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-[#2D2D2D] to-[#3D3D3D] rounded-3xl p-8 md:p-12 text-white">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 bg-white/10 text-white/80 px-3 py-1.5 rounded-full text-xs font-semibold mb-6">
+                Povestea noastră
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold mb-5 leading-tight">
+                Am cumpărat un kit. Nu a mers. Atunci am construit altul.
+              </h2>
+              <p className="text-white/75 leading-relaxed mb-4">
+                Când am luat primul kit de planșe cu nisip pentru fiul nostru Filip, experiența a fost dezamăgitoare: folia se rupea, nisipul se împrăștia peste tot, designul arăta slab la final. Filip a renunțat la jumătate.
+              </p>
+              <p className="text-white/75 leading-relaxed mb-8">
+                Am înțeles că ideea e bună — execuția nu e. Atunci am decis să construim kitul pe care ni l-am fi dorit noi. Împreună cu Filip, am testat, am corectat, am îmbunătățit — până când activitatea a funcționat cu adevărat.
+              </p>
+              <Link
+                to="/despre-noi"
+                className="inline-flex items-center gap-2 bg-[#5BC4C0] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#3EA8A4] transition-colors"
+              >
+                Citește povestea completă
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ DE CE E DIFERIT ═══ */}
+      <section className="py-10 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title mb-4">De ce funcționează atât de bine?</h2>
+            <h2 className="section-title mb-4">Nu e același lucru. Iată de ce.</h2>
             <p className="section-subtitle max-w-2xl mx-auto">
-              Nu e doar o joacă frumoasă — e o activitate cu beneficii concrete, validate de educatori și psihologi pentru copii.
+              Față de kiturile ieftine importate, fiecare detaliu Sensoria Kids a fost gândit să facă experiența mai bună — pentru copil și pentru tine.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {benefits.map((b) => (
-              <div key={b.title} className="card p-6 text-center group hover:-translate-y-1 transition-transform">
-                <div className={`w-14 h-14 rounded-2xl ${b.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
-                  <b.icon size={24} />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+            {differentiators.map((d) => (
+              <div key={d.title} className="card p-6 hover:-translate-y-1 transition-transform">
+                <div className={`w-12 h-12 rounded-2xl ${d.bg} flex items-center justify-center mb-4`}>
+                  <d.icon size={22} className={d.color} />
                 </div>
-                <h3 className="font-bold text-[#2D2D2D] mb-2">{b.title}</h3>
-                <p className="text-sm text-[#6B7280] leading-relaxed">{b.description}</p>
+                <h3 className="font-bold text-[#2D2D2D] mb-2 text-sm leading-snug">{d.title}</h3>
+                <p className="text-xs text-[#6B7280] leading-relaxed">{d.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Audience */}
+      {/* ═══ ANTI-MESS ═══ */}
+      <section className="py-10 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="section-title mb-4">
+                Știm că primul gând e{' '}
+                <em className="text-[#6B7280] not-italic">"o să se facă dezastru"</em>.{' '}
+                Nu e chiar așa.
+              </h2>
+              <p className="section-subtitle mb-8">
+                Am gândit fiecare detaliu al kitului ca să reducem mizeria — nu să o ascundem sub fotografii frumoase.
+              </p>
+              <div className="space-y-5">
+                {antiMessPoints.map((p) => (
+                  <div key={p.title} className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-xl bg-[#5BC4C0] flex items-center justify-center shrink-0 mt-0.5">
+                      <Check size={14} className="text-white" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-sm text-[#2D2D2D] mb-0.5">{p.title}</p>
+                      <p className="text-sm text-[#6B7280]">{p.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 p-4 bg-[#5BC4C0]/10 rounded-2xl border border-[#5BC4C0]/20">
+                <p className="font-bold text-[#2D2D2D] text-center text-sm">
+                  Podeaua rămâne curată. Copilul rămâne ocupat.
+                </p>
+              </div>
+            </div>
+            <div className="relative">
+              <img
+                src="/hero-event.png"
+                alt="Activitate cu planșe de nisip — ordonată și liniștitoare"
+                className="w-full rounded-3xl shadow-hover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ PENTRU CINE E ═══ */}
       <section className="py-10 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="section-title mb-4">Potrivit pentru orice context</h2>
             <p className="section-subtitle max-w-xl mx-auto">
-              Acasă, la grădiniță sau la afterschool — kiturile Sensoria Kids se adaptează ușor oricărui mediu
+              Acasă, la grădiniță sau ca idee de cadou — kiturile Sensoria Kids se adaptează ușor
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {audiences.map((a) => (
-              <div
-                key={a.title}
-                className={`${a.bg} border-2 ${a.color} rounded-2xl p-6 hover:shadow-card transition-shadow`}
-              >
+              <div key={a.title} className={`${a.bg} border-2 ${a.border} rounded-2xl p-6 hover:shadow-card transition-shadow`}>
                 <div className={`w-12 h-12 ${a.iconBg} rounded-2xl flex items-center justify-center mb-4`}>
                   <a.icon size={24} className={a.iconColor} />
                 </div>
@@ -352,93 +453,68 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Age groups */}
+      {/* ═══ BENEFICII ═══ */}
       <section className="py-10 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title mb-4">Câte un kit potrivit pentru fiecare vârstă</h2>
+            <h2 className="section-title mb-4">Ce câștigă copilul. Ce câștigi tu.</h2>
             <p className="section-subtitle max-w-xl mx-auto">
-              Nu toate kiturile sunt la fel — le-am gândit diferit pentru fiecare etapă de dezvoltare
+              Nu e doar joacă frumoasă — e o activitate cu beneficii concrete, pentru amândoi.
             </p>
           </div>
-
-          {/* Tabs */}
-          <div className="flex flex-wrap justify-center gap-3 mb-10">
-            {ageGroups.map((ag, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveAge(i)}
-                className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all ${
-                  activeAge === i
-                    ? 'text-white shadow-card scale-105'
-                    : 'bg-gray-100 text-[#6B7280] hover:bg-gray-200'
-                }`}
-                style={activeAge === i ? { backgroundColor: ageGroups[i].color } : undefined}
-              >
-                {ag.label} · {ag.age}
-              </button>
-            ))}
-          </div>
-
-          {/* Content */}
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <div>
-              <div
-                className="inline-block px-4 py-1.5 rounded-full text-white text-sm font-semibold mb-4"
-                style={{ backgroundColor: ageGroups[activeAge].color }}
-              >
-                {ageGroups[activeAge].age}
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="bg-gradient-to-br from-[#5BC4C0]/10 to-[#5BC4C0]/5 rounded-3xl p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-2xl bg-[#5BC4C0] flex items-center justify-center">
+                  <Brain size={22} className="text-white" />
+                </div>
+                <div>
+                  <p className="text-xs text-[#5BC4C0] font-semibold uppercase tracking-wide">Pentru</p>
+                  <h3 className="text-xl font-bold text-[#2D2D2D]">Copilul tău</h3>
+                </div>
               </div>
-              <h3 className="text-2xl font-bold text-[#2D2D2D] mb-4">
-                {ageGroups[activeAge].label}
-              </h3>
-              <p className="text-[#6B7280] text-lg leading-relaxed mb-6">
-                {ageGroups[activeAge].desc}
-              </p>
               <ul className="space-y-3">
-                {ageGroups[activeAge].features.map((f, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <div
-                      className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
-                      style={{ backgroundColor: `${ageGroups[activeAge].color}20` }}
-                    >
-                      <Check size={12} style={{ color: ageGroups[activeAge].color }} />
+                {benefitsChild.map((b, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#5BC4C0] flex items-center justify-center shrink-0 mt-0.5">
+                      <Check size={11} className="text-white" />
                     </div>
-                    <span className="text-[#2D2D2D] font-medium">{f}</span>
+                    <span className="text-sm text-[#2D2D2D]">{b}</span>
                   </li>
                 ))}
               </ul>
-              <Link to="/magazin" className="btn-primary mt-8 inline-flex">
-                Găsește produse potrivite
-                <ArrowRight size={16} />
-              </Link>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {products.slice(activeAge * 2, activeAge * 2 + 2).length > 0
-                ? products.slice(activeAge * 2, activeAge * 2 + 2).map((p) => (
-                    <ProductCard key={p.id} product={p} />
-                  ))
-                : (
-                  <div className="col-span-2 text-center py-12 text-[#6B7280]">
-                    <p className="font-medium mb-2">Nu există produse în această categorie momentan.</p>
-                    <Link to="/magazin" className="btn-outline text-sm">
-                      Vezi toate produsele
-                      <ArrowRight size={14} />
-                    </Link>
-                  </div>
-                )
-              }
+            <div className="bg-gradient-to-br from-[#E86B9E]/10 to-[#E86B9E]/5 rounded-3xl p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-2xl bg-[#E86B9E] flex items-center justify-center">
+                  <Heart size={22} className="text-white" />
+                </div>
+                <div>
+                  <p className="text-xs text-[#E86B9E] font-semibold uppercase tracking-wide">Pentru</p>
+                  <h3 className="text-xl font-bold text-[#2D2D2D]">Tine, ca părinte</h3>
+                </div>
+              </div>
+              <ul className="space-y-3">
+                {benefitsParent.map((b, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#E86B9E] flex items-center justify-center shrink-0 mt-0.5">
+                      <Check size={11} className="text-white" />
+                    </div>
+                    <span className="text-sm text-[#2D2D2D]">{b}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Products */}
+      {/* ═══ PRODUSE ═══ */}
       <section className="py-20 bg-gradient-to-br from-[#5BC4C0]/5 to-[#E86B9E]/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-10">
             <div>
-              <h2 className="section-title mb-2">Cele mai iubite kituri</h2>
+              <h2 className="section-title mb-2">Cele mai alese kituri</h2>
               <p className="section-subtitle">Alegerile preferate ale familiilor Sensoria Kids</p>
             </div>
             <Link to="/magazin" className="btn-outline hidden sm:inline-flex">
@@ -460,16 +536,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* ═══ TESTIMONIALE ═══ */}
       <section className="py-10 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title mb-4">Ce spun părinții și educatorii</h2>
+            <h2 className="section-title mb-4">Ce spun părinții</h2>
             <p className="section-subtitle max-w-xl mx-auto">
-              Părinți, bunici, educatoare — toți au găsit ceva valoros în kiturile Sensoria Kids
+              Experiențe reale, de la părinți care au deschis deja primul kit.
             </p>
           </div>
-
           <div className="relative">
             <div className="grid md:grid-cols-2 gap-6">
               {testimonials.slice(testimonialIdx, testimonialIdx + 2).map((t, _, arr) => (
@@ -479,9 +554,7 @@ export default function HomePage() {
                       <Star key={i} size={16} className="text-yellow-400 fill-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-[#2D2D2D] leading-relaxed mb-6 italic">
-                    "{t.text}"
-                  </p>
+                  <p className="text-[#2D2D2D] leading-relaxed mb-6 italic">"{t.text}"</p>
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#5BC4C0] to-[#E86B9E] flex items-center justify-center text-white text-sm font-bold">
                       {t.avatar}
@@ -494,7 +567,6 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-
             <div className="flex justify-center gap-3 mt-8">
               <button
                 onClick={() => setTestimonialIdx(Math.max(0, testimonialIdx - 2))}
@@ -515,44 +587,82 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Newsletter */}
+      {/* ═══ TRUST + ROMÂNIA ═══ */}
+      <section className="py-10 md:py-16 bg-gray-50">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid sm:grid-cols-3 gap-6">
+            <div className="bg-white rounded-2xl p-6 shadow-card text-center">
+              <div className="w-12 h-12 rounded-2xl bg-[#5BC4C0]/10 flex items-center justify-center mx-auto mb-3">
+                <MapPin size={22} className="text-[#5BC4C0]" />
+              </div>
+              <h3 className="font-bold text-[#2D2D2D] mb-2">Produs în România</h3>
+              <p className="text-sm text-[#6B7280]">Materiale din România și UE. Standarde europene de siguranță. Un brand la care poți ajunge.</p>
+            </div>
+            <div className="bg-white rounded-2xl p-6 shadow-card text-center">
+              <div className="w-12 h-12 rounded-2xl bg-[#E86B9E]/10 flex items-center justify-center mx-auto mb-3">
+                <ShieldCheck size={22} className="text-[#E86B9E]" />
+              </div>
+              <h3 className="font-bold text-[#2D2D2D] mb-2">Nisip sigur</h3>
+              <p className="text-sm text-[#6B7280]">Testat și verificat. Sigur la atingere pentru copii de la 2 ani. Fără substanțe nocive.</p>
+            </div>
+            <div className="bg-white rounded-2xl p-6 shadow-card text-center">
+              <div className="w-12 h-12 rounded-2xl bg-[#B07CC6]/10 flex items-center justify-center mx-auto mb-3">
+                <Heart size={22} className="text-[#B07CC6]" />
+              </div>
+              <h3 className="font-bold text-[#2D2D2D] mb-2">Retur simplu</h3>
+              <p className="text-sm text-[#6B7280]">30 de zile pentru retur dacă nu ești mulțumit. Fără întrebări complicate.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ CTA FINAL + NEWSLETTER ═══ */}
       <section className="py-20 bg-gradient-to-br from-[#5BC4C0] to-[#3EA8A4]">
         <div className="max-w-2xl mx-auto px-4 text-center">
-          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <Mail size={32} className="text-white" />
-          </div>
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Idei, oferte și noutăți — direct pe email
-          </h2>
-          <p className="text-white/80 mb-8 text-lg">
-            Înscrie-te și primești idei creative gratuite, oferte exclusive și notificări când lansăm produse noi.
+          <h2 className="text-3xl font-bold text-white mb-4">Gata să încerci?</h2>
+          <p className="text-white/80 mb-6 text-lg">
+            Livrare rapidă în toată România. Retur simplu în 30 de zile. Fiecare kit vine cu tot ce e nevoie.
           </p>
-          {subscribed ? (
-            <div className="bg-white/20 rounded-2xl p-6 text-white">
-              <p className="text-xl font-bold mb-1">Mulțumim!</p>
-              <p>Te-ai abonat cu succes. Verifică-ți email-ul.</p>
+          <Link
+            to="/magazin"
+            className="inline-flex items-center gap-2 bg-white text-[#5BC4C0] font-bold px-8 py-4 rounded-xl hover:bg-gray-50 transition-colors text-base mb-12"
+          >
+            Descoperă kiturile
+            <ArrowRight size={18} />
+          </Link>
+
+          <div className="border-t border-white/20 pt-10">
+            <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-3">
+              <Mail size={24} className="text-white" />
             </div>
-          ) : (
-            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <div className="flex-1 flex items-center gap-2 bg-white rounded-xl px-4 py-3">
-                <Mail size={18} className="text-gray-400 shrink-0" />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Adresa ta de email"
-                  required
-                  className="flex-1 outline-none text-sm text-[#2D2D2D] placeholder-gray-400"
-                />
+            <p className="text-white font-semibold mb-2">Vrei să fii primul care află?</p>
+            <p className="text-white/70 text-sm mb-6">Idei de activități, oferte și produse noi — direct pe email.</p>
+            {subscribed ? (
+              <div className="bg-white/20 rounded-2xl p-4 text-white">
+                <p className="font-bold">Mulțumim! Te-ai abonat cu succes.</p>
               </div>
-              <button
-                type="submit"
-                className="bg-[#E86B9E] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#D04D82] transition-colors shrink-0"
-              >
-                Abonează-te
-              </button>
-            </form>
-          )}
+            ) : (
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <div className="flex-1 flex items-center gap-2 bg-white rounded-xl px-4 py-3">
+                  <Mail size={18} className="text-gray-400 shrink-0" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Adresa ta de email"
+                    required
+                    className="flex-1 outline-none text-sm text-[#2D2D2D] placeholder-gray-400"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="bg-[#E86B9E] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#D04D82] transition-colors shrink-0"
+                >
+                  Abonează-te
+                </button>
+              </form>
+            )}
+          </div>
         </div>
       </section>
     </div>
