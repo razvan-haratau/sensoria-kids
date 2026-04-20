@@ -347,7 +347,7 @@ export default function HomePage() {
                 A început acasă, cu Filip — și cu bucuria lui.
               </h2>
               <p className="text-white/75 leading-relaxed mb-4">
-                Suntem două familii care au descoperit, prin ochii copiilor lor, cât de multă bucurie poate aduce o activitate simplă, dar plină de culoare. Filip a fost atât de încântat de planșele cu nisip încât ne-a făcut să vedem magia din ele.
+                Suntem o familie care a descoperit, prin ochii copiilor, cât de multă bucurie poate aduce o activitate simplă, dar plină de culoare. Filip a fost atât de încântat de planșele cu nisip încât ne-a făcut să vedem magia din ele.
               </p>
               <p className="text-white/75 leading-relaxed mb-8">
                 Apoi a venit și Iris. Îi privim cum creează împreună — cum Filip o ajută pe surioara lui, cum aleg culorile, cum, la final, sunt mândri de ce au făcut cu mânuțele lor. Sensoria Kids s-a născut din dorința de a duce mai departe această bucurie.
