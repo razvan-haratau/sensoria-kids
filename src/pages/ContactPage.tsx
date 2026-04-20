@@ -116,14 +116,28 @@ export default function ContactPage() {
               </a>
             </div>
 
-            {/* Map placeholder */}
-            <div className="mt-8 rounded-2xl overflow-hidden bg-gray-100 h-48 flex items-center justify-center">
-              <div className="text-center text-[#6B7280]">
-                <MapPin size={32} className="mx-auto mb-2 text-[#5BC4C0]" />
-                <p className="text-sm font-medium">Harta Google Maps</p>
-                <p className="text-xs">Configurează adresa în setări</p>
+            {/* Map */}
+            {settings.address && settings.address !== 'România' ? (
+              <div className="mt-8 rounded-2xl overflow-hidden h-48">
+                <iframe
+                  title="Locație Sensoria Kids"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  src={`https://maps.google.com/maps?q=${encodeURIComponent(settings.address)}&output=embed`}
+                />
               </div>
-            </div>
+            ) : (
+              <div className="mt-8 rounded-2xl overflow-hidden bg-gray-100 h-48 flex items-center justify-center">
+                <div className="text-center text-[#6B7280]">
+                  <MapPin size={32} className="mx-auto mb-2 text-[#5BC4C0]" />
+                  <p className="text-sm font-medium">Harta Google Maps</p>
+                  <p className="text-xs">Adaugă adresa în <a href="/admin/setari" className="text-[#5BC4C0] hover:underline">Setări Admin</a></p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Form */}
