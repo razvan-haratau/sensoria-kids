@@ -250,8 +250,8 @@ export default function HomePage() {
             </div>
             <div className="flex items-center gap-6">
               <div className="text-center">
-                <p className="text-2xl font-bold text-[#2D2D2D]">2–8</p>
-                <p className="text-xs text-[#6B7280]">Ani recomandat</p>
+                <p className="text-2xl font-bold text-[#2D2D2D]">2–10</p>
+                <p className="text-xs text-[#6B7280]">Ani recomandați</p>
               </div>
               <div className="w-px h-10 bg-gray-200" />
               <div className="text-center">
