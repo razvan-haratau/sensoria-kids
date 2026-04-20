@@ -52,7 +52,7 @@ const antiMessTips = [
   'Dezlipește folia doar pe o zonă mică odată — adezivul expus prinde praf rapid',
   'Folosește tuburile cu grijă — toarnă puțin, nu mult. Poți adăuga, nu poți lua înapoi',
   'Strânge nisipul în exces înapoi în tub după fiecare zonă — nu se pierde',
-  'Dacă nisipul ajunge pe o zonă greșită, suflă ușor sau folosește bețișorul inclus',
+  'Dacă nisipul ajunge pe o zonă greșită, suflă ușor cu gura — se îndepărtează ușor',
 ]
 
 const mistakes = [
@@ -63,10 +63,6 @@ const mistakes = [
   {
     mistake: 'Torni prea mult nisip dintr-o dată',
     why: 'Se risipește și e greu de controlat. Mai bine puțin de două ori decât mult o dată.',
-  },
-  {
-    mistake: 'Folosești același bețișor la culori diferite fără să-l cureți',
-    why: 'Culorile se amestecă pe planșă. Șterge bețișorul între culori.',
   },
   {
     mistake: 'Alegi o planșă prea dificilă pentru vârsta copilului',
@@ -96,7 +92,7 @@ const ageGuide = [
     ],
   },
   {
-    age: '6–8 ani',
+    age: '6–10 ani',
     color: '#B07CC6',
     tips: [
       'Lucrează complet independent',
@@ -142,10 +138,8 @@ export default function CumFunctioneazaPage() {
             {[
               { item: 'Planșele cu desen', detail: 'Cu adeziv gata aplicat sub folie protectoare' },
               { item: 'Tuburi de nisip colorat', detail: 'Câte o culoare per tub, ușor de controlat' },
-              { item: 'Bețișor de aplicare', detail: 'Pentru detalii fine și împingerea nisipului' },
-              { item: 'Instrucțiuni clare', detail: 'Cu pași vizuali, potrivite și pentru copii' },
-              { item: 'Folie de protecție', detail: 'Pentru conservarea planșei finalizate' },
-              { item: 'Coală de lucru', detail: 'Prinsă dedesubt pentru a strânge excesul' },
+              { item: 'Instrucțiuni clare', detail: 'Pagina A4 cu pași vizuali — o pui dedesubt ca foaie de lucru' },
+              { item: 'Folie de protecție', detail: 'Pungă cu clapetă în care introduci planșa finalizată' },
             ].map((c) => (
               <div key={c.item} className="flex items-start gap-3 bg-gray-50 rounded-2xl p-4">
                 <div className="w-6 h-6 rounded-full bg-[#5BC4C0] flex items-center justify-center shrink-0 mt-0.5">
@@ -288,8 +282,8 @@ export default function CumFunctioneazaPage() {
               <div className="w-12 h-12 rounded-2xl bg-[#E86B9E]/10 flex items-center justify-center mx-auto mb-3">
                 <span className="text-2xl">2</span>
               </div>
-              <h3 className="font-bold text-[#2D2D2D] mb-2">Aplică folia inclusă</h3>
-              <p className="text-sm text-[#6B7280]">Folia de protecție din kit se pune peste planșă și o protejează pe termen lung.</p>
+              <h3 className="font-bold text-[#2D2D2D] mb-2">Introduci desenul în pungă</h3>
+              <p className="text-sm text-[#6B7280]">Introduci planșa în punga cu clapetă primită în kit — o protejează și e gata de dăruit sau expus.</p>
             </div>
             <div className="bg-white rounded-2xl p-6 shadow-card text-center">
               <div className="w-12 h-12 rounded-2xl bg-[#B07CC6]/10 flex items-center justify-center mx-auto mb-3">
