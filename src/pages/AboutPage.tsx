@@ -69,7 +69,7 @@ export default function AboutPage() {
               prea repede.
             </p>
             <p className="text-[#6B7280] leading-relaxed">
-              Apoi a venit și <strong>Iris</strong>. Și acum îi privim zilnic cum creează împreună —
+              Apoi a venit și <strong>Iris</strong>. Și acum îi privim cum creează împreună —
               cum Filip o ajută pe surioara lui mai mică, cum aleg culorile împreună, cum, la final,
               sunt mândri de ce au făcut cu mânuțele lor.
             </p>
