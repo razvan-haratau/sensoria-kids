@@ -68,7 +68,7 @@ const differentiators = [
     bg: 'bg-[#B07CC6]/10',
   },
   {
-    title: 'Rezultatul se înrăma',
+    title: 'Rezultatul se poate înrăma',
     desc: 'Planșa finalizată nu e o joacă de aruncat. Poate fi înrămată, pusă pe perete, dusă la bunici. E ceva de care copilul e mândru.',
     icon: Award,
     color: 'text-[#E08870]',
