@@ -61,7 +61,7 @@ const differentiators = [
     bg: 'bg-[#E86B9E]/10',
   },
   {
-    title: 'Designuri mai realiste',
+    title: 'Designuri realiste',
     desc: 'Fiecare planșă arată bine și înainte, și după. Nu forme vagi și generice — desene pe care copilul vrea să le termine.',
     icon: Palette,
     color: 'text-[#B07CC6]',
