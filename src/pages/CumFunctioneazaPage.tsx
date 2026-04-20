@@ -160,7 +160,7 @@ export default function CumFunctioneazaPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="section-title mb-4 text-center">Ghid pas cu pas</h2>
           <p className="section-subtitle text-center mb-12">
-            6 pași simpli, pe care un copil de 4 ani îi poate urma singur.
+            6 pași simpli, pe care chiar și un copil îi poate urma singur.
           </p>
           <div className="space-y-6">
             {steps.map((step) => (
