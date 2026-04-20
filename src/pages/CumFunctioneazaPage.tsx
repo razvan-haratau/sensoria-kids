@@ -45,6 +45,13 @@ const steps = [
     tip: 'Lasă planșa câteva minute înainte să o muți — nisipul se așează mai bine.',
     color: 'bg-[#E86B9E]',
   },
+  {
+    num: 7,
+    title: 'Introduci desenul în pungă',
+    desc: 'Introduci planșa în punga cu clapetă primită în kit — o protejează și e gata de dăruit sau expus.',
+    tip: 'Punga cu clapetă păstrează planșa la adăpost de praf și o face ușor de transportat.',
+    color: 'bg-[#5BC4C0]',
+  },
 ]
 
 const antiMessTips = [
