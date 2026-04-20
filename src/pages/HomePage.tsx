@@ -69,7 +69,7 @@ const differentiators = [
   },
   {
     title: 'Rezultatul se înrăma',
-    desc: 'Planșa finalizată nu e o joacă de aruncat. Se poate poate înrăma, pune pe perete, duce la bunici. E ceva de care copilul e mândru.',
+    desc: 'Planșa finalizată nu e o joacă de aruncat. Poate fi înrămată, pusă pe perete, dusă la bunici. E ceva de care copilul e mândru.',
     icon: Award,
     color: 'text-[#E08870]',
     bg: 'bg-[#F4A68F]/10',
