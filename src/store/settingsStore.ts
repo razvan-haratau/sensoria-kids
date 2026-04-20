@@ -36,12 +36,12 @@ interface SettingsStore {
 // Map DB column names (snake_case) → app field names (camelCase)
 function dbToSettings(row: Record<string, unknown>): StoreSettings {
   return {
-    storeName: (row.store_name as string) ?? defaultSettings.storeName,
-    email: (row.email as string) ?? defaultSettings.email,
-    phone: (row.phone as string) ?? defaultSettings.phone,
-    address: (row.address as string) ?? defaultSettings.address,
-    instagramUrl: (row.instagram_url as string) ?? defaultSettings.instagramUrl,
-    facebookUrl: (row.facebook_url as string) ?? defaultSettings.facebookUrl,
+    storeName: (row.store_name as string) || defaultSettings.storeName,
+    email: (row.email as string) || defaultSettings.email,
+    phone: (row.phone as string) || defaultSettings.phone,
+    address: (row.address as string) || defaultSettings.address,
+    instagramUrl: (row.instagram_url as string) || defaultSettings.instagramUrl,
+    facebookUrl: (row.facebook_url as string) || defaultSettings.facebookUrl,
     freeShippingThreshold: (row.free_shipping_threshold as number) ?? defaultSettings.freeShippingThreshold,
     shippingCost: (row.shipping_cost as number) ?? defaultSettings.shippingCost,
     lowStockThreshold: (row.low_stock_threshold as number) ?? defaultSettings.lowStockThreshold,
