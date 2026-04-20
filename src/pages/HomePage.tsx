@@ -54,8 +54,8 @@ const differentiators = [
     bg: 'bg-[#5BC4C0]/10',
   },
   {
-    title: 'Nisipul vine în tuburi',
-    desc: 'Nu în pungi pe care copilul le răstoarnă accidental. Tuburile sunt mai ușor de controlat — nisipul merge exact unde trebuie.',
+    title: 'Nisipul vine în eprubete',
+    desc: 'Nu în pungi pe care copilul le răstoarnă accidental. Eprubetele sunt mai ușor de controlat — nisipul merge exact unde trebuie.',
     icon: Package,
     color: 'text-[#E86B9E]',
     bg: 'bg-[#E86B9E]/10',
