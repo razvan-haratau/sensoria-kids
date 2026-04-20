@@ -368,9 +368,9 @@ export default function HomePage() {
       <section className="py-10 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title mb-4">Nu e același lucru. Iată de ce.</h2>
+            <h2 className="section-title mb-4">Am testat fiecare detaliu. Apoi l-am îmbunătățit.</h2>
             <p className="section-subtitle max-w-2xl mx-auto">
-              Față de kiturile ieftine importate, fiecare detaliu Sensoria Kids a fost gândit să facă experiența mai bună — pentru copil și pentru tine.
+              Fiecare detaliu al kitului are un motiv concret — venit din ore petrecute cu copiii noștri.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
