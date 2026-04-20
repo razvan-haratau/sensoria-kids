@@ -344,13 +344,13 @@ export default function HomePage() {
                 Povestea noastră
               </div>
               <h2 className="text-2xl md:text-3xl font-bold mb-5 leading-tight">
-                Am cumpărat un kit. Nu a mers. Atunci am construit altul.
+                A început acasă, cu Filip — și cu bucuria lui.
               </h2>
               <p className="text-white/75 leading-relaxed mb-4">
-                Când am luat primul kit de planșe cu nisip pentru fiul nostru Filip, experiența a fost dezamăgitoare: folia se rupea, nisipul se împrăștia peste tot, designul arăta slab la final. Filip a renunțat la jumătate.
+                Suntem două familii care au descoperit, prin ochii copiilor lor, cât de multă bucurie poate aduce o activitate simplă, dar plină de culoare. Filip a fost atât de încântat de planșele cu nisip încât ne-a făcut să vedem magia din ele.
               </p>
               <p className="text-white/75 leading-relaxed mb-8">
-                Am înțeles că ideea e bună — execuția nu e. Atunci am decis să construim kitul pe care ni l-am fi dorit noi. Împreună cu Filip, am testat, am corectat, am îmbunătățit — până când activitatea a funcționat cu adevărat.
+                Apoi a venit și Iris. Îi privim cum creează împreună — cum Filip o ajută pe surioara lui, cum aleg culorile, cum, la final, sunt mândri de ce au făcut cu mânuțele lor. Sensoria Kids s-a născut din dorința de a duce mai departe această bucurie.
               </p>
               <Link
                 to="/despre-noi"
