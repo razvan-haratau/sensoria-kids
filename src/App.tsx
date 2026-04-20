@@ -23,6 +23,7 @@ import NotFoundPage from './pages/NotFoundPage'
 import { TermeniPage, ConfidentialitiatePage, ReturPage } from './pages/LegalPages'
 
 import CumFunctioneazaPage from './pages/CumFunctioneazaPage'
+import PetreceriCorporatePage from './pages/PetreceriCorporatePage'
 
 import AdminLayout from './pages/admin/AdminLayout'
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -81,6 +82,7 @@ export default function App() {
             <Route path="/produs/:id" element={<PublicLayout><ProductDetailPage /></PublicLayout>} />
             <Route path="/despre-noi" element={<PublicLayout><AboutPage /></PublicLayout>} />
             <Route path="/cum-functioneaza" element={<PublicLayout><CumFunctioneazaPage /></PublicLayout>} />
+            <Route path="/petreceri-corporate" element={<PublicLayout><PetreceriCorporatePage /></PublicLayout>} />
             <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
             <Route path="/checkout" element={<PublicLayout><CheckoutPage /></PublicLayout>} />
             {/* Netopia return URL — /checkout/confirmare?orderId=xxx&status=success */}
