@@ -134,10 +134,10 @@ export default function CumFunctioneazaPage() {
           <p className="section-subtitle text-center mb-10">
             Fiecare kit Sensoria Kids conține tot ce e necesar. Nu trebuie să cumperi nimic separat.
           </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
             {[
               { item: 'Planșele cu desen', detail: 'Cu adeziv gata aplicat sub folie protectoare' },
-              { item: 'Tuburi de nisip colorat', detail: 'Câte o culoare per tub, ușor de controlat' },
+              { item: 'Eprubete de nisip colorat', detail: 'Câte o culoare per eprubetă, ușor de controlat' },
               { item: 'Instrucțiuni clare', detail: 'Pagina A4 cu pași vizuali — o pui dedesubt ca foaie de lucru' },
               { item: 'Folie de protecție', detail: 'Pungă cu clapetă în care introduci planșa finalizată' },
             ].map((c) => (
