@@ -20,7 +20,7 @@ const steps = [
   {
     num: 3,
     title: 'Presari nisipul',
-    desc: 'Iei tubul cu culoarea potrivită și presari nisipul peste zona dezlipită. Acoperi tot adezivul expus — nu trebuie să fie uniform perfect.',
+    desc: 'Iei eprubeta cu culoarea potrivită și presari nisipul peste zona dezlipită. Acoperi tot adezivul expus — nu trebuie să fie uniform perfect.',
     tip: 'Copilul poate folosi și degetul să împingă ușor nisipul spre margini.',
     color: 'bg-[#5BC4C0]',
   },
@@ -28,7 +28,7 @@ const steps = [
     num: 4,
     title: 'Scuturi excesul',
     desc: 'Ții planșa ușor înclinată și o scuturi ușor — nisipul în exces cade pe coala de dedesubt. Ce rămâne pe planșă e exact ce trebuie.',
-    tip: 'Nisipul căzut îl poți strânge înapoi în tub. Nu se pierde.',
+    tip: 'Nisipul căzut îl poți strânge înapoi în eprubetă. Nu se pierde.',
     color: 'bg-[#B07CC6]',
   },
   {
@@ -50,8 +50,8 @@ const steps = [
 const antiMessTips = [
   'Pune întotdeauna o coală sau o tavă sub planșă — strângi tot nisipul în 30 de secunde',
   'Dezlipește folia doar pe o zonă mică odată — adezivul expus prinde praf rapid',
-  'Folosește tuburile cu grijă — toarnă puțin, nu mult. Poți adăuga, nu poți lua înapoi',
-  'Strânge nisipul în exces înapoi în tub după fiecare zonă — nu se pierde',
+  'Folosește eprubetele cu grijă — toarnă puțin, nu mult. Poți adăuga, nu poți lua înapoi',
+  'Strânge nisipul în exces înapoi în eprubetă după fiecare zonă — nu se pierde',
   'Dacă nisipul ajunge pe o zonă greșită, suflă ușor cu gura — se îndepărtează ușor',
 ]
 

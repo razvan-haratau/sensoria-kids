@@ -124,7 +124,7 @@ const audiences = [
 
 const antiMessPoints = [
   {
-    title: 'Nisipul vine în tuburi',
+    title: 'Nisipul vine în eprubete',
     desc: 'Nu în pungi deschise. Copilul toarnă exact cât trebuie, fără să răstoarne accidental tot nisipul pe masă.',
   },
   {
@@ -133,7 +133,7 @@ const antiMessPoints = [
   },
   {
     title: 'Nisipul în exces se reutilizează',
-    desc: 'Îl pui înapoi în tub. Nu se pierde, nu se risipește — e gândit să dureze.',
+    desc: 'Îl pui înapoi în eprubetă. Nu se pierde, nu se risipește — e gândit să dureze.',
   },
   {
     title: 'Activitate pe masă sau pe podea',
