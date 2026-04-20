@@ -122,24 +122,6 @@ const audiences = [
   },
 ]
 
-const antiMessPoints = [
-  {
-    title: 'Nisipul vine în eprubete',
-    desc: 'Nu în pungi deschise. Copilul toarnă exact cât trebuie, fără să răstoarne accidental tot nisipul pe masă.',
-  },
-  {
-    title: 'Scuturi planșa și nisipul cade',
-    desc: 'Excesul se desprinde ușor. Pui o coală dedesubt și strângi tot în 30 de secunde.',
-  },
-  {
-    title: 'Nisipul în exces se reutilizează',
-    desc: 'Îl pui înapoi în eprubetă. Nu se pierde, nu se risipește — e gândit să dureze.',
-  },
-  {
-    title: 'Activitate pe masă sau pe podea',
-    desc: 'Se poate face oriunde. Nu trebuie un spațiu special pregătit sau echipament de curățenie.',
-  },
-]
 
 const benefitsChild = [
   'Stă concentrat 30–60 de minute fără să ceară telefonul',
@@ -387,46 +369,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ ANTI-MESS ═══ */}
-      <section className="py-10 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="section-title mb-4">
-                Știm că primul gând e{' '}
-                <em className="text-[#6B7280] not-italic">"o să se facă dezastru"</em>.{' '}
-                Nu e chiar așa.
-              </h2>
-              <p className="section-subtitle mb-8">
-                Am gândit fiecare detaliu al kitului ca să reducem mizeria — nu să o ascundem sub fotografii frumoase.
-              </p>
-              <div className="space-y-5">
-                {antiMessPoints.map((p) => (
-                  <div key={p.title} className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-xl bg-[#5BC4C0] flex items-center justify-center shrink-0 mt-0.5">
-                      <Check size={14} className="text-white" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-sm text-[#2D2D2D] mb-0.5">{p.title}</p>
-                      <p className="text-sm text-[#6B7280]">{p.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8 p-4 bg-[#5BC4C0]/10 rounded-2xl border border-[#5BC4C0]/20">
-                <p className="font-bold text-[#2D2D2D] text-center text-sm">
-                  Podeaua rămâne curată. Copilul rămâne ocupat.
-                </p>
-              </div>
-            </div>
-            <div className="relative">
-              <img
-                src="/hero-event.png"
-                alt="Activitate cu planșe de nisip — ordonată și liniștitoare"
-                className="w-full rounded-3xl shadow-hover"
-              />
-            </div>
-          </div>
+      {/* ═══ IMAGE BREAK ═══ */}
+      <section className="py-10 md:py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <img
+            src="/hero-event.png"
+            alt="Activitate cu planșe de nisip — ordonată și liniștitoare"
+            className="w-full rounded-3xl shadow-hover"
+          />
         </div>
       </section>
 
