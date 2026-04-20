@@ -78,8 +78,8 @@ export default function AboutPage() {
           {/* Decizia */}
           <p className="text-[#6B7280] leading-relaxed mb-6">
             Așa s-a născut Sensoria Kids — din dorința noastră de a duce mai departe această bucurie
-            către cât mai mulți copii. Nu ca un proiect, ci ca un act firesc: dacă asta ne-a bucurat
-            pe noi atât de mult, de ce să nu existe ceva la fel de îngrijit pentru toți ceilalți?
+            către cât mai mulți copii. Nu ca un proiect, ci ca un lucru firesc: dacă asta ne-a bucurat
+            pe noi atât de mult, de ce să nu existe ceva la fel de frumos și pentru toți ceilalți?
           </p>
 
           {/* Citat */}
