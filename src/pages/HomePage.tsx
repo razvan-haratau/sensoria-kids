@@ -16,19 +16,19 @@ const howItWorksSteps = [
   {
     num: 1,
     title: 'Dezlipești folia',
-    desc: 'Pe o zonă mică, pas cu pas. Adezivul e gata — nu trebuie lipici separat.',
+    desc: 'Pe o zonă mică, pas cu pas. Planșa are deja adeziv — nu trebuie lipici separat.',
     color: 'bg-[#F4A68F]',
   },
   {
     num: 2,
     title: 'Alegi culoarea',
-    desc: 'Fiecare zonă are culoarea ei. Copilul alege ce umple primul.',
+    desc: 'Fiecare zonă are culoarea ei. Copilul alege ce segment să coloreze prima dată.',
     color: 'bg-[#E86B9E]',
   },
   {
     num: 3,
     title: 'Presari nisipul',
-    desc: 'Din tub, direct pe zonă. Controlat, fără să se verse.',
+    desc: 'Din eprubetă sau punguță direct pe zonă. Controlat, fără să se verse.',
     color: 'bg-[#5BC4C0]',
   },
   {
