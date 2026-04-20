@@ -48,7 +48,6 @@ export default function Footer() {
                 { label: 'Magazin', href: '/magazin' },
                 { label: 'Cum Funcționează', href: '/cum-functioneaza' },
                 { label: 'Povestea Noastră', href: '/despre-noi' },
-                { label: 'Petreceri Corporate', href: '/petreceri-corporate' },
                 { label: 'Contact', href: '/contact' },
               ].map((link) => (
                 <li key={link.href}>
