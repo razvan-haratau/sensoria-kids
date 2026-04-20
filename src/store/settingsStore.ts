@@ -17,10 +17,10 @@ export interface StoreSettings {
 const defaultSettings: StoreSettings = {
   storeName: 'Sensoria Kids',
   email: 'contact@sensoriakids.ro',
-  phone: '+40 722 000 000',
+  phone: '+40 793 917 909',
   address: 'România',
-  instagramUrl: 'https://instagram.com/sensoriakids',
-  facebookUrl: 'https://facebook.com/sensoriakids',
+  instagramUrl: 'https://www.instagram.com/sensoria.kids.bucharest/',
+  facebookUrl: 'https://www.facebook.com/',
   freeShippingThreshold: 200,
   shippingCost: 20,
   lowStockThreshold: 5,

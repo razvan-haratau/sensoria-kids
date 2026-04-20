@@ -85,7 +85,7 @@ const differentiators = [
 
 const audiences = [
   {
-    title: 'Copii 2–6 ani',
+    title: 'Copii 2–10 ani',
     desc: 'Modele mari, simple, care dau un sentiment de reușită rapid. Primele experiențe cu culorile și textura.',
     icon: Baby,
     iconColor: 'text-[#E08870]',
