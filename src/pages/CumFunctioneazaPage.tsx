@@ -49,7 +49,7 @@ const steps = [
     num: 7,
     title: 'Introduci desenul în pungă',
     desc: 'Introduci planșa în punga cu clapetă primită în kit — o protejează și e gata de dăruit sau expus.',
-    tip: 'Punga cu clapetă păstrează planșa la adăpost de praf și o face ușor de transportat.',
+    tip: 'Punga cu clapetă păstrează planșa intactă — nisipul nu cade, nu face mizerie în casă și o poți transporta ușor oriunde.',
     color: 'bg-[#5BC4C0]',
   },
 ]
@@ -167,7 +167,7 @@ export default function CumFunctioneazaPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="section-title mb-4 text-center">Ghid pas cu pas</h2>
           <p className="section-subtitle text-center mb-12">
-            6 pași simpli, pe care chiar și un copil îi poate urma singur.
+            7 pași simpli, pe care chiar și un copil îi poate urma singur.
           </p>
           <div className="space-y-6">
             {steps.map((step) => (
@@ -266,39 +266,6 @@ export default function CumFunctioneazaPage() {
                 </ul>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ CUM PĂSTREZI PLANȘA ═══ */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="section-title mb-4 text-center">Cum păstrezi planșa finalizată</h2>
-          <p className="section-subtitle text-center mb-10">
-            Planșa nu e o joacă de aruncat. Poate fi ținută minte mult timp.
-          </p>
-          <div className="grid sm:grid-cols-3 gap-6">
-            <div className="bg-white rounded-2xl p-6 shadow-card text-center">
-              <div className="w-12 h-12 rounded-2xl bg-[#5BC4C0]/10 flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">1</span>
-              </div>
-              <h3 className="font-bold text-[#2D2D2D] mb-2">Lasă să se așeze</h3>
-              <p className="text-sm text-[#6B7280]">Câteva minute după finalizare, ca nisipul să se stabilizeze pe adeziv.</p>
-            </div>
-            <div className="bg-white rounded-2xl p-6 shadow-card text-center">
-              <div className="w-12 h-12 rounded-2xl bg-[#E86B9E]/10 flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">2</span>
-              </div>
-              <h3 className="font-bold text-[#2D2D2D] mb-2">Introduci desenul în pungă</h3>
-              <p className="text-sm text-[#6B7280]">Introduci planșa în punga cu clapetă primită în kit — o protejează și e gata de dăruit sau expus.</p>
-            </div>
-            <div className="bg-white rounded-2xl p-6 shadow-card text-center">
-              <div className="w-12 h-12 rounded-2xl bg-[#B07CC6]/10 flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">3</span>
-              </div>
-              <h3 className="font-bold text-[#2D2D2D] mb-2">Pune în ramă</h3>
-              <p className="text-sm text-[#6B7280]">Orice ramă standard se potrivește. Planșa finalizată arată bine pe perete.</p>
-            </div>
           </div>
         </div>
       </section>
