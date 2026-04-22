@@ -16,7 +16,7 @@ const sortOptions = [
 ]
 
 export default function ShopPage() {
-  useMeta('Magazin', 'Explorează colecția Sensoria Kids — planșe de nisip, kituri creative și accesorii pentru copii de 2–10 ani.')
+  useMeta('Magazin — Kituri cu nisip colorat', 'Cumpără kituri cu planșe de nisip colorat pentru copii. Colecția Sensoria Kids — activitate creativă, sigură, 100% produsă în România. Livrare rapidă.')
   const { products: allProducts } = useProductsStore()
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('Toate')

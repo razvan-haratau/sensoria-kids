@@ -6,7 +6,7 @@ import { useSettingsStore } from '../store/settingsStore'
 const categories = ['Comenzi', 'Colaborări', 'Educatori & Instituții', 'Altele']
 
 export default function ContactPage() {
-  useMeta('Contact', 'Contactează Sensoria Kids — suntem aici să te ajutăm cu comenzi, colaborări sau orice întrebare despre produsele noastre.')
+  useMeta('Contact Sensoria Kids', 'Contactează echipa Sensoria Kids pentru comenzi, colaborări sau întrebări. Răspundem în 24 de ore. Tel: +40 793 917 909 | contact@sensoriakids.ro')
   const { settings } = useSettingsStore()
   const [form, setForm] = useState({
     name: '',

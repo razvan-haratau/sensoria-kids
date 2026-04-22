@@ -1,7 +1,7 @@
 import { useMeta } from '../hooks/useMeta'
 
 export function TermeniPage() {
-  useMeta('Termeni și Condiții')
+  useMeta('Termeni și Condiții', 'Termenii și condițiile de utilizare ale site-ului Sensoria Kids și de achiziționare a produselor noastre.')
   return (
     <div className="min-h-screen pt-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16">
@@ -35,7 +35,7 @@ export function TermeniPage() {
 }
 
 export function ConfidentialitiatePage() {
-  useMeta('Politica de Confidențialitate')
+  useMeta('Politica de Confidențialitate', 'Politica de confidențialitate și GDPR a Sensoria Kids. Cum colectăm, procesăm și protejăm datele tale personale.')
   return (
     <div className="min-h-screen pt-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16">
@@ -69,7 +69,7 @@ export function ConfidentialitiatePage() {
 }
 
 export function ReturPage() {
-  useMeta('Politica de Retur')
+  useMeta('Politica de Retur', 'Politica de retur și înlocuire a produselor Sensoria Kids. Returnezi simplu în 14 zile de la primirea comenzii.')
   return (
     <div className="min-h-screen pt-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16">

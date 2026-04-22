@@ -140,7 +140,7 @@ const benefitsParent = [
 ]
 
 export default function HomePage() {
-  useMeta('', 'Planșe de nisip colorate pentru copii de 2–8 ani. Activitate creativă fără ecrane, gândită să funcționeze.')
+  useMeta('', 'Planșe de nisip colorat pentru copii de 2–10 ani. Activitate creativă fără ecrane, fără mizerie — rezultat frumos de care copilul e mândru. 100% produs în România.')
   const { products } = useProductsStore()
   const { subscribe } = useNewsletterStore()
   const [testimonialIdx, setTestimonialIdx] = useState(0)

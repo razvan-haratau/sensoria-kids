@@ -27,8 +27,8 @@ const madeInRomania = [
 
 export default function AboutPage() {
   useMeta(
-    'Povestea Noastră',
-    'Sensoria Kids a apărut din bucuria unui copil și din dorința de a duce mai departe acea magie. Aflați povestea din spatele brandului.'
+    'Povestea Noastră — Brand românesc de planșe cu nisip',
+    'Sensoria Kids — brand românesc creat de părinți pentru părinți. Planșele, nisipul și ambalajele sunt produse 100% în România. Aflați povestea din spatele brandului.'
   )
 
   return (

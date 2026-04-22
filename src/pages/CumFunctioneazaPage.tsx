@@ -112,8 +112,8 @@ const ageGuide = [
 
 export default function CumFunctioneazaPage() {
   useMeta(
-    'Cum Funcționează',
-    'Ghid complet pas cu pas pentru planșele cu nisip Sensoria Kids — cum se folosesc, sfaturi anti-mizerie și greșeli de evitat.'
+    'Cum Funcționează Planșele cu Nisip',
+    'Ghid complet în 7 pași pentru planșele cu nisip colorat Sensoria Kids. Aflați cum se folosesc, ce conține kitul și sfaturi pentru o activitate fără mizerie.'
   )
 
   return (

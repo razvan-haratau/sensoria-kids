@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Pagini principale -->
   <url>
     <loc>https://www.sensoriakids.ro/</loc>
     <changefreq>weekly</changefreq>
@@ -11,6 +13,11 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.sensoriakids.ro/cum-functioneaza</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.sensoriakids.ro/despre-noi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -20,6 +27,70 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Produse -->
+  <url>
+    <loc>https://www.sensoriakids.ro/produs/aca12a2b-e753-40db-bff0-f0461cff4391</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sensoriakids.ro/produs/299ec297-a686-435d-ac62-d89aed48d2cf</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sensoriakids.ro/produs/6ca8cdbf-4b40-4ad9-9536-453740110dd6</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sensoriakids.ro/produs/deeecf8d-3c78-48c8-8707-b7ad4ae87d7b</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sensoriakids.ro/produs/91a3c51b-085d-41aa-85c4-21dedd1cbb8e</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sensoriakids.ro/produs/c94a5425-9d24-49ec-962b-adbb2273e3a8</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sensoriakids.ro/produs/665c327f-7552-42b4-ab65-316593b044c6</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sensoriakids.ro/produs/64df7ccd-50ad-4cfb-bd36-f15f943ca10f</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sensoriakids.ro/produs/ca2a87f5-f696-4212-8f22-31eeaf21da32</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sensoriakids.ro/produs/fa38d1bc-dd05-42a2-9fcc-3cb828944772</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sensoriakids.ro/produs/2a53219a-5abe-4e28-984f-0bcf5d376c54</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sensoriakids.ro/produs/a6575a74-6975-40db-8a0c-6d5640fb56d9</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pagini legale -->
   <url>
     <loc>https://www.sensoriakids.ro/termeni</loc>
     <changefreq>yearly</changefreq>
@@ -35,4 +106,10 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://www.sensoriakids.ro/gdpr</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>
