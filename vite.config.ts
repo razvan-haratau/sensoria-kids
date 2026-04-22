@@ -30,6 +30,7 @@ export default defineConfig({
   server: { headers: securityHeaders },
   preview: { headers: securityHeaders },
   build: {
+    target: 'es2019',
     rollupOptions: {
       output: {
         manualChunks: {
