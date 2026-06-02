@@ -4,12 +4,13 @@ import {
   ArrowRight, Star, Sparkles, Hand, Heart, Brain,
   ChevronLeft, ChevronRight, Mail,
   ShieldCheck, Check, Package, Palette, Award, MapPin, Gift,
-  Baby, Home, BookOpen,
+  Baby, Home, BookOpen, Instagram, Facebook,
 } from 'lucide-react'
 import ProductCard from '../components/ProductCard'
 import { testimonials } from '../lib/mockData'
 import { useProductsStore } from '../store/productsStore'
 import { useNewsletterStore } from '../store/newsletterStore'
+import { useSettingsStore } from '../store/settingsStore'
 import { useMeta } from '../hooks/useMeta'
 
 const howItWorksSteps = [
@@ -143,6 +144,7 @@ export default function HomePage() {
   useMeta('', 'Planșe de nisip colorat pentru copii de 2–10 ani. Activitate creativă fără ecrane, fără mizerie — rezultat frumos de care copilul e mândru. 100% produs în România.')
   const { products } = useProductsStore()
   const { subscribe } = useNewsletterStore()
+  const { settings } = useSettingsStore()
   const [testimonialIdx, setTestimonialIdx] = useState(0)
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
@@ -166,6 +168,14 @@ export default function HomePage() {
 
         {/* MOBILE */}
         <div className="lg:hidden flex flex-col items-center text-center px-4 sm:px-6 pt-20 pb-0 w-full">
+          <div className="flex items-center gap-3 mb-4">
+            <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#6B7280] hover:text-[#E86B9E] transition-colors">
+              <Instagram size={20} />
+            </a>
+            <a href={settings.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#6B7280] hover:text-[#5BC4C0] transition-colors">
+              <Facebook size={20} />
+            </a>
+          </div>
           <div className="inline-flex items-center gap-2 bg-[#5BC4C0]/10 text-[#5BC4C0] px-4 py-2 rounded-full text-sm font-semibold mb-5">
             <Sparkles size={14} />
             Fără ecrane. Fără haos. Doar creativitate.
@@ -210,6 +220,14 @@ export default function HomePage() {
         {/* DESKTOP */}
         <div className="hidden lg:grid max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 grid-cols-2 gap-12 items-center">
           <div>
+            <div className="flex items-center gap-3 mb-5">
+              <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#6B7280] hover:text-[#E86B9E] transition-colors">
+                <Instagram size={22} />
+              </a>
+              <a href={settings.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#6B7280] hover:text-[#5BC4C0] transition-colors">
+                <Facebook size={22} />
+              </a>
+            </div>
             <div className="inline-flex items-center gap-2 bg-[#5BC4C0]/10 text-[#5BC4C0] px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <Sparkles size={14} />
               Fără ecrane. Fără haos. Doar creativitate.
