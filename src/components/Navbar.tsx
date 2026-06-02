@@ -38,10 +38,10 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center shrink-0">
-          <img src="/logo.png" alt="Sensoria Kids" className="h-12 w-auto object-contain" />
+          <img src="/logo.png" alt="Sensoria Kids" className="h-[60px] w-auto object-contain" />
         </Link>
 
         {/* Desktop Nav */}
