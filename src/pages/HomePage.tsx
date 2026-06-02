@@ -170,10 +170,10 @@ export default function HomePage() {
         <div className="lg:hidden flex flex-col items-center text-center px-4 sm:px-6 pt-20 pb-0 w-full">
           <div className="flex items-center gap-3 mb-4">
             <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#6B7280] hover:text-[#E86B9E] transition-colors">
-              <Instagram size={20} />
+              <Instagram size={40} />
             </a>
             <a href={settings.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#6B7280] hover:text-[#5BC4C0] transition-colors">
-              <Facebook size={20} />
+              <Facebook size={40} />
             </a>
           </div>
           <div className="inline-flex items-center gap-2 bg-[#5BC4C0]/10 text-[#5BC4C0] px-4 py-2 rounded-full text-sm font-semibold mb-5">
@@ -222,10 +222,10 @@ export default function HomePage() {
           <div>
             <div className="flex items-center gap-3 mb-5">
               <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#6B7280] hover:text-[#E86B9E] transition-colors">
-                <Instagram size={22} />
+                <Instagram size={44} />
               </a>
               <a href={settings.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#6B7280] hover:text-[#5BC4C0] transition-colors">
-                <Facebook size={22} />
+                <Facebook size={44} />
               </a>
             </div>
             <div className="inline-flex items-center gap-2 bg-[#5BC4C0]/10 text-[#5BC4C0] px-4 py-2 rounded-full text-sm font-semibold mb-6">
