@@ -50,7 +50,7 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 to={link.href}
-                className={`text-sm font-medium transition-colors duration-200 hover:text-[#5BC4C0] ${
+                className={`text-lg font-medium transition-colors duration-200 hover:text-[#5BC4C0] ${
                   location.pathname === link.href ? 'text-[#5BC4C0]' : 'text-[#2D2D2D]'
                 }`}
               >
@@ -97,7 +97,7 @@ export default function Navbar() {
                     location.pathname === link.href
                       ? 'bg-[#5BC4C0]/10 text-[#5BC4C0]'
                       : 'text-[#2D2D2D] hover:bg-gray-50'
-                  }`}
+                  } text-lg`}
                 >
                   {link.label}
                 </Link>
