@@ -167,7 +167,7 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#5BC4C0]/10 to-[#E86B9E]/10">
 
         {/* MOBILE */}
-        <div className="lg:hidden flex flex-col items-center text-center px-4 sm:px-6 pt-28 pb-0 w-full">
+        <div className="lg:hidden flex flex-col items-center text-center px-4 sm:px-6 pt-32 pb-0 w-full">
           <div className="flex items-center gap-3 mb-8">
             <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#6B7280] hover:text-[#E86B9E] transition-colors">
               <Instagram size={40} />
@@ -218,7 +218,7 @@ export default function HomePage() {
         </div>
 
         {/* DESKTOP */}
-        <div className="hidden lg:grid max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 grid-cols-2 gap-12 items-center">
+        <div className="hidden lg:grid max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 grid-cols-2 gap-12 items-center">
           <div>
             <div className="flex items-center gap-3 mb-8">
               <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#6B7280] hover:text-[#E86B9E] transition-colors">
