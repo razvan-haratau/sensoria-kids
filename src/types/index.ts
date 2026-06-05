@@ -69,3 +69,34 @@ export type ProductCategory = 'Planșe Simple' | 'Kit Complet' | 'Nisip Colorat'
 export type AgeRange = '2-4' | '4-6' | '6-8' | '8-10'
 export type Difficulty = 'Ușor' | 'Mediu' | 'Avansat'
 export type OrderStatus = 'Nouă' | 'În procesare' | 'Expediată' | 'Livrată' | 'Anulată'
+
+export interface Workshop {
+  id: string
+  title: string
+  slug: string
+  description: string
+  date: string
+  duration_minutes: number
+  location: string
+  price: number
+  age_min: number
+  age_max: number
+  max_participants: number
+  includes: string[]
+  status: 'draft' | 'active' | 'full' | 'closed'
+  created_at: string
+  updated_at: string
+}
+
+export interface WorkshopRegistration {
+  id: string
+  workshop_id: string
+  parent_name: string
+  parent_email: string
+  parent_phone: string
+  child_name: string
+  child_age: number
+  notes: string | null
+  status: 'confirmed' | 'cancelled'
+  created_at: string
+}

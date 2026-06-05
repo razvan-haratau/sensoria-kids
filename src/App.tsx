@@ -31,6 +31,9 @@ import AdminOrders from './pages/admin/AdminOrders'
 import AdminCustomers from './pages/admin/AdminCustomers'
 import AdminReports from './pages/admin/AdminReports'
 import AdminSettings from './pages/admin/AdminSettings'
+import AdminWorkshops from './pages/admin/AdminWorkshops'
+import AdminWorkshopDetail from './pages/admin/AdminWorkshopDetail'
+import WorkshopPage from './pages/WorkshopPage'
 
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -90,6 +93,9 @@ export default function App() {
             <Route path="/retur" element={<PublicLayout><ReturPage /></PublicLayout>} />
             <Route path="/gdpr" element={<PublicLayout><ConfidentialitiatePage /></PublicLayout>} />
 
+            {/* Workshop routes — semi-private, no link from site */}
+            <Route path="/atelier/:slug" element={<WorkshopPage />} />
+
             {/* Admin routes */}
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
@@ -98,6 +104,8 @@ export default function App() {
               <Route path="clienti" element={<AdminCustomers />} />
               <Route path="rapoarte" element={<AdminReports />} />
               <Route path="setari" element={<AdminSettings />} />
+              <Route path="ateliere" element={<AdminWorkshops />} />
+              <Route path="ateliere/:id" element={<AdminWorkshopDetail />} />
             </Route>
 
             {/* 404 */}

@@ -42,6 +42,37 @@ export type DbOrder = {
   created_at: string
 }
 
+export type DbWorkshop = {
+  id: string
+  title: string
+  slug: string
+  description: string
+  date: string
+  duration_minutes: number
+  location: string
+  price: number
+  age_min: number
+  age_max: number
+  max_participants: number
+  includes: string[]
+  status: string
+  created_at: string
+  updated_at: string
+}
+
+export type DbWorkshopRegistration = {
+  id: string
+  workshop_id: string
+  parent_name: string
+  parent_email: string
+  parent_phone: string
+  child_name: string
+  child_age: number
+  notes: string | null
+  status: string
+  created_at: string
+}
+
 export type DbSettings = {
   id: number
   store_name: string

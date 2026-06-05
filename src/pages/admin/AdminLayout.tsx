@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useLocation, Outlet } from 'react-router-dom'
 import {
   LayoutDashboard, Package, ShoppingBag, Users, BarChart3,
-  Settings, LogOut, ExternalLink, Menu, ChevronRight,
+  Settings, LogOut, ExternalLink, Menu, ChevronRight, Sparkles,
 } from 'lucide-react'
 import { useAuthStore } from '../../store/authStore'
 import AdminLogin from './AdminLogin'
@@ -12,6 +12,7 @@ const navItems = [
   { label: 'Produse', href: '/admin/produse', icon: Package },
   { label: 'Comenzi', href: '/admin/comenzi', icon: ShoppingBag },
   { label: 'Clienți', href: '/admin/clienti', icon: Users },
+  { label: 'Ateliere', href: '/admin/ateliere', icon: Sparkles },
   { label: 'Rapoarte', href: '/admin/rapoarte', icon: BarChart3 },
   { label: 'Setări', href: '/admin/setari', icon: Settings },
 ]
