@@ -52,7 +52,7 @@ Deno.serve(async (req) => {
           <tr>
             <td align="center" bgcolor="#5BC4C0" style="background-color:#5BC4C0; background-image:linear-gradient(135deg,#5BC4C0,#E86B9E); padding:28px 32px;">
               <h1 style="margin:0; color:#ffffff; font-size:22px; font-weight:700;">Comanda a fost expediată!</h1>
-              <p style="margin:6px 0 0; color:rgba(255,255,255,0.9); font-size:14px;">Planșe de nisip colorate pentru copii</p>
+              <p style="margin:6px 0 0; color:rgba(255,255,255,0.9); font-size:14px;">Planșe creative cu nisip colorat</p>
             </td>
           </tr>
 
