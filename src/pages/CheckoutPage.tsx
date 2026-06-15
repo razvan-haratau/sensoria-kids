@@ -69,7 +69,7 @@ export default function CheckoutPage() {
     setProcessing(true)
     setPaymentError('')
 
-    const orderId = `ORD-${crypto.randomUUID().split('-')[0].toUpperCase()}`
+    const orderId = `SENS-${crypto.randomUUID().split('-')[0].toUpperCase()}`
 
     const orderData: Order = {
       id: orderId,

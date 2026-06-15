@@ -14,10 +14,21 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
+const LOGO_URL = 'https://www.sensoriakids.ro/logo.png'
+
 interface OrderItem {
   product_name: string
   quantity: number
   unit_price: number
+}
+
+interface ShippingAddress {
+  name: string
+  street: string
+  city: string
+  county: string
+  postal_code: string
+  country: string
 }
 
 interface OrderData {
@@ -28,6 +39,7 @@ interface OrderData {
   total: number
   shipping_cost: number
   payment_method: string
+  shipping_address?: ShippingAddress
 }
 
 Deno.serve(async (req) => {
@@ -48,11 +60,11 @@ Deno.serve(async (req) => {
 
     const itemsHtml = order.items
       .map(
-        (item) => `
+        (item, idx) => `
         <tr>
-          <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; color: #374151;">${item.product_name}</td>
-          <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; color: #374151; text-align: center;">×${item.quantity}</td>
-          <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; color: #374151; text-align: right; font-weight: 600;">${item.unit_price * item.quantity} RON</td>
+          <td style="padding:12px 0; border-bottom:${idx === order.items.length - 1 ? 'none' : '1px solid #F0F0F0'}; color:#2D2D2D; font-size:14px;">${item.product_name}</td>
+          <td style="padding:12px 0; border-bottom:${idx === order.items.length - 1 ? 'none' : '1px solid #F0F0F0'}; color:#6B7280; font-size:14px; text-align:center;">×${item.quantity}</td>
+          <td style="padding:12px 0; border-bottom:${idx === order.items.length - 1 ? 'none' : '1px solid #F0F0F0'}; color:#2D2D2D; font-size:14px; text-align:right; font-weight:600;">${item.unit_price * item.quantity} RON</td>
         </tr>`
       )
       .join('')
@@ -63,71 +75,134 @@ Deno.serve(async (req) => {
 <!DOCTYPE html>
 <html lang="ro">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
-<body style="margin:0; padding:0; background:#f9fafb; font-family:'Segoe UI', Arial, sans-serif;">
-  <div style="max-width:600px; margin:40px auto; background:#ffffff; border-radius:16px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.08);">
+<body style="margin:0; padding:0; background:#F3F4F6; font-family:'Segoe UI', Arial, sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F3F4F6;">
+    <tr>
+      <td align="center" style="padding:32px 16px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px; background:#ffffff; border-radius:20px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.06);">
 
-    <!-- Header -->
-    <div style="background:linear-gradient(135deg, #5BC4C0, #E86B9E); padding:40px 32px; text-align:center;">
-      <h1 style="color:#ffffff; margin:0; font-size:24px; font-weight:700;">Sensoria Kids</h1>
-      <p style="color:rgba(255,255,255,0.85); margin:8px 0 0; font-size:14px;">Planșe de nisip colorate pentru copii</p>
-    </div>
-
-    <!-- Body -->
-    <div style="padding:40px 32px;">
-      <h2 style="color:#2D2D2D; font-size:20px; margin:0 0 8px;">Comandă confirmată!</h2>
-      <p style="color:#6B7280; margin:0 0 24px;">Bună, <strong style="color:#2D2D2D;">${order.customer_name}</strong>! Comanda ta a fost plasată cu succes.</p>
-
-      <!-- Order ID -->
-      <div style="background:#f0fdf9; border:1px solid #5BC4C0; border-radius:12px; padding:16px 20px; margin-bottom:28px;">
-        <p style="margin:0; color:#6B7280; font-size:13px;">Număr comandă</p>
-        <p style="margin:4px 0 0; color:#5BC4C0; font-size:18px; font-weight:700; font-family:monospace;">${order.id}</p>
-      </div>
-
-      <!-- Products -->
-      <h3 style="color:#2D2D2D; font-size:15px; margin:0 0 12px;">Produse comandate</h3>
-      <table style="width:100%; border-collapse:collapse; margin-bottom:24px;">
-        <thead>
+          <!-- Logo -->
           <tr>
-            <th style="text-align:left; color:#9CA3AF; font-size:12px; font-weight:600; padding-bottom:8px; border-bottom:2px solid #f3f4f6; text-transform:uppercase;">Produs</th>
-            <th style="text-align:center; color:#9CA3AF; font-size:12px; font-weight:600; padding-bottom:8px; border-bottom:2px solid #f3f4f6; text-transform:uppercase;">Cant.</th>
-            <th style="text-align:right; color:#9CA3AF; font-size:12px; font-weight:600; padding-bottom:8px; border-bottom:2px solid #f3f4f6; text-transform:uppercase;">Preț</th>
+            <td align="center" style="padding:32px 32px 20px;">
+              <img src="${LOGO_URL}" alt="Sensoria Kids" width="170" style="display:block; max-width:170px; height:auto; border:0;" />
+            </td>
           </tr>
-        </thead>
-        <tbody>${itemsHtml}</tbody>
-      </table>
 
-      <!-- Totals -->
-      <div style="background:#f9fafb; border-radius:12px; padding:16px 20px; margin-bottom:28px;">
-        <table style="width:100%; border-collapse:collapse;">
+          <!-- Title banner -->
           <tr>
-            <td style="color:#6B7280; font-size:14px; padding-bottom:8px;">Transport</td>
-            <td style="color:#6B7280; font-size:14px; padding-bottom:8px; text-align:right;">${order.shipping_cost === 0 ? 'Gratuit' : `${order.shipping_cost} RON`}</td>
+            <td align="center" bgcolor="#5BC4C0" style="background-color:#5BC4C0; background-image:linear-gradient(135deg,#5BC4C0,#E86B9E); padding:28px 32px;">
+              <h1 style="margin:0; color:#ffffff; font-size:22px; font-weight:700;">Comandă confirmată!</h1>
+              <p style="margin:6px 0 0; color:rgba(255,255,255,0.9); font-size:14px;">Planșe de nisip colorate pentru copii</p>
+            </td>
           </tr>
-          <tr style="border-top:1px solid #e5e7eb;">
-            <td style="color:#2D2D2D; font-size:16px; font-weight:700; padding-top:12px;">Total</td>
-            <td style="color:#5BC4C0; font-size:16px; font-weight:700; padding-top:12px; text-align:right;">${order.total} RON</td>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:32px;">
+              <p style="margin:0 0 24px; color:#6B7280; font-size:15px; line-height:1.6;">
+                Bună, <strong style="color:#2D2D2D;">${order.customer_name}</strong>! Comanda ta a fost plasată cu succes.
+              </p>
+
+              <!-- Order ID -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F0FDF9; border:1px solid #5BC4C0; border-radius:14px; margin-bottom:16px;">
+                <tr>
+                  <td style="padding:16px 20px;">
+                    <p style="margin:0; color:#6B7280; font-size:13px;">Număr comandă</p>
+                    <p style="margin:4px 0 0; color:#5BC4C0; font-size:18px; font-weight:700; font-family:monospace;">${order.id}</p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Delivery estimate -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFF1F5; border-radius:14px; margin-bottom:28px;">
+                <tr>
+                  <td style="border-left:4px solid #E86B9E; padding:14px 20px; border-radius:0 14px 14px 0;">
+                    <p style="margin:0; color:#2D2D2D; font-size:14px; line-height:1.6;">
+                      <strong>Comanda ta este în procesare.</strong> O vei primi în <strong>24–48 de ore</strong>.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+              ${order.shipping_address ? `
+              <!-- Shipping address -->
+              <h3 style="color:#2D2D2D; font-size:14px; font-weight:700; margin:0 0 12px; text-transform:uppercase; letter-spacing:0.5px;">Adresă de livrare</h3>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F9FAFB; border-radius:14px; margin-bottom:28px;">
+                <tr>
+                  <td style="padding:16px 20px;">
+                    <p style="margin:0 0 6px; color:#2D2D2D; font-size:14px; font-weight:600;">${order.shipping_address.name}</p>
+                    <p style="margin:0; color:#6B7280; font-size:14px; line-height:1.7;">
+                      ${order.shipping_address.street}<br>
+                      ${order.shipping_address.city}, ${order.shipping_address.county}, ${order.shipping_address.postal_code}<br>
+                      ${order.shipping_address.country}
+                    </p>
+                  </td>
+                </tr>
+              </table>
+              ` : ''}
+
+              <!-- Products -->
+              <h3 style="color:#2D2D2D; font-size:14px; font-weight:700; margin:0 0 12px; text-transform:uppercase; letter-spacing:0.5px;">Produse comandate</h3>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F9FAFB; border-radius:14px; margin-bottom:16px;">
+                <tr>
+                  <td style="padding:8px 20px 4px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th style="text-align:left; color:#9CA3AF; font-size:11px; font-weight:700; padding-bottom:8px; border-bottom:2px solid #F0F0F0; text-transform:uppercase; letter-spacing:0.5px;">Produs</th>
+                          <th style="text-align:center; color:#9CA3AF; font-size:11px; font-weight:700; padding-bottom:8px; border-bottom:2px solid #F0F0F0; text-transform:uppercase; letter-spacing:0.5px;">Cant.</th>
+                          <th style="text-align:right; color:#9CA3AF; font-size:11px; font-weight:700; padding-bottom:8px; border-bottom:2px solid #F0F0F0; text-transform:uppercase; letter-spacing:0.5px;">Preț</th>
+                        </tr>
+                      </thead>
+                      <tbody>${itemsHtml}</tbody>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Totals -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F9FAFB; border-radius:14px; margin-bottom:28px;">
+                <tr>
+                  <td style="padding:16px 20px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="color:#6B7280; font-size:14px; padding-bottom:10px;">Transport</td>
+                        <td style="color:#6B7280; font-size:14px; padding-bottom:10px; text-align:right;">${order.shipping_cost === 0 ? 'Gratuit' : `${order.shipping_cost} RON`}</td>
+                      </tr>
+                      <tr>
+                        <td style="color:#2D2D2D; font-size:16px; font-weight:700; padding-top:10px; border-top:1px solid #E5E7EB;">Total</td>
+                        <td style="color:#5BC4C0; font-size:16px; font-weight:700; padding-top:10px; border-top:1px solid #E5E7EB; text-align:right;">${order.total} RON</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Payment -->
+              <p style="color:#6B7280; font-size:14px; margin:0 0 28px;">
+                <strong style="color:#2D2D2D;">Metodă de plată:</strong> ${paymentLabel}
+              </p>
+
+              <p style="color:#6B7280; font-size:14px; line-height:1.6; margin:0 0 8px;">
+                Te vom contacta telefonic sau pe email dacă avem nevoie de detalii suplimentare pentru livrare.
+              </p>
+              <p style="color:#6B7280; font-size:14px; margin:0;">Mulțumim că ai ales Sensoria Kids!</p>
+            </td>
           </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" bgcolor="#F9FAFB" style="background-color:#F9FAFB; padding:20px 32px; border-top:1px solid #F0F0F0;">
+              <p style="color:#9CA3AF; font-size:12px; margin:0;">
+                © ${new Date().getFullYear()} Sensoria Kids · <a href="https://www.sensoriakids.ro" style="color:#5BC4C0; text-decoration:none;">sensoriakids.ro</a>
+              </p>
+            </td>
+          </tr>
+
         </table>
-      </div>
-
-      <!-- Payment -->
-      <p style="color:#6B7280; font-size:14px; margin:0 0 28px;">
-        <strong style="color:#2D2D2D;">Metodă de plată:</strong> ${paymentLabel}
-      </p>
-
-      <p style="color:#6B7280; font-size:14px; line-height:1.6; margin:0 0 8px;">
-        Te vom contacta în cel mai scurt timp pentru confirmarea și livrarea comenzii.
-      </p>
-      <p style="color:#6B7280; font-size:14px; margin:0;">Mulțumim că ai ales Sensoria Kids!</p>
-    </div>
-
-    <!-- Footer -->
-    <div style="background:#f9fafb; padding:24px 32px; text-align:center; border-top:1px solid #f3f4f6;">
-      <p style="color:#9CA3AF; font-size:12px; margin:0;">
-        © ${new Date().getFullYear()} Sensoria Kids · <a href="https://www.sensoriakids.ro" style="color:#5BC4C0; text-decoration:none;">sensoriakids.ro</a>
-      </p>
-    </div>
-  </div>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>`
 
@@ -140,7 +215,7 @@ Deno.serve(async (req) => {
       body: JSON.stringify({
         from: FROM_EMAIL,
         to: order.customer_email,
-        subject: `Confirmare comandă ${order.id} — Sensoria Kids`,
+        subject: `Confirmare comandă (${order.id}) — Planșe cu nisip colorat`,
         html,
       }),
     })

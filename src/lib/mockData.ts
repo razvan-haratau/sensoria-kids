@@ -157,7 +157,7 @@ export const mockProducts: Product[] = [
 
 export const mockOrders: Order[] = [
   {
-    id: 'ORD-2024-001',
+    id: 'SENS-2024-001',
     customer_email: 'mama.elena@gmail.com',
     customer_name: 'Elena Popescu',
     customer_phone: '+40 722 345 678',
@@ -170,7 +170,7 @@ export const mockOrders: Order[] = [
       country: 'România',
     },
     items: [
-      { id: '1', order_id: 'ORD-2024-001', product_id: '1', product_name: 'Planșă Nisip - Fluturi Colorați', quantity: 2, unit_price: 45 },
+      { id: '1', order_id: 'SENS-2024-001', product_id: '1', product_name: 'Planșă Nisip - Fluturi Colorați', quantity: 2, unit_price: 45 },
     ],
     total: 99,
     shipping_cost: 9,
@@ -180,7 +180,7 @@ export const mockOrders: Order[] = [
     created_at: '2024-03-01T14:30:00Z',
   },
   {
-    id: 'ORD-2024-002',
+    id: 'SENS-2024-002',
     customer_email: 'tata.mihai@yahoo.ro',
     customer_name: 'Mihai Ionescu',
     customer_phone: '+40 733 456 789',
@@ -193,8 +193,8 @@ export const mockOrders: Order[] = [
       country: 'România',
     },
     items: [
-      { id: '2', order_id: 'ORD-2024-002', product_id: '4', product_name: 'Kit Complet - Univers și Stele', quantity: 1, unit_price: 125 },
-      { id: '3', order_id: 'ORD-2024-002', product_id: '8', product_name: 'Accesorii Premium', quantity: 1, unit_price: 28 },
+      { id: '2', order_id: 'SENS-2024-002', product_id: '4', product_name: 'Kit Complet - Univers și Stele', quantity: 1, unit_price: 125 },
+      { id: '3', order_id: 'SENS-2024-002', product_id: '8', product_name: 'Accesorii Premium', quantity: 1, unit_price: 28 },
     ],
     total: 153,
     shipping_cost: 0,
@@ -204,7 +204,7 @@ export const mockOrders: Order[] = [
     created_at: '2024-03-10T09:15:00Z',
   },
   {
-    id: 'ORD-2024-003',
+    id: 'SENS-2024-003',
     customer_email: 'gradinita@educatieplus.ro',
     customer_name: 'Grădinița Educație Plus',
     customer_phone: '+40 21 345 6789',
@@ -217,7 +217,7 @@ export const mockOrders: Order[] = [
       country: 'România',
     },
     items: [
-      { id: '4', order_id: 'ORD-2024-003', product_id: '2', product_name: 'Kit Complet - Grădina Fermecată', quantity: 5, unit_price: 89 },
+      { id: '4', order_id: 'SENS-2024-003', product_id: '2', product_name: 'Kit Complet - Grădina Fermecată', quantity: 5, unit_price: 89 },
     ],
     total: 445,
     shipping_cost: 0,
