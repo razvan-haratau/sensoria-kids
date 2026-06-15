@@ -230,35 +230,93 @@ Deno.serve(async (req) => {
 
     // Notificare admin
     if (ADMIN_EMAIL) {
-      const itemsText = order.items.map((i) => `${i.product_name} ×${i.quantity} = ${i.unit_price * i.quantity} RON`).join('<br>')
+      const adminItemsHtml = order.items
+        .map(
+          (item, idx) => `
+          <tr>
+            <td style="padding:10px 0; border-bottom:${idx === order.items.length - 1 ? 'none' : '1px solid #F0F0F0'}; color:#2D2D2D; font-size:14px;">${item.product_name}</td>
+            <td style="padding:10px 0; border-bottom:${idx === order.items.length - 1 ? 'none' : '1px solid #F0F0F0'}; color:#6B7280; font-size:14px; text-align:center;">×${item.quantity}</td>
+            <td style="padding:10px 0; border-bottom:${idx === order.items.length - 1 ? 'none' : '1px solid #F0F0F0'}; color:#2D2D2D; font-size:14px; text-align:right; font-weight:600;">${item.unit_price * item.quantity} RON</td>
+          </tr>`
+        )
+        .join('')
       const paymentLabel = order.payment_method === 'card' ? 'Card bancar (Netopia)' : 'Ramburs la livrare'
       const adminHtml = `
 <!DOCTYPE html>
 <html lang="ro">
-<head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#f9fafb;font-family:'Segoe UI',Arial,sans-serif;">
-  <div style="max-width:500px;margin:40px auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
-    <div style="background:#2D2D2D;padding:24px 32px;">
-      <p style="color:#9CA3AF;font-size:12px;margin:0 0 4px;text-transform:uppercase;letter-spacing:1px;">Sensoria Kids — Admin</p>
-      <h2 style="color:#fff;margin:0;font-size:20px;">Comandă nouă!</h2>
-    </div>
-    <div style="padding:28px 32px;space-y:16px;">
-      <table style="width:100%;border-collapse:collapse;margin-bottom:20px;">
-        <tr><td style="color:#6B7280;font-size:13px;padding:6px 0;">Comandă</td><td style="font-family:monospace;font-weight:700;color:#5BC4C0;font-size:15px;">${order.id}</td></tr>
-        <tr><td style="color:#6B7280;font-size:13px;padding:6px 0;">Client</td><td style="font-weight:600;color:#2D2D2D;">${order.customer_name}</td></tr>
-        <tr><td style="color:#6B7280;font-size:13px;padding:6px 0;">Email</td><td style="color:#2D2D2D;">${order.customer_email}</td></tr>
-        <tr><td style="color:#6B7280;font-size:13px;padding:6px 0;">Plată</td><td style="color:#2D2D2D;">${paymentLabel}</td></tr>
-      </table>
-      <div style="background:#f9fafb;border-radius:10px;padding:16px 20px;margin-bottom:20px;">
-        <p style="color:#6B7280;font-size:12px;margin:0 0 10px;text-transform:uppercase;letter-spacing:1px;">Produse</p>
-        <p style="color:#2D2D2D;font-size:14px;margin:0;line-height:1.8;">${itemsText}</p>
-      </div>
-      <div style="display:flex;justify-content:space-between;border-top:2px solid #f3f4f6;padding-top:16px;">
-        <span style="font-size:16px;font-weight:700;color:#2D2D2D;">Total</span>
-        <span style="font-size:20px;font-weight:700;color:#5BC4C0;">${order.total} RON</span>
-      </div>
-    </div>
-  </div>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0; padding:0; background:#F3F4F6; font-family:'Segoe UI', Arial, sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F3F4F6;">
+    <tr>
+      <td align="center" style="padding:32px 16px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px; background:#ffffff; border-radius:20px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.06);">
+
+          <!-- Title banner -->
+          <tr>
+            <td bgcolor="#2D2D2D" style="background-color:#2D2D2D; padding:28px 32px;">
+              <p style="margin:0 0 4px; color:#9CA3AF; font-size:12px; text-transform:uppercase; letter-spacing:1px;">Sensoria Kids — Admin</p>
+              <h1 style="margin:0; color:#ffffff; font-size:22px; font-weight:700;">Comandă nouă!</h1>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:32px;">
+
+              <!-- Order info -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F0FDF9; border:1px solid #5BC4C0; border-radius:14px; margin-bottom:24px;">
+                <tr>
+                  <td style="padding:16px 20px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                      <tr><td style="color:#6B7280; font-size:13px; padding:4px 0;">Comandă</td><td style="color:#5BC4C0; font-size:15px; font-weight:700; text-align:right;">${order.id}</td></tr>
+                      <tr><td style="color:#6B7280; font-size:13px; padding:4px 0;">Client</td><td style="color:#2D2D2D; font-size:14px; font-weight:600; text-align:right;">${order.customer_name}</td></tr>
+                      <tr><td style="color:#6B7280; font-size:13px; padding:4px 0;">Email</td><td style="color:#2D2D2D; font-size:14px; text-align:right;">${order.customer_email}</td></tr>
+                      <tr><td style="color:#6B7280; font-size:13px; padding:4px 0;">Plată</td><td style="color:#2D2D2D; font-size:14px; text-align:right;">${paymentLabel}</td></tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Products -->
+              <h3 style="color:#2D2D2D; font-size:14px; font-weight:700; margin:0 0 12px; text-transform:uppercase; letter-spacing:0.5px;">Produse</h3>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F9FAFB; border-radius:14px; margin-bottom:16px;">
+                <tr>
+                  <td style="padding:8px 20px 4px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th style="text-align:left; color:#9CA3AF; font-size:11px; font-weight:700; padding-bottom:8px; border-bottom:2px solid #F0F0F0; text-transform:uppercase; letter-spacing:0.5px;">Produs</th>
+                          <th style="text-align:center; color:#9CA3AF; font-size:11px; font-weight:700; padding-bottom:8px; border-bottom:2px solid #F0F0F0; text-transform:uppercase; letter-spacing:0.5px;">Cant.</th>
+                          <th style="text-align:right; color:#9CA3AF; font-size:11px; font-weight:700; padding-bottom:8px; border-bottom:2px solid #F0F0F0; text-transform:uppercase; letter-spacing:0.5px;">Preț</th>
+                        </tr>
+                      </thead>
+                      <tbody>${adminItemsHtml}</tbody>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Total -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F9FAFB; border-radius:14px;">
+                <tr>
+                  <td style="padding:16px 20px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="color:#2D2D2D; font-size:16px; font-weight:700;">Total</td>
+                        <td style="color:#5BC4C0; font-size:20px; font-weight:700; text-align:right;">${order.total} RON</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>`
 
