@@ -17,6 +17,7 @@ const corsHeaders = {
 const LOGO_URL = 'https://www.sensoriakids.ro/logo.png'
 
 interface OrderItem {
+  product_id: string
   product_name: string
   quantity: number
   unit_price: number
@@ -62,7 +63,9 @@ Deno.serve(async (req) => {
       .map(
         (item, idx) => `
         <tr>
-          <td style="padding:12px 0; border-bottom:${idx === order.items.length - 1 ? 'none' : '1px solid #F0F0F0'}; color:#2D2D2D; font-size:14px;">${item.product_name}</td>
+          <td style="padding:12px 0; border-bottom:${idx === order.items.length - 1 ? 'none' : '1px solid #F0F0F0'}; color:#2D2D2D; font-size:14px;">
+            <a href="https://www.sensoriakids.ro/produs/${item.product_id}" style="color:#2D2D2D; text-decoration:none; font-weight:600;">${item.product_name}</a>
+          </td>
           <td style="padding:12px 0; border-bottom:${idx === order.items.length - 1 ? 'none' : '1px solid #F0F0F0'}; color:#6B7280; font-size:14px; text-align:center;">×${item.quantity}</td>
           <td style="padding:12px 0; border-bottom:${idx === order.items.length - 1 ? 'none' : '1px solid #F0F0F0'}; color:#2D2D2D; font-size:14px; text-align:right; font-weight:600;">${item.unit_price * item.quantity} RON</td>
         </tr>`
@@ -92,7 +95,7 @@ Deno.serve(async (req) => {
           <tr>
             <td align="center" bgcolor="#5BC4C0" style="background-color:#5BC4C0; background-image:linear-gradient(135deg,#5BC4C0,#E86B9E); padding:28px 32px;">
               <h1 style="margin:0; color:#ffffff; font-size:22px; font-weight:700;">Comandă confirmată!</h1>
-              <p style="margin:6px 0 0; color:rgba(255,255,255,0.9); font-size:14px;">Planșe de nisip colorate pentru copii</p>
+              <p style="margin:6px 0 0; color:rgba(255,255,255,0.9); font-size:14px;">Planșe creative cu nisip colorat</p>
             </td>
           </tr>
 
@@ -118,7 +121,7 @@ Deno.serve(async (req) => {
                 <tr>
                   <td style="border-left:4px solid #E86B9E; padding:14px 20px; border-radius:0 14px 14px 0;">
                     <p style="margin:0; color:#2D2D2D; font-size:14px; line-height:1.6;">
-                      <strong>Comanda ta este în procesare.</strong> O vei primi în <strong>24–48 de ore</strong>.
+                      <strong>Comanda ta este în procesare.</strong> Vei primi confirmarea expedierii ei în <strong>24–72 de ore</strong> de la efectuarea comenzii.
                     </p>
                   </td>
                 </tr>
