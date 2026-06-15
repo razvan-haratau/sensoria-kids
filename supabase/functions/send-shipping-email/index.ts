@@ -88,7 +88,10 @@ Deno.serve(async (req) => {
               <p style="color:#6B7280; font-size:14px; line-height:1.6; margin:0 0 8px;">
                 Dacă ai întrebări despre livrare, nu ezita să ne contactezi.
               </p>
-              <p style="color:#6B7280; font-size:14px; margin:0;">Mulțumim că ai ales Sensoria Kids!</p>
+              <p style="color:#6B7280; font-size:14px; margin:0 0 16px;">Mulțumim că ai ales Sensoria Kids!</p>
+
+              <p style="color:#2D2D2D; font-size:14px; font-weight:600; margin:0;">Irina Haratau — Fondator</p>
+              <p style="color:#6B7280; font-size:14px; margin:2px 0 0;">+40733.307.209</p>
             </td>
           </tr>
 
