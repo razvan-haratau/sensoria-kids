@@ -98,6 +98,20 @@ Deno.serve(async (req) => {
           <!-- Footer -->
           <tr>
             <td align="center" bgcolor="#F9FAFB" style="background-color:#F9FAFB; padding:20px 32px; border-top:1px solid #F0F0F0;">
+              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 12px;">
+                <tr>
+                  <td style="padding:0 6px;">
+                    <a href="https://www.facebook.com/share/1BLaRtJmv3/?mibextid=wwXIfr" target="_blank">
+                      <img src="https://www.sensoriakids.ro/icon-facebook.png" alt="Facebook" width="36" height="36" style="display:block; border-radius:10px;" />
+                    </a>
+                  </td>
+                  <td style="padding:0 6px;">
+                    <a href="https://www.instagram.com/sensoria.kids.bucharest/" target="_blank">
+                      <img src="https://www.sensoriakids.ro/icon-instagram.png" alt="Instagram" width="36" height="36" style="display:block; border-radius:10px;" />
+                    </a>
+                  </td>
+                </tr>
+              </table>
               <p style="color:#9CA3AF; font-size:12px; margin:0;">
                 © ${new Date().getFullYear()} Sensoria Kids · <a href="https://www.sensoriakids.ro" style="color:#5BC4C0; text-decoration:none;">sensoriakids.ro</a>
               </p>
