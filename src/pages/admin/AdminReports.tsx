@@ -22,29 +22,33 @@ const PERIODS: { key: PeriodKey; label: string }[] = [
 ]
 
 function RevenueLineChart({ data }: { data: { label: string; revenue: number; orders: number }[] }) {
-  const [tooltip, setTooltip] = useState<{ x: number; y: number; d: typeof data[0] } | null>(null)
+  const [hoverIdx, setHoverIdx] = useState<number | null>(null)
 
-  const W = 540, H = 180, PL = 52, PR = 16, PT = 12, PB = 32
+  const W = 560, H = 220, PL = 64, PR = 20, PT = 16, PB = 36
   const chartW = W - PL - PR
   const chartH = H - PT - PB
 
-  const maxRev = Math.max(...data.map((d) => d.revenue), 1)
-  const yTicks = [0, 0.25, 0.5, 0.75, 1].map((t) => Math.round(maxRev * t))
+  const maxRev = Math.max(...data.map((d) => d.revenue), 100)
+  // arată mereu o scală curată
+  const niceMax = Math.ceil(maxRev / 100) * 100
+  const yTicks = [0, Math.round(niceMax * 0.25), Math.round(niceMax * 0.5), Math.round(niceMax * 0.75), niceMax]
 
   const px = (i: number) => PL + (i / Math.max(data.length - 1, 1)) * chartW
-  const py = (v: number) => PT + chartH - (v / maxRev) * chartH
+  const py = (v: number) => PT + chartH - (v / niceMax) * chartH
 
   const points = data.map((d, i) => ({ x: px(i), y: py(d.revenue), d }))
 
   const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ')
-  const areaPath = `${linePath} L${points[points.length - 1].x.toFixed(1)},${(PT + chartH).toFixed(1)} L${PL},${(PT + chartH).toFixed(1)} Z`
+  const areaPath = `${linePath} L${points[points.length - 1].x.toFixed(1)},${(PT + chartH).toFixed(1)} L${PL.toFixed(1)},${(PT + chartH).toFixed(1)} Z`
+
+  const hovered = hoverIdx !== null ? points[hoverIdx] : null
 
   return (
-    <div className="relative">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ overflow: 'visible' }}>
+    <div className="w-full" style={{ overflowX: 'auto' }}>
+      <svg viewBox={`0 0 ${W} ${H}`} style={{ display: 'block', width: '100%', minWidth: 320 }}>
         <defs>
-          <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#5BC4C0" stopOpacity="0.18" />
+          <linearGradient id="areaGrad2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#5BC4C0" stopOpacity="0.15" />
             <stop offset="100%" stopColor="#5BC4C0" stopOpacity="0" />
           </linearGradient>
         </defs>
@@ -54,50 +58,71 @@ function RevenueLineChart({ data }: { data: { label: string; revenue: number; or
           const y = py(tick)
           return (
             <g key={tick}>
-              <line x1={PL} y1={y} x2={W - PR} y2={y} stroke="#F0F0F0" strokeWidth="1" />
-              <text x={PL - 6} y={y + 4} textAnchor="end" fontSize="10" fill="#9CA3AF">
-                {tick > 0 ? `${tick.toLocaleString('ro')}` : '0'}
+              <line x1={PL} y1={y} x2={W - PR} y2={y} stroke="#F3F4F6" strokeWidth="1" />
+              <text x={PL - 8} y={y + 4} textAnchor="end" fontSize="11" fill="#9CA3AF" fontFamily="inherit">
+                {tick === 0 ? '0' : tick >= 1000 ? `${(tick / 1000).toFixed(1)}k` : `${tick}`}
               </text>
             </g>
           )
         })}
 
+        {/* Hover vertical line */}
+        {hovered && (
+          <line x1={hovered.x} y1={PT} x2={hovered.x} y2={PT + chartH} stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4 3" />
+        )}
+
         {/* Area fill */}
-        <path d={areaPath} fill="url(#areaGrad)" />
+        <path d={areaPath} fill="url(#areaGrad2)" />
 
         {/* Line */}
         <path d={linePath} fill="none" stroke="#5BC4C0" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
 
-        {/* Dots + hover areas */}
+        {/* Dots */}
         {points.map((p, i) => (
-          <g key={i}>
-            <circle cx={p.x} cy={p.y} r="4" fill="#5BC4C0" stroke="white" strokeWidth="2" />
-            <rect
-              x={p.x - 16} y={PT} width="32" height={chartH}
-              fill="transparent"
-              onMouseEnter={() => setTooltip({ x: p.x, y: p.y, d: p.d })}
-              onMouseLeave={() => setTooltip(null)}
-              style={{ cursor: 'crosshair' }}
-            />
-          </g>
+          <circle
+            key={i}
+            cx={p.x} cy={p.y} r={hoverIdx === i ? 6 : 4}
+            fill={hoverIdx === i ? '#5BC4C0' : p.d.revenue > 0 ? '#5BC4C0' : '#E5E7EB'}
+            stroke="white" strokeWidth="2"
+            style={{ cursor: 'pointer', transition: 'r 0.1s' }}
+            onMouseEnter={() => setHoverIdx(i)}
+            onMouseLeave={() => setHoverIdx(null)}
+          />
+        ))}
+
+        {/* Invisible wider hover targets */}
+        {points.map((p, i) => (
+          <rect
+            key={`h${i}`}
+            x={p.x - 20} y={PT} width="40" height={chartH}
+            fill="transparent"
+            onMouseEnter={() => setHoverIdx(i)}
+            onMouseLeave={() => setHoverIdx(null)}
+          />
         ))}
 
         {/* X-axis labels */}
         {data.map((d, i) => (
-          <text key={i} x={px(i)} y={H - 6} textAnchor="middle" fontSize="11" fill="#9CA3AF" className="capitalize">
+          <text key={i} x={px(i)} y={H - 8} textAnchor="middle" fontSize="11" fill="#9CA3AF" fontFamily="inherit" style={{ textTransform: 'capitalize' }}>
             {d.label}
           </text>
         ))}
 
         {/* Tooltip */}
-        {tooltip && (() => {
-          const tx = tooltip.x + 10
-          const ty = Math.max(PT + 4, tooltip.y - 38)
+        {hovered && (() => {
+          const pad = 10
+          const bw = 120, bh = 42
+          const tx = Math.min(hovered.x + pad, W - bw - PR)
+          const ty = Math.max(PT + 4, hovered.y - bh - pad)
           return (
             <g>
-              <rect x={tx} y={ty} width="110" height="36" rx="6" fill="#2D2D2D" opacity="0.92" />
-              <text x={tx + 8} y={ty + 13} fontSize="11" fill="white" fontWeight="600">{tooltip.d.revenue.toLocaleString('ro')} RON</text>
-              <text x={tx + 8} y={ty + 27} fontSize="10" fill="#9CA3AF">{tooltip.d.orders} comenzi</text>
+              <rect x={tx} y={ty} width={bw} height={bh} rx="8" fill="#1F2937" />
+              <text x={tx + 10} y={ty + 16} fontSize="12" fill="white" fontWeight="700" fontFamily="inherit">
+                {hovered.d.revenue.toLocaleString('ro')} RON
+              </text>
+              <text x={tx + 10} y={ty + 32} fontSize="11" fill="#9CA3AF" fontFamily="inherit">
+                {hovered.d.orders} {hovered.d.orders === 1 ? 'comandă' : 'comenzi'}
+              </text>
             </g>
           )
         })()}
@@ -209,8 +234,18 @@ export default function AdminReports() {
 
   const topProducts = useMemo(() => {
     const qtys: Record<string, number> = {}
-    filteredOrders.forEach((o) => { o.items.forEach((item) => { qtys[item.product_id] = (qtys[item.product_id] || 0) + item.quantity }) })
-    return products.filter((p) => qtys[p.id]).sort((a, b) => (qtys[b.id] || 0) - (qtys[a.id] || 0)).slice(0, 3)
+    const revenues: Record<string, number> = {}
+    filteredOrders.forEach((o) => {
+      o.items.forEach((item) => {
+        qtys[item.product_id] = (qtys[item.product_id] || 0) + item.quantity
+        revenues[item.product_id] = (revenues[item.product_id] || 0) + item.unit_price * item.quantity
+      })
+    })
+    return products
+      .filter((p) => qtys[p.id])
+      .sort((a, b) => (qtys[b.id] || 0) - (qtys[a.id] || 0))
+      .slice(0, 3)
+      .map((p) => ({ ...p, qtySold: qtys[p.id] || 0, totalRevenue: revenues[p.id] || 0 }))
   }, [filteredOrders, products])
 
   return (
@@ -300,7 +335,8 @@ export default function AdminReports() {
                 <div key={p.id} className="flex items-center gap-2 mb-2">
                   <span className="text-xs font-bold text-[#6B7280] w-4">{i + 1}.</span>
                   <p className="text-xs text-[#2D2D2D] flex-1 truncate">{p.name}</p>
-                  <span className="text-xs font-semibold text-[#5BC4C0]">{p.price} RON</span>
+                  <span className="text-xs text-[#6B7280]">×{p.qtySold}</span>
+                  <span className="text-xs font-semibold text-[#5BC4C0]">{p.totalRevenue} RON</span>
                 </div>
               ))}
             </div>
