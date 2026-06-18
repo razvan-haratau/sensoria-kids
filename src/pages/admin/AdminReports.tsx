@@ -21,6 +21,91 @@ const PERIODS: { key: PeriodKey; label: string }[] = [
   { key: 'custom', label: 'Custom' },
 ]
 
+function RevenueLineChart({ data }: { data: { label: string; revenue: number; orders: number }[] }) {
+  const [tooltip, setTooltip] = useState<{ x: number; y: number; d: typeof data[0] } | null>(null)
+
+  const W = 540, H = 180, PL = 52, PR = 16, PT = 12, PB = 32
+  const chartW = W - PL - PR
+  const chartH = H - PT - PB
+
+  const maxRev = Math.max(...data.map((d) => d.revenue), 1)
+  const yTicks = [0, 0.25, 0.5, 0.75, 1].map((t) => Math.round(maxRev * t))
+
+  const px = (i: number) => PL + (i / Math.max(data.length - 1, 1)) * chartW
+  const py = (v: number) => PT + chartH - (v / maxRev) * chartH
+
+  const points = data.map((d, i) => ({ x: px(i), y: py(d.revenue), d }))
+
+  const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ')
+  const areaPath = `${linePath} L${points[points.length - 1].x.toFixed(1)},${(PT + chartH).toFixed(1)} L${PL},${(PT + chartH).toFixed(1)} Z`
+
+  return (
+    <div className="relative">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ overflow: 'visible' }}>
+        <defs>
+          <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#5BC4C0" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#5BC4C0" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+
+        {/* Y-axis grid + labels */}
+        {yTicks.map((tick) => {
+          const y = py(tick)
+          return (
+            <g key={tick}>
+              <line x1={PL} y1={y} x2={W - PR} y2={y} stroke="#F0F0F0" strokeWidth="1" />
+              <text x={PL - 6} y={y + 4} textAnchor="end" fontSize="10" fill="#9CA3AF">
+                {tick > 0 ? `${tick.toLocaleString('ro')}` : '0'}
+              </text>
+            </g>
+          )
+        })}
+
+        {/* Area fill */}
+        <path d={areaPath} fill="url(#areaGrad)" />
+
+        {/* Line */}
+        <path d={linePath} fill="none" stroke="#5BC4C0" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+
+        {/* Dots + hover areas */}
+        {points.map((p, i) => (
+          <g key={i}>
+            <circle cx={p.x} cy={p.y} r="4" fill="#5BC4C0" stroke="white" strokeWidth="2" />
+            <rect
+              x={p.x - 16} y={PT} width="32" height={chartH}
+              fill="transparent"
+              onMouseEnter={() => setTooltip({ x: p.x, y: p.y, d: p.d })}
+              onMouseLeave={() => setTooltip(null)}
+              style={{ cursor: 'crosshair' }}
+            />
+          </g>
+        ))}
+
+        {/* X-axis labels */}
+        {data.map((d, i) => (
+          <text key={i} x={px(i)} y={H - 6} textAnchor="middle" fontSize="11" fill="#9CA3AF" className="capitalize">
+            {d.label}
+          </text>
+        ))}
+
+        {/* Tooltip */}
+        {tooltip && (() => {
+          const tx = tooltip.x + 10
+          const ty = Math.max(PT + 4, tooltip.y - 38)
+          return (
+            <g>
+              <rect x={tx} y={ty} width="110" height="36" rx="6" fill="#2D2D2D" opacity="0.92" />
+              <text x={tx + 8} y={ty + 13} fontSize="11" fill="white" fontWeight="600">{tooltip.d.revenue.toLocaleString('ro')} RON</text>
+              <text x={tx + 8} y={ty + 27} fontSize="10" fill="#9CA3AF">{tooltip.d.orders} comenzi</text>
+            </g>
+          )
+        })()}
+      </svg>
+    </div>
+  )
+}
+
 export default function AdminReports() {
   const { orders, fetchOrders } = useOrdersStore()
   const { products } = useProductsStore()
@@ -185,27 +270,10 @@ export default function AdminReports() {
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">
-        {/* Revenue bar chart */}
+        {/* Revenue line chart */}
         <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-card">
-          <h3 className="font-bold text-[#2D2D2D] mb-6">Evoluție venituri</h3>
-          <div className="space-y-2.5">
-            {chartData.map((d, i) => (
-              <div key={i} className="flex items-center gap-4">
-                <span className="text-xs text-[#6B7280] w-14 shrink-0 capitalize">{d.label}</span>
-                <div className="flex-1 h-7 bg-gray-100 rounded-lg overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-r from-[#5BC4C0] to-[#5BC4C0]/80 rounded-lg flex items-center justify-end pr-3 transition-all duration-500"
-                    style={{ width: `${(d.revenue / maxRevenue) * 100}%`, minWidth: d.revenue > 0 ? '60px' : '0' }}
-                  >
-                    {d.revenue > 0 && (
-                      <span className="text-xs font-bold text-white whitespace-nowrap">{d.revenue.toLocaleString('ro')} RON</span>
-                    )}
-                  </div>
-                </div>
-                <span className="text-xs text-[#6B7280] w-12 text-right shrink-0">{d.orders} com.</span>
-              </div>
-            ))}
-          </div>
+          <h3 className="font-bold text-[#2D2D2D] mb-4">Evoluție venituri</h3>
+          <RevenueLineChart data={chartData} />
         </div>
 
         {/* Category breakdown */}
