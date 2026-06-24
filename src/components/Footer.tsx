@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Instagram, Facebook, Mail, Phone, MapPin, Heart } from 'lucide-react'
 import { useSettingsStore } from '../store/settingsStore'
+import NTPLogo from 'ntp-logo-react'
 
 export default function Footer() {
   const { settings } = useSettingsStore()
@@ -108,7 +109,35 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* Netopia + ANPC */}
+        <div className="border-t border-white/10 pt-8 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-gray-500">Plată securizată prin</span>
+            <a href="https://www.netopia-payments.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 transition-opacity">
+              <NTPLogo color="#ffffff" version="vertical" secret="166261" />
+            </a>
+          </div>
+          <div className="flex items-center gap-4 text-xs text-gray-500">
+            <a
+              href="https://legislatie.just.ro/Public/DetaliiDocument/257649?fs=e&s=cl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#5BC4C0] transition-colors"
+            >
+              SAL — Soluționarea alternativă a litigiilor
+            </a>
+            <a
+              href="https://ec.europa.eu/consumers/odr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#5BC4C0] transition-colors"
+            >
+              SOL — Platforma europeană
+            </a>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-500">
             © {new Date().getFullYear()} {settings.storeName}. Toate drepturile rezervate.
           </p>

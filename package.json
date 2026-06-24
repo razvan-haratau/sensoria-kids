@@ -23,12 +23,16 @@
       "/confidentialitate",
       "/retur"
     ],
-    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
     "renderAfterTime": 3000
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
     "lucide-react": "^0.344.0",
+    "ntp-logo-react": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.0",
