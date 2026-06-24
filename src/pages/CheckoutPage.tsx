@@ -39,7 +39,7 @@ export default function CheckoutPage() {
   const [confirmedOrderId, setConfirmedOrderId] = useState('')
   const [confirmedEmail, setConfirmedEmail] = useState('')
   const [phoneError, setPhoneError] = useState('')
-  const [paymentMethod, setPaymentMethod] = useState<'card' | 'ramburs'>('ramburs')
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'ramburs'>('card')
   const [processing, setProcessing] = useState(false)
   const [paymentError, setPaymentError] = useState('')
 
@@ -334,18 +334,20 @@ export default function CheckoutPage() {
 
                   <form onSubmit={handlePayment} className="space-y-4">
                     <div className="space-y-3 mb-6">
-                      {/* Card via Netopia — dezactivat temporar */}
-                      <div className="flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 bg-gray-50 opacity-50 cursor-not-allowed select-none">
-                        <input type="radio" name="payment" value="card" disabled className="accent-gray-300" />
-                        <CreditCard size={20} className="text-gray-300" />
+                      {/* Card via Netopia */}
+                      <label className={`flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition-all ${paymentMethod === 'card' ? 'border-[#5BC4C0] bg-[#5BC4C0]/5' : 'border-gray-100 hover:border-gray-200'}`}>
+                        <input
+                          type="radio" name="payment" value="card"
+                          checked={paymentMethod === 'card'}
+                          onChange={() => setPaymentMethod('card')}
+                          className="accent-[#5BC4C0]"
+                        />
+                        <CreditCard size={20} className="text-[#6B7280]" />
                         <div>
-                          <div className="flex items-center gap-2">
-                            <p className="font-semibold text-gray-400 text-sm">Plată cu cardul</p>
-                            <span className="text-[10px] font-semibold bg-gray-200 text-gray-500 px-2 py-0.5 rounded-full">În curând</span>
-                          </div>
-                          <p className="text-xs text-gray-400">Visa, Mastercard — securizat prin Netopia Payments</p>
+                          <p className="font-semibold text-[#2D2D2D] text-sm">Plată cu cardul</p>
+                          <p className="text-xs text-[#6B7280]">Visa, Mastercard — securizat prin Netopia Payments</p>
                         </div>
-                      </div>
+                      </label>
 
                       {/* Ramburs */}
                       <label className={`flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition-all ${paymentMethod === 'ramburs' ? 'border-[#5BC4C0] bg-[#5BC4C0]/5' : 'border-gray-100 hover:border-gray-200'}`}>
@@ -387,6 +389,8 @@ export default function CheckoutPage() {
                             </svg>
                             Se procesează...
                           </span>
+                        ) : paymentMethod === 'card' ? (
+                          <>Plătește cu cardul — {orderTotal} RON</>
                         ) : (
                           <>Plasează comanda — {orderTotal} RON</>
                         )}
