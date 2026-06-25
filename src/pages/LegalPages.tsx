@@ -6,7 +6,7 @@ export function TermeniPage() {
     <div className="min-h-screen pt-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16">
         <h1 className="text-3xl font-bold text-[#2D2D2D] mb-2">Termeni și Condiții</h1>
-        <p className="text-[#6B7280] text-sm mb-10">Ultima actualizare: Ianuarie 2024</p>
+        <p className="text-[#6B7280] text-sm mb-10">Ultima actualizare: Ianuarie 2026</p>
         <div className="prose prose-gray max-w-none space-y-6 text-[#6B7280] leading-relaxed">
           <section>
             <h2 className="text-xl font-bold text-[#2D2D2D] mb-3">1. Informații generale</h2>
@@ -47,7 +47,7 @@ export function ConfidentialitiatePage() {
     <div className="min-h-screen pt-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16">
         <h1 className="text-3xl font-bold text-[#2D2D2D] mb-2">Politica de Confidențialitate</h1>
-        <p className="text-[#6B7280] text-sm mb-10">Ultima actualizare: Ianuarie 2024</p>
+        <p className="text-[#6B7280] text-sm mb-10">Ultima actualizare: Ianuarie 2026</p>
         <div className="space-y-6 text-[#6B7280] leading-relaxed">
           <section>
             <h2 className="text-xl font-bold text-[#2D2D2D] mb-3">1. Date colectate</h2>
@@ -81,7 +81,7 @@ export function ReturPage() {
     <div className="min-h-screen pt-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16">
         <h1 className="text-3xl font-bold text-[#2D2D2D] mb-2">Politica de Retur</h1>
-        <p className="text-[#6B7280] text-sm mb-10">Ultima actualizare: Ianuarie 2024</p>
+        <p className="text-[#6B7280] text-sm mb-10">Ultima actualizare: Ianuarie 2026</p>
         <div className="space-y-6 text-[#6B7280] leading-relaxed">
           <div className="bg-[#5BC4C0]/10 rounded-2xl p-5">
             <p className="font-semibold text-[#5BC4C0] text-lg mb-1">Retur simplu în 30 de zile</p>
