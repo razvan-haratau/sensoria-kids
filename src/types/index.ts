@@ -84,7 +84,7 @@ export interface Workshop {
   max_participants: number
   includes: string[]
   status: 'draft' | 'active' | 'full' | 'closed'
-  image_url?: string
+  image_url?: string | null
   created_at: string
   updated_at: string
 }

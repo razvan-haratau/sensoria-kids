@@ -370,7 +370,7 @@ export default function AdminWorkshopDetail() {
               <div className="relative">
                 <img src={form.image_url} alt="Imagine atelier" className="w-full rounded-xl object-cover max-h-56" />
                 <button
-                  onClick={() => setForm(f => ({ ...f, image_url: undefined }))}
+                  onClick={() => setForm(f => ({ ...f, image_url: null }))}
                   className="absolute top-2 right-2 w-7 h-7 bg-white/90 hover:bg-red-50 text-[#6B7280] hover:text-red-500 rounded-full flex items-center justify-center shadow transition-colors"
                 >
                   <X size={13} />
