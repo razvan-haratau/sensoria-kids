@@ -141,9 +141,9 @@ export default function AdminWorkshopDetail() {
       canvas.getContext('2d')!.drawImage(img, 0, 0, canvas.width, canvas.height)
       const blob = await new Promise<Blob>(res => canvas.toBlob(b => res(b!), 'image/jpeg', 0.85))
       const fileName = `workshops/${crypto.randomUUID()}.jpg`
-      const { error: upErr } = await supabase.storage.from('products').upload(fileName, blob, { contentType: 'image/jpeg', upsert: true })
+      const { error: upErr } = await supabase.storage.from('product-images').upload(fileName, blob, { contentType: 'image/jpeg', upsert: true })
       if (upErr) throw upErr
-      const { data: { publicUrl } } = supabase.storage.from('products').getPublicUrl(fileName)
+      const { data: { publicUrl } } = supabase.storage.from('product-images').getPublicUrl(fileName)
       setForm(f => ({ ...f, image_url: publicUrl }))
     } catch (e) {
       setError('Eroare la încărcarea imaginii.')
