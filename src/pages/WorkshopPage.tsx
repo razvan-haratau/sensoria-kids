@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import { useMeta } from '../hooks/useMeta'
+import { useSettingsStore } from '../store/settingsStore'
 import type { Workshop } from '../types'
 
 type RegistrationForm = {
@@ -61,6 +62,7 @@ const inputClass =
 
 export default function WorkshopPage() {
   const { slug } = useParams<{ slug: string }>()
+  const { settings } = useSettingsStore()
   const [workshop, setWorkshop] = useState<Workshop | null>(null)
   const [spotsLeft, setSpotsLeft] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
@@ -238,8 +240,18 @@ export default function WorkshopPage() {
 
       {/* ═══ HERO ═══ */}
       <div className="bg-gradient-to-br from-[#5BC4C0]/15 to-[#E86B9E]/10 pb-8">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32">
-          <img src="/logo.png" alt="Sensoria Kids" className="h-14 w-auto object-contain mb-6" />
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24">
+          <div className="flex items-center gap-3 mb-6">
+            <img src="/logo.png" alt="Sensoria Kids" className="h-[70px] w-auto object-contain" />
+            <div className="flex gap-2">
+              <a href={settings.facebookUrl} target="_blank" rel="noopener noreferrer">
+                <img src="https://www.sensoriakids.ro/icon-facebook.png" alt="Facebook" width="30" height="30" className="rounded-lg" />
+              </a>
+              <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer">
+                <img src="https://www.sensoriakids.ro/icon-instagram.png" alt="Instagram" width="30" height="30" className="rounded-lg" />
+              </a>
+            </div>
+          </div>
           <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm text-[#5BC4C0] px-3 py-1.5 rounded-full text-xs font-semibold mb-4 shadow-sm">
             <span className="w-1.5 h-1.5 bg-[#5BC4C0] rounded-full animate-pulse" />
             Atelier Sensoria Kids
