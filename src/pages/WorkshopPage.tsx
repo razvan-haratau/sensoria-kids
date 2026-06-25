@@ -329,7 +329,7 @@ export default function WorkshopPage() {
 
             {/* Ce include */}
             <div>
-              <h2 className="text-base font-bold text-[#2D2D2D] mb-3">Ce include înscrierea</h2>
+              <h2 className="text-base font-bold text-[#2D2D2D] mb-3">Ce include atelierul</h2>
               <ul className="space-y-2.5">
                 {workshop.includes.map((item, i) => (
                   <li key={i} className="flex items-start gap-2.5 text-sm text-[#6B7280]">

@@ -336,7 +336,7 @@ export default function AdminWorkshopDetail() {
           </div>
 
           <div className="bg-white rounded-2xl border border-gray-100 p-5 space-y-4">
-            <h3 className="text-sm font-semibold text-[#6B7280] uppercase tracking-wide">Ce include înscrierea</h3>
+            <h3 className="text-sm font-semibold text-[#6B7280] uppercase tracking-wide">Ce include atelierul</h3>
             <div className="flex gap-2">
               <input
                 type="text"
