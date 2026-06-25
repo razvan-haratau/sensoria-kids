@@ -10,7 +10,14 @@ export function TermeniPage() {
         <div className="prose prose-gray max-w-none space-y-6 text-[#6B7280] leading-relaxed">
           <section>
             <h2 className="text-xl font-bold text-[#2D2D2D] mb-3">1. Informații generale</h2>
-            <p>Sensoria Kids este un brand deținut și operat în România. Prin accesarea și utilizarea acestui site, ești de acord cu termenii și condițiile prezentate mai jos.</p>
+            <p>Site-ul <strong className="text-[#2D2D2D]">sensoriakids.ro</strong> este deținut și operat de:</p>
+            <div className="mt-3 bg-gray-50 rounded-xl px-5 py-4 text-sm space-y-1">
+              <p><strong className="text-[#2D2D2D]">CONSEVENT DUO SRL</strong></p>
+              <p>CUI: 53864288</p>
+              <p>Sediul social: Șoseaua Mihai Bravu, Nr. 110, Bloc D2, Sc. A, Et. 4, Ap. 2, București, Sector 2</p>
+              <p>Email: contact@sensoriakids.ro</p>
+            </div>
+            <p className="mt-3">Prin accesarea și utilizarea acestui site, ești de acord cu termenii și condițiile prezentate mai jos.</p>
           </section>
           <section>
             <h2 className="text-xl font-bold text-[#2D2D2D] mb-3">2. Produse și prețuri</h2>
@@ -22,11 +29,11 @@ export function TermeniPage() {
           </section>
           <section>
             <h2 className="text-xl font-bold text-[#2D2D2D] mb-3">4. Retur și rambursare</h2>
-            <p>Ai dreptul de a returna produsele în 30 de zile de la primire, fără a oferi o justificare. Produsele trebuie să fie în starea originală, nefolosite și în ambalajul original.</p>
+            <p>Ai dreptul de a returna produsele în 30 de zile de la primire, fără a oferi o justificare. Produsele trebuie să fie în starea originală, nefolosite și în ambalajul original. Detalii complete în <a href="/retur" className="text-[#5BC4C0] underline">Politica de Retur</a>.</p>
           </section>
           <section>
             <h2 className="text-xl font-bold text-[#2D2D2D] mb-3">5. Contact</h2>
-            <p>Pentru întrebări legate de acești termeni, ne poți contacta la contact@sensoriakids.ro.</p>
+            <p>Pentru întrebări legate de acești termeni, ne poți contacta la <a href="mailto:contact@sensoriakids.ro" className="text-[#5BC4C0] underline">contact@sensoriakids.ro</a>.</p>
           </section>
         </div>
       </div>
@@ -78,25 +85,85 @@ export function ReturPage() {
         <div className="space-y-6 text-[#6B7280] leading-relaxed">
           <div className="bg-[#5BC4C0]/10 rounded-2xl p-5">
             <p className="font-semibold text-[#5BC4C0] text-lg mb-1">Retur simplu în 30 de zile</p>
-            <p className="text-sm">Nu ești mulțumit? Returnezi și îți rambursăm integral.</p>
+            <p className="text-sm">Nu ești mulțumit? Returnezi și îți rambursăm integral, fără întrebări suplimentare.</p>
           </div>
+
           <section>
             <h2 className="text-xl font-bold text-[#2D2D2D] mb-3">Condiții de retur</h2>
             <ul className="list-disc list-inside space-y-2 text-sm">
-              <li>Produsul să fie nefolosit și în ambalajul original</li>
-              <li>Returnarea să fie inițiată în 30 de zile de la primire</li>
-              <li>Să ai dovada achiziției (email confirmare comandă)</li>
+              <li>Produsul să fie nefolosit și în ambalajul original, sigilat</li>
+              <li>Returnarea să fie inițiată în termen de 30 de zile calendaristice de la data primirii</li>
+              <li>Să dispui de dovada achiziției (email de confirmare a comenzii)</li>
+              <li>Produsul să nu prezinte deteriorări cauzate de utilizare sau depozitare necorespunzătoare</li>
             </ul>
           </section>
+
           <section>
-            <h2 className="text-xl font-bold text-[#2D2D2D] mb-3">Cum inițiezi un retur</h2>
-            <ol className="list-decimal list-inside space-y-2 text-sm">
-              <li>Contactează-ne la contact@sensoriakids.ro</li>
-              <li>Menționează numărul comenzii și motivul returnării</li>
-              <li>Vei primi instrucțiunile de returnare în 24 de ore</li>
-              <li>Rambursarea se efectuează în 5-10 zile lucrătoare</li>
-            </ol>
+            <h2 className="text-xl font-bold text-[#2D2D2D] mb-3">Cum inițiezi un retur — pas cu pas</h2>
+            <div className="space-y-4">
+
+              <div className="flex gap-4">
+                <div className="w-8 h-8 rounded-full bg-[#5BC4C0]/15 text-[#5BC4C0] font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">1</div>
+                <div>
+                  <p className="font-semibold text-[#2D2D2D] text-sm mb-1">Trimite un email la contact@sensoriakids.ro</p>
+                  <p className="text-sm">Subiectul emailului: <span className="font-medium text-[#2D2D2D]">„Cerere retur — Comanda #[numărul comenzii]"</span></p>
+                  <div className="mt-2 bg-gray-50 rounded-xl px-4 py-3 text-xs space-y-1">
+                    <p className="font-semibold text-[#2D2D2D] mb-2">Includeți în email:</p>
+                    <p>— Numele complet și adresa de livrare</p>
+                    <p>— Numărul comenzii (din emailul de confirmare)</p>
+                    <p>— Produsul / produsele pe care dorești să le returnezi</p>
+                    <p>— Motivul returului (opțional, dar ne ajută să ne îmbunătățim)</p>
+                    <p>— IBAN-ul contului bancar pentru rambursare (sau specificați că doriți rambursarea pe card)</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="w-8 h-8 rounded-full bg-[#5BC4C0]/15 text-[#5BC4C0] font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">2</div>
+                <div>
+                  <p className="font-semibold text-[#2D2D2D] text-sm mb-1">Aștepți confirmarea noastră</p>
+                  <p className="text-sm">Îți răspundem în maximum 24-48 de ore lucrătoare cu confirmarea cererii și adresa de returnare a coletului.</p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="w-8 h-8 rounded-full bg-[#5BC4C0]/15 text-[#5BC4C0] font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">3</div>
+                <div>
+                  <p className="font-semibold text-[#2D2D2D] text-sm mb-1">Trimiți coletul</p>
+                  <p className="text-sm">Ambalezi produsul în ambalajul original și îl trimiți la adresa indicată prin orice serviciu de curierat. Costurile de transport la retur sunt suportate de client, cu excepția cazurilor în care produsul este defect sau livrat eronat.</p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="w-8 h-8 rounded-full bg-[#5BC4C0]/15 text-[#5BC4C0] font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">4</div>
+                <div>
+                  <p className="font-semibold text-[#2D2D2D] text-sm mb-1">Rambursarea</p>
+                  <p className="text-sm">După recepționarea și verificarea produsului, procesăm rambursarea în termen de <strong className="text-[#2D2D2D]">5-10 zile lucrătoare</strong>. Rambursarea se face pe același mijloc de plată folosit la comandă (card bancar sau transfer bancar).</p>
+                </div>
+              </div>
+
+            </div>
           </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-[#2D2D2D] mb-3">Produse care nu pot fi returnate</h2>
+            <ul className="list-disc list-inside space-y-2 text-sm">
+              <li>Produse deschise sau cu ambalajul deteriorat</li>
+              <li>Produse personalizate la cererea clientului</li>
+              <li>Produse deteriorate ca urmare a utilizării necorespunzătoare</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-[#2D2D2D] mb-3">Produs defect sau livrat greșit?</h2>
+            <p className="text-sm">Dacă ai primit un produs defect sau diferit față de ce ai comandat, costurile de retur sunt integral suportate de noi. Trimite-ne un email la <a href="mailto:contact@sensoriakids.ro" className="text-[#5BC4C0] underline">contact@sensoriakids.ro</a> cu o fotografie a produsului și rezolvăm situația prioritar.</p>
+          </section>
+
+          <div className="bg-gray-50 rounded-2xl px-5 py-4 text-sm">
+            <p className="font-semibold text-[#2D2D2D] mb-1">Contact retur</p>
+            <p>Email: <a href="mailto:contact@sensoriakids.ro" className="text-[#5BC4C0] underline">contact@sensoriakids.ro</a></p>
+            <p className="mt-1 text-xs">Program răspuns: Luni – Vineri, 9:00 – 18:00</p>
+          </div>
         </div>
       </div>
     </div>
