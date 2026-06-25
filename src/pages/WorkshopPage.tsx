@@ -408,7 +408,7 @@ export default function WorkshopPage() {
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="grid sm:grid-cols-2 gap-4 items-end">
                     <InputField label="Prenume și nume copil" required>
                       <input
                         type="text" required
