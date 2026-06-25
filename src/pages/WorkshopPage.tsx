@@ -429,8 +429,8 @@ export default function WorkshopPage() {
                 </p>
 
                 <form onSubmit={handleSubmit} noValidate className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4 items-start">
-                    <InputField label="Prenume și nume copil" required error={formErrors.child_name}>
+                  <div className="grid sm:grid-cols-2 gap-4 items-end">
+                    <InputField label="Nume copil" required error={formErrors.child_name}>
                       <input
                         type="text"
                         value={form.child_name}
