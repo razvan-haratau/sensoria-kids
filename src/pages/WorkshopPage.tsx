@@ -348,7 +348,7 @@ export default function WorkshopPage() {
               <div className="space-y-3">
                 {[
                   'Fiecare copil primește kitul complet la sosire',
-                  'Un cititor de la Clubul Curioșilor prezintă lecția despre corpul uman',
+                  `Un cititor de la ${workshop.partner_name ?? 'un partener Sensoria'} prezintă lecția`,
                   'Copilul creează propria planșă cu nisip colorat, pas cu pas',
                   'Planșa finalizată pleacă acasă — poate fi înrămată',
                 ].map((step, i) => (
