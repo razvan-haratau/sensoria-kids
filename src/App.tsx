@@ -34,6 +34,7 @@ import AdminSettings from './pages/admin/AdminSettings'
 import AdminWorkshops from './pages/admin/AdminWorkshops'
 import AdminWorkshopDetail from './pages/admin/AdminWorkshopDetail'
 import WorkshopPage from './pages/WorkshopPage'
+import WorkshopsListPage from './pages/WorkshopsListPage'
 
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -94,6 +95,7 @@ export default function App() {
             <Route path="/gdpr" element={<PublicLayout><ConfidentialitiatePage /></PublicLayout>} />
 
             {/* Workshop routes — semi-private, no link from site */}
+            <Route path="/ateliere" element={<WorkshopsListPage />} />
             <Route path="/atelier/:slug" element={<WorkshopPage />} />
 
             {/* Admin routes */}
