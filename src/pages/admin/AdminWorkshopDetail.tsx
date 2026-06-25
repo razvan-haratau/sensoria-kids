@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import {
   ArrowLeft, Save, Download, Trash2, Check,
   Users, Calendar, MapPin, Tag, Clock, ExternalLink,
-  X, AlertCircle,
+  X, AlertCircle, ImagePlus,
 } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import type { Workshop, WorkshopRegistration } from '../../types'
@@ -54,6 +54,7 @@ export default function AdminWorkshopDetail() {
   const [error, setError] = useState('')
   const [includeInput, setIncludeInput] = useState('')
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null)
+  const [imageUploading, setImageUploading] = useState(false)
 
   useEffect(() => {
     if (!isNew && id) fetchWorkshop()
@@ -126,6 +127,28 @@ export default function AdminWorkshopDetail() {
     a.download = `inscrieri-${form.slug || 'atelier'}.csv`
     a.click()
     URL.revokeObjectURL(url)
+  }
+
+  async function handleImageUpload(file: File) {
+    setImageUploading(true)
+    try {
+      const canvas = document.createElement('canvas')
+      const img = await createImageBitmap(file)
+      const maxW = 1200
+      const scale = img.width > maxW ? maxW / img.width : 1
+      canvas.width = img.width * scale
+      canvas.height = img.height * scale
+      canvas.getContext('2d')!.drawImage(img, 0, 0, canvas.width, canvas.height)
+      const blob = await new Promise<Blob>(res => canvas.toBlob(b => res(b!), 'image/jpeg', 0.85))
+      const fileName = `workshops/${crypto.randomUUID()}.jpg`
+      const { error: upErr } = await supabase.storage.from('products').upload(fileName, blob, { contentType: 'image/jpeg', upsert: true })
+      if (upErr) throw upErr
+      const { data: { publicUrl } } = supabase.storage.from('products').getPublicUrl(fileName)
+      setForm(f => ({ ...f, image_url: publicUrl }))
+    } catch (e) {
+      setError('Eroare la încărcarea imaginii.')
+    }
+    setImageUploading(false)
   }
 
   const confirmed = registrations.filter(r => r.status === 'confirmed').length
@@ -340,6 +363,36 @@ export default function AdminWorkshopDetail() {
 
         {/* Sidebar */}
         <div className="space-y-4">
+          {/* Imagine atelier */}
+          <div className="bg-white rounded-2xl border border-gray-100 p-5 space-y-3">
+            <h3 className="text-sm font-semibold text-[#6B7280] uppercase tracking-wide">Imagine atelier</h3>
+            {form.image_url ? (
+              <div className="relative">
+                <img src={form.image_url} alt="Imagine atelier" className="w-full rounded-xl object-cover max-h-56" />
+                <button
+                  onClick={() => setForm(f => ({ ...f, image_url: undefined }))}
+                  className="absolute top-2 right-2 w-7 h-7 bg-white/90 hover:bg-red-50 text-[#6B7280] hover:text-red-500 rounded-full flex items-center justify-center shadow transition-colors"
+                >
+                  <X size={13} />
+                </button>
+              </div>
+            ) : (
+              <label className={`flex flex-col items-center justify-center gap-2 border-2 border-dashed rounded-xl p-6 cursor-pointer transition-colors ${imageUploading ? 'border-[#5BC4C0] bg-[#5BC4C0]/5' : 'border-gray-200 hover:border-[#5BC4C0] hover:bg-[#5BC4C0]/5'}`}>
+                {imageUploading ? (
+                  <div className="w-6 h-6 border-2 border-[#5BC4C0] border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <ImagePlus size={22} className="text-gray-300" />
+                )}
+                <span className="text-xs text-[#6B7280]">{imageUploading ? 'Se încarcă...' : 'Apasă pentru a adăuga imagine'}</span>
+                <input
+                  type="file" accept="image/*" className="hidden"
+                  disabled={imageUploading}
+                  onChange={e => { const f = e.target.files?.[0]; if (f) handleImageUpload(f) }}
+                />
+              </label>
+            )}
+          </div>
+
           <div className="bg-white rounded-2xl border border-gray-100 p-5 space-y-4">
             <h3 className="text-sm font-semibold text-[#6B7280] uppercase tracking-wide">Publicare</h3>
             <Field label="Status">
