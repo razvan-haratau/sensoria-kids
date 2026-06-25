@@ -255,7 +255,7 @@ export default function WorkshopPage() {
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3.5 shadow-sm">
               <Calendar size={15} className="text-[#5BC4C0] mb-1.5" />
               <p className="text-[10px] uppercase tracking-wide text-[#6B7280] mb-0.5">Data</p>
-              <p className="text-sm font-bold text-[#2D2D2D]">18 Iulie 2026</p>
+              <p className="text-sm font-bold text-[#2D2D2D] capitalize">{new Date(workshop.date).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
               <p className="text-xs text-[#6B7280]">ora {formatTime(workshop.date)}</p>
             </div>
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3.5 shadow-sm">
