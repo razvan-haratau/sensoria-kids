@@ -240,7 +240,7 @@ export default function WorkshopPage() {
 
       {/* ═══ HERO ═══ */}
       <div className="bg-gradient-to-br from-[#5BC4C0]/15 to-[#E86B9E]/10 pb-8">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-24">
           <div className="flex items-center gap-3 mb-6">
             <img src="/logo.png" alt="Sensoria Kids" className="h-[70px] w-auto object-contain" />
             <div className="flex gap-2">
