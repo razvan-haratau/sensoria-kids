@@ -40,10 +40,11 @@ function formatTime(dateStr: string) {
 }
 
 function InputField({
-  label, required, children,
+  label, required, error, children,
 }: {
   label: string
   required?: boolean
+  error?: string
   children: React.ReactNode
 }) {
   return (
@@ -53,6 +54,12 @@ function InputField({
         {required && <span className="text-[#E86B9E] ml-0.5">*</span>}
       </label>
       {children}
+      {error && (
+        <p className="flex items-center gap-1 mt-1.5 text-xs text-red-500">
+          <AlertCircle size={12} className="shrink-0" />
+          {error}
+        </p>
+      )}
     </div>
   )
 }
@@ -71,6 +78,7 @@ export default function WorkshopPage() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
+  const [formErrors, setFormErrors] = useState<Partial<Record<keyof RegistrationForm, string>>>({})
 
   useMeta(
     workshop?.title || 'Atelier',
@@ -106,9 +114,22 @@ export default function WorkshopPage() {
     setSpotsLeft(maxParticipants - (count ?? 0))
   }
 
+  function validateForm(): boolean {
+    const errors: Partial<Record<keyof RegistrationForm, string>> = {}
+    if (!form.child_name.trim()) errors.child_name = 'Completează acest câmp'
+    if (!form.child_age) errors.child_age = 'Selectează vârsta'
+    if (!form.parent_name.trim()) errors.parent_name = 'Completează acest câmp'
+    if (!form.parent_email.trim()) errors.parent_email = 'Completează acest câmp'
+    else if (!/\S+@\S+\.\S+/.test(form.parent_email)) errors.parent_email = 'Adresa de email nu este validă'
+    if (!form.parent_phone.trim()) errors.parent_phone = 'Completează acest câmp'
+    setFormErrors(errors)
+    return Object.keys(errors).length === 0
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!workshop) return
+    if (!validateForm()) return
     setSubmitting(true)
     setError('')
 
@@ -407,23 +428,22 @@ export default function WorkshopPage() {
                   Completează formularul — înscrierea se confirmă instant.
                 </p>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4 items-end">
-                    <InputField label="Prenume și nume copil" required>
+                <form onSubmit={handleSubmit} noValidate className="space-y-4">
+                  <div className="grid sm:grid-cols-2 gap-4 items-start">
+                    <InputField label="Prenume și nume copil" required error={formErrors.child_name}>
                       <input
-                        type="text" required
+                        type="text"
                         value={form.child_name}
-                        onChange={e => setForm({ ...form, child_name: e.target.value })}
+                        onChange={e => { setForm({ ...form, child_name: e.target.value }); setFormErrors(fe => ({ ...fe, child_name: undefined })) }}
                         placeholder="Ex: Maria Ionescu"
-                        className={inputClass}
+                        className={`${inputClass} ${formErrors.child_name ? 'border-red-400 focus:border-red-400 focus:ring-red-200' : ''}`}
                       />
                     </InputField>
-                    <InputField label="Vârsta copilului" required>
+                    <InputField label="Vârsta copilului" required error={formErrors.child_age}>
                       <select
-                        required
                         value={form.child_age}
-                        onChange={e => setForm({ ...form, child_age: e.target.value })}
-                        className={inputClass}
+                        onChange={e => { setForm({ ...form, child_age: e.target.value }); setFormErrors(fe => ({ ...fe, child_age: undefined })) }}
+                        className={`${inputClass} ${formErrors.child_age ? 'border-red-400 focus:border-red-400 focus:ring-red-200' : ''}`}
                       >
                         <option value="">Selectează vârsta</option>
                         {Array.from({ length: 7 }, (_, i) => i + 4).map(age => (
@@ -433,33 +453,33 @@ export default function WorkshopPage() {
                     </InputField>
                   </div>
 
-                  <InputField label="Prenume și nume (părinte / însoțitor)" required>
+                  <InputField label="Prenume și nume (părinte / însoțitor)" required error={formErrors.parent_name}>
                     <input
-                      type="text" required
+                      type="text"
                       value={form.parent_name}
-                      onChange={e => setForm({ ...form, parent_name: e.target.value })}
+                      onChange={e => { setForm({ ...form, parent_name: e.target.value }); setFormErrors(fe => ({ ...fe, parent_name: undefined })) }}
                       placeholder="Ex: Ana Ionescu"
-                      className={inputClass}
+                      className={`${inputClass} ${formErrors.parent_name ? 'border-red-400 focus:border-red-400 focus:ring-red-200' : ''}`}
                     />
                   </InputField>
 
                   <div className="grid sm:grid-cols-2 gap-4">
-                    <InputField label="Email" required>
+                    <InputField label="Email" required error={formErrors.parent_email}>
                       <input
-                        type="email" required
+                        type="email"
                         value={form.parent_email}
-                        onChange={e => setForm({ ...form, parent_email: e.target.value })}
+                        onChange={e => { setForm({ ...form, parent_email: e.target.value }); setFormErrors(fe => ({ ...fe, parent_email: undefined })) }}
                         placeholder="ana@email.com"
-                        className={inputClass}
+                        className={`${inputClass} ${formErrors.parent_email ? 'border-red-400 focus:border-red-400 focus:ring-red-200' : ''}`}
                       />
                     </InputField>
-                    <InputField label="Telefon" required>
+                    <InputField label="Telefon" required error={formErrors.parent_phone}>
                       <input
-                        type="tel" required
+                        type="tel"
                         value={form.parent_phone}
-                        onChange={e => setForm({ ...form, parent_phone: e.target.value })}
+                        onChange={e => { setForm({ ...form, parent_phone: e.target.value }); setFormErrors(fe => ({ ...fe, parent_phone: undefined })) }}
                         placeholder="07xx xxx xxx"
-                        className={inputClass}
+                        className={`${inputClass} ${formErrors.parent_phone ? 'border-red-400 focus:border-red-400 focus:ring-red-200' : ''}`}
                       />
                     </InputField>
                   </div>
