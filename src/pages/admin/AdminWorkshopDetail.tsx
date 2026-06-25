@@ -314,6 +314,28 @@ export default function AdminWorkshopDetail() {
           </div>
 
           <div className="bg-white rounded-2xl border border-gray-100 p-5 space-y-4">
+            <h3 className="text-sm font-semibold text-[#6B7280] uppercase tracking-wide">Partener (opțional)</h3>
+            <Field label="Nume partener">
+              <input
+                type="text"
+                value={form.partner_name ?? ''}
+                onChange={e => setForm({ ...form, partner_name: e.target.value || null })}
+                placeholder="Ex: Clubul Curioșilor"
+                className={inputClass}
+              />
+            </Field>
+            <Field label="Descriere partener">
+              <textarea
+                rows={2}
+                value={form.partner_description ?? ''}
+                onChange={e => setForm({ ...form, partner_description: e.target.value || null })}
+                placeholder="Scurtă descriere despre partener și rolul lui în atelier..."
+                className={`${inputClass} resize-none`}
+              />
+            </Field>
+          </div>
+
+          <div className="bg-white rounded-2xl border border-gray-100 p-5 space-y-4">
             <h3 className="text-sm font-semibold text-[#6B7280] uppercase tracking-wide">Ce include înscrierea</h3>
             <div className="flex gap-2">
               <input

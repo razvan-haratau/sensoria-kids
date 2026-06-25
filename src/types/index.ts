@@ -85,6 +85,8 @@ export interface Workshop {
   includes: string[]
   status: 'draft' | 'active' | 'full' | 'closed'
   image_url?: string | null
+  partner_name?: string | null
+  partner_description?: string | null
   created_at: string
   updated_at: string
 }

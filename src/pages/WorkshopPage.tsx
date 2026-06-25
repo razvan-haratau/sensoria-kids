@@ -238,7 +238,8 @@ export default function WorkshopPage() {
 
       {/* ═══ HERO ═══ */}
       <div className="bg-gradient-to-br from-[#5BC4C0]/15 to-[#E86B9E]/10 pb-8">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-32 sm:pt-36">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32">
+          <img src="/logo.png" alt="Sensoria Kids" className="h-14 w-auto object-contain mb-6" />
           <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm text-[#5BC4C0] px-3 py-1.5 rounded-full text-xs font-semibold mb-4 shadow-sm">
             <span className="w-1.5 h-1.5 bg-[#5BC4C0] rounded-full animate-pulse" />
             Atelier Sensoria Kids
@@ -349,20 +350,22 @@ export default function WorkshopPage() {
               </div>
             </div>
 
-            {/* Clubul Curioșilor */}
-            <div className="bg-[#E86B9E]/5 border border-[#E86B9E]/10 rounded-2xl p-4">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-xl bg-[#E86B9E]/10 flex items-center justify-center shrink-0">
-                  <BookOpen size={15} className="text-[#E86B9E]" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-[#2D2D2D] mb-0.5">Clubul Curioșilor</p>
-                  <p className="text-xs text-[#6B7280] leading-relaxed">
-                    Un club de lectură pentru copii care transformă știința în povești. La acest atelier, un cititor prezintă lecția despre corpul uman — interactiv, pe înțelesul copilului.
-                  </p>
+            {/* Partener */}
+            {workshop.partner_name && (
+              <div className="bg-[#E86B9E]/5 border border-[#E86B9E]/10 rounded-2xl p-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-[#E86B9E]/10 flex items-center justify-center shrink-0">
+                    <BookOpen size={15} className="text-[#E86B9E]" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-[#2D2D2D] mb-0.5">{workshop.partner_name}</p>
+                    {workshop.partner_description && (
+                      <p className="text-xs text-[#6B7280] leading-relaxed">{workshop.partner_description}</p>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             {/* Plată */}
             <div className="bg-[#5BC4C0]/5 rounded-2xl p-4">
