@@ -5,8 +5,8 @@ import { useCartStore } from '../store/cartStore'
 
 const navLinks = [
   { label: 'Acasă', href: '/' },
-  { label: 'Magazin', href: '/magazin' },
   { label: 'Ateliere', href: '/ateliere' },
+  { label: 'Magazin', href: '/magazin' },
   { label: 'Cum Funcționează', href: '/cum-functioneaza' },
   { label: 'Povestea Noastră', href: '/despre-noi' },
   { label: 'Contact', href: '/contact' },
