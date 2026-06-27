@@ -97,6 +97,7 @@ export default function ContactPage() {
             <div className="mb-8 p-4 rounded-2xl bg-gray-50 text-sm space-y-0.5">
               <p className="font-semibold text-[#2D2D2D]">CONSEVENT DUO SRL</p>
               <p className="text-[#6B7280]">CUI: 53864288</p>
+              <p className="text-[#6B7280]">Nr. Reg. Com.: J2026008964001</p>
               <p className="text-[#6B7280]">Șoseaua Mihai Bravu, Nr. 110, Bloc D2,</p>
               <p className="text-[#6B7280]">Sc. A, Et. 4, Ap. 2, București, Sector 2</p>
             </div>

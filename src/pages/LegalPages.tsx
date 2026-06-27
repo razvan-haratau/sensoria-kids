@@ -14,6 +14,7 @@ export function TermeniPage() {
             <div className="mt-3 bg-gray-50 rounded-xl px-5 py-4 text-sm space-y-1">
               <p><strong className="text-[#2D2D2D]">CONSEVENT DUO SRL</strong></p>
               <p>CUI: 53864288</p>
+              <p>Nr. Reg. Com.: J2026008964001</p>
               <p>Sediul social: Șoseaua Mihai Bravu, Nr. 110, Bloc D2, Sc. A, Et. 4, Ap. 2, București, Sector 2</p>
               <p>Email: contact@sensoriakids.ro</p>
             </div>
