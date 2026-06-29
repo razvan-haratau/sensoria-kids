@@ -59,7 +59,7 @@ export default function WorkshopsListPage() {
     <div className="min-h-screen bg-white">
       {/* Hero */}
       <div className="bg-gradient-to-br from-[#5BC4C0]/15 to-[#E86B9E]/10 pb-10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-32 sm:pt-36">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-24">
           <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm text-[#5BC4C0] px-3 py-1.5 rounded-full text-xs font-semibold mb-4 shadow-sm">
             <span className="w-1.5 h-1.5 bg-[#5BC4C0] rounded-full animate-pulse" />
             Ateliere Sensoria Kids

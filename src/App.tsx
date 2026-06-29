@@ -95,7 +95,7 @@ export default function App() {
             <Route path="/gdpr" element={<PublicLayout><ConfidentialitiatePage /></PublicLayout>} />
 
             {/* Workshop routes — semi-private, no link from site */}
-            <Route path="/ateliere" element={<WorkshopsListPage />} />
+            <Route path="/ateliere" element={<PublicLayout><WorkshopsListPage /></PublicLayout>} />
             <Route path="/atelier/:slug" element={<WorkshopPage />} />
 
             {/* Admin routes */}
