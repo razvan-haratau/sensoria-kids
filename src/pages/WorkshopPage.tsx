@@ -330,9 +330,11 @@ export default function WorkshopPage() {
         </div>
       </div>
 
-      {/* ═══ IMAGINE ═══ */}
+      {/* ═══ CONTENT ═══ */}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
+
       {workshop.image_url && (
-        <div className="max-w-sm mx-auto px-4 -mt-2 pb-2">
+        <div className="max-w-sm mx-auto mb-10">
           <img
             src={workshop.image_url}
             alt={workshop.title}
@@ -340,9 +342,6 @@ export default function WorkshopPage() {
           />
         </div>
       )}
-
-      {/* ═══ CONTENT ═══ */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
 
           {/* Left: detalii */}
