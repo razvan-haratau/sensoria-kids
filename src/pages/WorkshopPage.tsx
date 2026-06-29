@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import {
   Calendar, MapPin, Clock, Users, Tag, Check,
-  AlertCircle, ChevronRight, BookOpen,
+  AlertCircle, ChevronRight, BookOpen, CreditCard, Wallet,
 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import { useMeta } from '../hooks/useMeta'
@@ -75,6 +75,7 @@ export default function WorkshopPage() {
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
   const [form, setForm] = useState<RegistrationForm>(emptyForm)
+  const [paymentMethod, setPaymentMethod] = useState<'fata-locului' | 'card'>('fata-locului')
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
@@ -156,6 +157,7 @@ export default function WorkshopPage() {
         child_name: form.child_name.trim(),
         child_age: parseInt(form.child_age),
         notes: form.notes.trim() || null,
+        payment_method: paymentMethod,
         status: 'confirmed',
       })
 
@@ -175,6 +177,7 @@ export default function WorkshopPage() {
           child_name: form.child_name,
           child_age: form.child_age,
           notes: form.notes || null,
+          payment_method: paymentMethod,
         },
         workshop: {
           title: workshop.title,
@@ -495,6 +498,36 @@ export default function WorkshopPage() {
                       className={`${inputClass} resize-none`}
                     />
                   </InputField>
+
+                  {/* Metodă de plată */}
+                  <div>
+                    <p className="text-sm font-medium text-[#2D2D2D] mb-2">Metodă de plată</p>
+                    <div className="space-y-2">
+                      {/* Card — dezactivat temporar */}
+                      <div className="flex items-center gap-3 p-3.5 rounded-xl border-2 border-gray-100 bg-gray-50 opacity-50 cursor-not-allowed select-none">
+                        <input type="radio" name="ws-payment" value="card" disabled className="accent-gray-300" />
+                        <CreditCard size={18} className="text-gray-300 shrink-0" />
+                        <div className="flex items-center gap-2">
+                          <p className="font-semibold text-gray-400 text-sm">Plată cu cardul</p>
+                          <span className="text-[10px] font-semibold bg-gray-200 text-gray-500 px-2 py-0.5 rounded-full">În curând</span>
+                        </div>
+                      </div>
+                      {/* Plată la față locului */}
+                      <label className={`flex items-center gap-3 p-3.5 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'fata-locului' ? 'border-[#5BC4C0] bg-[#5BC4C0]/5' : 'border-gray-100 hover:border-gray-200'}`}>
+                        <input
+                          type="radio" name="ws-payment" value="fata-locului"
+                          checked={paymentMethod === 'fata-locului'}
+                          onChange={() => setPaymentMethod('fata-locului')}
+                          className="accent-[#5BC4C0]"
+                        />
+                        <Wallet size={18} className="text-[#6B7280] shrink-0" />
+                        <div>
+                          <p className="font-semibold text-[#2D2D2D] text-sm">Plată la față locului</p>
+                          <p className="text-xs text-[#6B7280]">Cash sau card la sosire</p>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
 
                   {error && (
                     <div className="flex items-start gap-2 text-red-500 text-sm bg-red-50 rounded-xl p-3">

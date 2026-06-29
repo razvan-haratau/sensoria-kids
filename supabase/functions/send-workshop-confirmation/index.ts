@@ -95,7 +95,7 @@ Deno.serve(async (req) => {
                       </tr>
                       <tr>
                         <td style="padding:8px 0; color:#6B7280; font-size:14px; border-top:1px solid #F0F0F0;">
-                          <span style="font-size:16px;">💳</span>&nbsp;&nbsp;${workshop.price} lei — plată la față locului, la sosire
+                          <span style="font-size:16px;">💳</span>&nbsp;&nbsp;${workshop.price} lei — ${registration.payment_method === 'card' ? 'plată cu cardul' : 'plată la față locului, la sosire'}
                         </td>
                       </tr>
                     </table>
@@ -204,6 +204,7 @@ Deno.serve(async (req) => {
                       <tr><td style="color:#6B7280; font-size:13px; padding:4px 0;">Părinte</td><td style="color:#2D2D2D; font-size:14px; text-align:right;">${registration.parent_name}</td></tr>
                       <tr><td style="color:#6B7280; font-size:13px; padding:4px 0;">Email</td><td style="color:#2D2D2D; font-size:14px; text-align:right;">${registration.parent_email}</td></tr>
                       <tr><td style="color:#6B7280; font-size:13px; padding:4px 0;">Telefon</td><td style="color:#2D2D2D; font-size:14px; text-align:right;">${registration.parent_phone}</td></tr>
+                      <tr><td style="color:#6B7280; font-size:13px; padding:4px 0;">Plată</td><td style="color:#2D2D2D; font-size:14px; text-align:right;">${registration.payment_method === 'card' ? 'Card' : 'La față locului'}</td></tr>
                       ${registration.notes ? `<tr><td style="color:#6B7280; font-size:13px; padding:4px 0;">Mențiuni</td><td style="color:#2D2D2D; font-size:14px; text-align:right; font-style:italic;">${registration.notes}</td></tr>` : ''}
                     </table>
                   </td>
