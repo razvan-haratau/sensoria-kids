@@ -171,7 +171,10 @@ export default function WorkshopPage() {
         registration: {
           parent_name: form.parent_name,
           parent_email: form.parent_email,
+          parent_phone: form.parent_phone,
           child_name: form.child_name,
+          child_age: form.child_age,
+          notes: form.notes || null,
         },
         workshop: {
           title: workshop.title,
