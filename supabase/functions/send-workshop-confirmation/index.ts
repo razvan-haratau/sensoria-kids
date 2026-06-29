@@ -108,7 +108,7 @@ Deno.serve(async (req) => {
                 <tr>
                   <td style="border-left:4px solid #E86B9E; padding:14px 20px; border-radius:0 14px 14px 0;">
                     <p style="margin:0; color:#2D2D2D; font-size:14px; line-height:1.6;">
-                      Vă așteptăm cu <strong>10 minute înainte</strong> de ora de start. Plata se face la sosire.
+                      Vă așteptăm cu <strong>10 minute înainte</strong> de ora de start. ${registration.payment_method === 'card' ? 'Plata a fost efectuată cu cardul.' : 'Plata se face la sosire, în numerar sau cu cardul.'}
                     </p>
                   </td>
                 </tr>

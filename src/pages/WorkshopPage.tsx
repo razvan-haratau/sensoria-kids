@@ -238,7 +238,7 @@ export default function WorkshopPage() {
             </div>
             <div className="flex items-center gap-2 text-sm text-[#6B7280]">
               <Tag size={14} className="text-[#E86B9E] shrink-0" />
-              {workshop.price} lei — plată la față locului, la sosire
+              {workshop.price} lei / copil
             </div>
           </div>
           <p className="text-xs text-[#6B7280]">
@@ -408,8 +408,8 @@ export default function WorkshopPage() {
             {/* Plată */}
             <div className="bg-[#5BC4C0]/5 rounded-2xl p-4">
               <p className="text-sm text-[#6B7280]">
-                <span className="font-semibold text-[#2D2D2D]">Plată la față locului.</span>{' '}
-                Rezervi locul prin formular, plata de <span className="font-semibold">{workshop.price} lei</span> se face la sosire, înainte de începerea atelierului.
+                <span className="font-semibold text-[#2D2D2D]">Rezervarea este gratuită.</span>{' '}
+                Plata de <span className="font-semibold">{workshop.price} lei</span> se face la față locului sau cu cardul — alegi la completarea formularului.
               </p>
             </div>
           </div>
