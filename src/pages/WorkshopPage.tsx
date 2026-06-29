@@ -408,8 +408,7 @@ export default function WorkshopPage() {
             {/* Plată */}
             <div className="bg-[#5BC4C0]/5 rounded-2xl p-4">
               <p className="text-sm text-[#6B7280]">
-                <span className="font-semibold text-[#2D2D2D]">Rezervarea este gratuită.</span>{' '}
-                Plata de <span className="font-semibold">{workshop.price} lei</span> se face la față locului sau cu cardul — alegi la completarea formularului.
+                Plata de <span className="font-semibold">{workshop.price} lei / copil</span> se face la față locului sau online cu cardul — alegi la completarea formularului de mai jos.
               </p>
             </div>
           </div>
