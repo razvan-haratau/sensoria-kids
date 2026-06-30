@@ -2,6 +2,13 @@
   command   = "npm run build"
   publish   = "dist"
 
+# Redirect non-www → www (evită conținut duplicat)
+[[redirects]]
+  from   = "https://sensoriakids.ro/*"
+  to     = "https://www.sensoriakids.ro/:splat"
+  status = 301
+  force  = true
+
 # SPA routing — toate rutele merg la index.html
 [[redirects]]
   from   = "/*"
