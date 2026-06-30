@@ -408,7 +408,7 @@ export default function WorkshopPage() {
             {/* Plată */}
             <div className="bg-[#5BC4C0]/5 rounded-2xl p-4">
               <p className="text-sm text-[#6B7280]">
-                Plata de <span className="font-semibold">{workshop.price} lei / copil</span> se face la față locului sau online cu cardul — alegi la completarea formularului de mai jos.
+                Plata de <span className="font-semibold">{workshop.price} lei / copil</span> se face la fața locului sau online cu cardul — alegi la completarea formularului de mai jos.
               </p>
             </div>
           </div>
@@ -511,7 +511,7 @@ export default function WorkshopPage() {
                           <span className="text-[10px] font-semibold bg-gray-200 text-gray-500 px-2 py-0.5 rounded-full">În curând</span>
                         </div>
                       </div>
-                      {/* Plată la față locului */}
+                      {/* Plată la fața locului */}
                       <label className={`flex items-center gap-3 p-3.5 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'fata-locului' ? 'border-[#5BC4C0] bg-[#5BC4C0]/5' : 'border-gray-100 hover:border-gray-200'}`}>
                         <input
                           type="radio" name="ws-payment" value="fata-locului"
@@ -521,7 +521,7 @@ export default function WorkshopPage() {
                         />
                         <Wallet size={18} className="text-[#6B7280] shrink-0" />
                         <div>
-                          <p className="font-semibold text-[#2D2D2D] text-sm">Plată la față locului</p>
+                          <p className="font-semibold text-[#2D2D2D] text-sm">Plată la fața locului</p>
                           <p className="text-xs text-[#6B7280]">Cash sau card la sosire</p>
                         </div>
                       </label>
