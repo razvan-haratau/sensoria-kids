@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Phone, Mail, MapPin, Instagram, Facebook, Send, CheckCircle } from 'lucide-react'
+import { Phone, Mail, MapPin, Instagram, Facebook, Send, CheckCircle, AlertCircle } from 'lucide-react'
 import { useMeta } from '../hooks/useMeta'
 import { useSettingsStore } from '../store/settingsStore'
+import { supabase } from '../lib/supabase'
 
 const categories = ['Comenzi', 'Colaborări', 'Educatori & Instituții', 'Altele']
 
@@ -18,6 +19,7 @@ export default function ContactPage() {
   const [honeypot, setHoneypot] = useState('')
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -25,12 +27,26 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Honeypot: bots fill hidden fields, real users don't
     if (honeypot) return
     setLoading(true)
-    // TODO: send to real API (Supabase / email service)
-    await new Promise((r) => setTimeout(r, 1200))
+    setSubmitError('')
+
+    const { error } = await supabase.functions.invoke('send-contact-email', {
+      body: {
+        name: form.name,
+        email: form.email,
+        phone: form.phone || null,
+        category: form.category,
+        message: form.message,
+      },
+    })
+
     setLoading(false)
+    if (error) {
+      console.error('Contact form error:', error)
+      setSubmitError('A apărut o eroare. Te rugăm să ne contactezi direct la contact@sensoriakids.ro')
+      return
+    }
     setSent(true)
   }
 
@@ -274,6 +290,12 @@ export default function ContactPage() {
                       .
                     </p>
 
+                    {submitError && (
+                      <div className="flex items-start gap-2 bg-red-50 border border-red-200 rounded-xl p-3">
+                        <AlertCircle size={16} className="text-red-500 shrink-0 mt-0.5" />
+                        <p className="text-sm text-red-700">{submitError}</p>
+                      </div>
+                    )}
                     <button
                       type="submit"
                       disabled={loading}
